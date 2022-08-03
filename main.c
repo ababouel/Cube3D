@@ -6,12 +6,11 @@
 /*   By: ababouel <ababouel@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/08/03 02:57:45 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/08/03 03:02:05 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
-// #include "GLFW/glfw3.h"
 
 int	main(void)
 {
