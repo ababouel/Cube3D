@@ -10,8 +10,10 @@
 #                                                                              #
 # **************************************************************************** #
 
+GREEN = \033[0;32m
+
 CC = cc 
-CFLAGS = -Wall -Werror -Wextra 
+CFLAGS = -Wall -Werror -Wextra -g 
 BDIR = build
 FILES = main
 NAME = cub3d
@@ -21,7 +23,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $^ -lmlx  -framework OpenGL -framework AppKit -o $@ 
-
+	@printf "$(GREEN)Done !"
 $(BDIR)/%.o : %.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@ 
