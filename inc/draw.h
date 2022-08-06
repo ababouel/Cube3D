@@ -13,6 +13,12 @@
 #ifndef DRAW_H
 # define DRAW_H
 
+typedef struct	s_vars {
+	void	*mlx;
+	void	*win;
+	void	*img;
+}	t_vars;
+
 typedef struct s_imgarg
 {
 	char	*addr;
@@ -20,6 +26,12 @@ typedef struct s_imgarg
 	int		line_length;
 	int		endian;
 }	t_imgarg;
+
+typedef struct s_vector
+{
+	float	x;
+	float	y;
+}	t_vector;
 
 void	draw_pixel(t_imgarg *data, int x, int y, int color);
 int		create_trgb(int t, int r, int g, int b);

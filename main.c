@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/08/06 15:27:42 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/08/06 18:54:33 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,19 @@
 #include <stdlib.h>
 #include "draw.h" 
 
-enum {
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17
-};
-typedef struct	s_vars {
-	void	*mlx;
-	void	*win;
-	void	*img;
-}				t_vars;
+char **map = {
+	{1,1,1,1,1,1,1,1,1,1},
+	{1,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,1},
+	{1,1,1,1,1,1,1,1,1,1}
+}
 
 int	rans(int max_number, int minimum_number)
 {
@@ -66,6 +65,6 @@ int	main(void)
 		x++;
 	}
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img, 0, 0);
-	mlx_hook(vars.win, ON_DESTROY, 1L<<0, close, &vars);
+	mlx_hook(vars.win, 17, 1L<<0, close, &vars);
 	mlx_loop(vars.mlx);
 }
