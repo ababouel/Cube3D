@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/08/07 02:13:14 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/08/07 19:50:21 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,6 @@
 // 	"111111111111111111111111111111111111111111111111111111111111111111111111111111111"
 // };
 
-int	rans(int max_number, int minimum_number)
-{
-	int number;
-
-	number = rand() % (max_number + 1 - minimum_number) + minimum_number;
-	return (number);
-}
-
 int	close(int keycode, t_vars *vars)
 {
 	(void)keycode;
@@ -59,25 +51,18 @@ int	main(void)
 {
 	t_vars		vars;
 	t_imgarg	img;
+	t_vector	v1;
+	t_vector	v2;
 
 	vars.mlx = mlx_init();
-    vars.win = mlx_new_window(vars.mlx, 1280, 720, "cub3d");
-	vars.img = mlx_new_image(vars.mlx, 1280, 720);
-	img.addr = mlx_get_data_addr(vars.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	int x = 0;
-	while (x < 21)
-	{
-		int y = 0;
-		while (y < 10)
-		{
-			if (map[x] != NULL && map[x][y] == '1')
-				draw_pixel(&img, x + 200, y + 200, create_trgb(10, 212, 128, 125));	
-			y++;	
-		}
-		x++;
-	}
-	
-	
+	v1.x = 0;
+	v1.y = 0;
+	v2.y = 50;
+	v2.x = 100;
+    vars.win = mlx_new_window(vars.mlx, 500, 500, "cub3d");
+	vars.img = mlx_new_image(vars.mlx, 500, 500);
+	img.addr = mlx_get_data_addr(vars.img, &img.bits_per_pixel, &img.line_length, &img.endian);		
+	draw_line(&v1 , &v2, &img);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img, 0, 0);
 	mlx_hook(vars.win, 17, 1L<<0, close, &vars);
 	mlx_loop(vars.mlx);
