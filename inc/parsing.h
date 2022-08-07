@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:41 by ababouel          #+#    #+#             */
-/*   Updated: 2022/08/06 19:25:13 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/08/07 02:12:56 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct s_color
 
 typedef struct s_data
 {
+    int         width;
+    int         height
     t_txtpath   *txtpath;
     t_color     *color;  
     char        **map;

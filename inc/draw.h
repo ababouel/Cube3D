@@ -29,11 +29,11 @@ typedef struct s_imgarg
 
 typedef struct s_vector
 {
-	float	x;
-	float	y;
+	int	x;
+	int	y;
 }	t_vector;
 
-void	draw_pixel(t_imgarg *data, int x, int y, int color);
+void	draw_pixel(t_imgarg *data, int x, int y,int color);
 int		create_trgb(int t, int r, int g, int b);
 
 #endif

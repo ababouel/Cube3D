@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/08/06 18:34:02 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/08/07 00:37:20 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-void	draw_pixel(t_imgarg *data,t_vector *v,int color)
+void	draw_pixel(t_imgarg *data,int x, int y,int color)
 {
 	char	*dst;
 
-	dst = data->addr + (v->y * data->line_length + v->x * (data->bits_per_pixel / 8));
+	dst = data->addr + (x * data->line_length + y * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
 
-void	draw_line(int x)
+// void	draw_line(int x )
