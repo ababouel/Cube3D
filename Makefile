@@ -6,30 +6,30 @@
 #    By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/03 16:04:53 by ababouel          #+#    #+#              #
-#    Updated: 2022/08/06 22:55:15 by ababouel         ###   ########.fr        #
+#    Updated: 2022/08/08 18:50:27 by ababouel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 GREEN = \033[0;32m
 
 CC = cc 
-CFLAGS = -Wall -Werror -Wextra 
+CFLAGS = -Wall -Werror -Wextra -g 
 BDIR = build
-FILES = main draw/drawline
+FILES = main draw/drawline 
 NAME = cub3d
-HEADERS = inc/draw.h
+HEADERS = inc/draw.h inc/mlx.h
 INC = -I ./inc
 OBJ = $(addprefix $(BDIR)/, $(FILES:=.o))
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $^ -lmlx  -framework OpenGL -framework AppKit -o $@ 
+	@$(CC) $(CFLAGS) $^  lib/libmlx.a -framework OpenGL -framework AppKit -o $@ 
 	@printf "$(GREEN)Done !"
 
 $(BDIR)/%.o : %.c $(HEADERS)
 	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) -c $< -o $@ -I ./inc
+	@$(CC) $(CFLAGS) -c $<   -o $@ -I ./inc
 	 
 clean:
 	rm -rf $(BDIR)

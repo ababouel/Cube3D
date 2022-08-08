@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/08/07 19:50:48 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/08/08 00:39:58 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,39 @@ void	draw_pixel(t_imgarg *data, int x, int y, int color)
 	char	*dst;
 	int		pos;
 
-	pos = (y * data->line_length + x * (data->bits_per_pixel / 8));
-	dst = data->addr + pos;
-	*(unsigned int*)dst = color;
+	if (x < 500 && x > 0 && y < 500 && y > 0)
+	{
+		pos = (y * data->line_length + x * (data->bits_per_pixel / 8));
+		dst = data->addr + pos;
+		*(unsigned int*)dst = color;
+	}
 }
 
 void draw_line(t_vector *v1, t_vector *v2, t_imgarg *data)
 {
 	float	dx;
 	float	dy;
-	float	yi;
-	float	xi;
+	float	xf;
+	float	yf;
 	int		step;
-
-	dx = fabs(v2->x - v1->x);
-	dy = fabs(v2->y - v1->y);
+	
+	dx = v2->x - v1->x;
+	dy = v2->y - v1->y;
 	step = sqrt((dx * dx) + (dy * dy));
-	yi = dy / step;
-	xi = dx / step;
+	dy /= step;
+	dx /= step;
+	xf = v1->x;
+	yf = v1->y;
 	while (step)
 	{
-		draw_pixel(data, v1->x, v1->y, create_trgb(0,255,255,255));
-		// printf("x=> %f,y => %f\n", v1->x, v1->y);
-		v1->x = v1->x + xi;
-		v1->y = v1->y + yi; 
+		draw_pixel(data, xf, yf, create_trgb(0,255,255,255));
+		xf += dx;
+		yf += dy; 
 		step--;
 	}
+}
+
+void	draw_map()
+{
+
 }
