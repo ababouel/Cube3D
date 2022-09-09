@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/08/08 23:10:22 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/09 19:51:17 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char map[10][10] = {
 	"1000100001",
 	"1000100001",
 	"1000000001",
-	"1000000001",
+	"10000N0001",
 	"1000000001",
 	"1000100001",
 	"1000100001",
@@ -31,9 +31,11 @@ char map[10][10] = {
 
 int	ft_close(int keycode, t_vars *vars)
 {
-	(void)keycode;
 	(void)vars;
-	exit(0);
+	if (keycode == 49)
+		exit(0);
+	printf("%d\n", keycode);
+	return (0);
 }
 t_vector *addvect(float x, float y)
 {
@@ -44,14 +46,17 @@ t_vector *addvect(float x, float y)
 
 	return (v);
 }
+
 int	main(void)
 {
 	void	*wall;
 	void	*floor;
-	void	*mlx;
-	void	*new;
+	void	*p;
+	t_vars	vars;
 	int		xfloor;
 	int		yfloor;
+	int		xp;
+	int		yp;
 	int 	x;
 	int		y;
 	int		xb;
@@ -59,11 +64,11 @@ int	main(void)
 	int		xd = 0;
 	int		yd = 0;
 	
-	mlx = mlx_init();
-   	new = mlx_new_window(mlx, 1000, 1000, "cub3d");
-	// image = mlx_new_image(mlx, 500, 500);
-	wall = mlx_xpm_file_to_image(mlx, "./texture/wall.xpm", &x, &y);
-	floor = mlx_xpm_file_to_image(mlx, "./texture/floor.xpm", &xfloor, &yfloor);	
+	vars.mlx = mlx_init();
+   	vars.win = mlx_new_window(vars.mlx, 600, 600, "cub3d");	
+	wall = mlx_xpm_file_to_image(vars.mlx, "./texture/wall.xpm", &x, &y);
+	floor = mlx_xpm_file_to_image(vars.mlx, "./texture/floor.xpm", &xfloor, &yfloor);
+	p = mlx_xpm_file_to_image(vars.mlx, "./texture/test.xpm", &xp, &yp);	
 	yb = 0;
 	while (yb < 10 )
 	{	
@@ -73,30 +78,17 @@ int	main(void)
 			if (xb == 0)
 				xd = 0;
 			if (map[yb][xb] == '1')
-				mlx_put_image_to_window(mlx, new, wall, xd, yd);
+				mlx_put_image_to_window(vars.mlx, vars.win, wall, xd, yd);
+			if (map[yb][xb] == 'N' || map[yb][xb] == '0')
+				mlx_put_image_to_window(vars.mlx, vars.win, floor, xd, yd);
+			if (map[yb][xb] == 'N')
+				mlx_put_image_to_window(vars.mlx, vars.win, p, xd, yd);
 			xb++;
 			xd += x;
 		}
 		yb++;
 		yd += y;
 	}
-	xd = 0;
-	yd = 0;
-	yb = 0;
-	while (yb < 10 )
-	{	
-		xb = 0;
-		while( xb < 10 )
-		{
-			if (xb == 0)
-				xd = 0;
-			if (map[yb][xb] == '0')
-				mlx_put_image_to_window(mlx, new, floor, xd, yd);
-			xb++;
-			xd += xfloor;
-		}
-		yb++;
-		yd += yfloor;
-	}
-	mlx_loop(mlx);
+	mlx_key_hook(vars.win, ft_close, &vars);	
+	mlx_loop(vars.mlx);
 }

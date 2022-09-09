@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/08/08 00:39:58 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/09 20:36:47 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,49 +16,62 @@
 #include <math.h>
 
 
-int	create_trgb(int t, int r, int g, int b)
+int	create_trgb(t_color *color)
 {
-	return (t << 24 | r << 16 | g << 8 | b);
+	return (color->t << 24 | color->r << 16 | color->g << 8 | color->b);
 }
 
-void	draw_pixel(t_imgarg *data, int x, int y, int color)
+void	draw_pixel(t_imgarg *data, t_vector *v, int color)
 {
 	char	*dst;
 	int		pos;
 
-	if (x < 500 && x > 0 && y < 500 && y > 0)
+	if (v->x < 500 && v->x > 0 && v->y < 500 && v->y > 0)
 	{
-		pos = (y * data->line_length + x * (data->bits_per_pixel / 8));
+		pos = (v->y * data->line_length + v->x * (data->bits_per_pixel / 8));
 		dst = data->addr + pos;
 		*(unsigned int*)dst = color;
 	}
 }
 
-void draw_line(t_vector *v1, t_vector *v2, t_imgarg *data)
+void draw_line(t_vector *v1, t_vector *v2, t_imgarg *data, t_color *color)
 {
-	float	dx;
-	float	dy;
-	float	xf;
-	float	yf;
-	int		step;
-	
-	dx = v2->x - v1->x;
-	dy = v2->y - v1->y;
-	step = sqrt((dx * dx) + (dy * dy));
-	dy /= step;
-	dx /= step;
-	xf = v1->x;
-	yf = v1->y;
+	int			step;
+	t_vector	vd;
+	t_vector	vf;
+
+	vd.x = v2->x - v1->x;
+	vd.y = v2->y - v1->y;
+	step = sqrt((vd.x * vd.x) + (vd.y * vd.y));
+	vd.y /= step;
+	vd.x /= step;
+	vf.x = v1->x;
+	vf.y = v1->y;	
 	while (step)
 	{
-		draw_pixel(data, xf, yf, create_trgb(0,255,255,255));
-		xf += dx;
-		yf += dy; 
+		draw_pixel(data, &vf, create_trgb(color));
+		vf.x += vd.x;
+		vf.y += vd.y; 
 		step--;
 	}
 }
 
-void	draw_map()
+void	draw_circle(t_imgarg *data ,t_vector *v, int r, int color)
 {
-
+	double PI = 3.1415926535;
+	double i;
+	double angle;
+	t_vector v1;
+	
+	i = 0;
+	while(i < 360)
+	{
+		angle = i;
+		v1.x = r * cos(angle * PI / 180);
+		v1.y = r * sin(angle * PI / 180);
+		v->x += v1.x;
+		v->y += v1.y; 
+		draw_pixel(data, v, color);
+		i += 0.1;
+	}	
 }

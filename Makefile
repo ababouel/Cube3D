@@ -6,7 +6,7 @@
 #    By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/03 16:04:53 by ababouel          #+#    #+#              #
-#    Updated: 2022/08/08 18:50:27 by ababouel         ###   ########.fr        #
+#    Updated: 2022/09/09 19:55:52 by ababouel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,14 +17,14 @@ CFLAGS = -Wall -Werror -Wextra -g
 BDIR = build
 FILES = main draw/drawline 
 NAME = cub3d
-HEADERS = inc/draw.h inc/mlx.h
+HEADERS = inc/draw.h
 INC = -I ./inc
 OBJ = $(addprefix $(BDIR)/, $(FILES:=.o))
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $^  lib/libmlx.a -framework OpenGL -framework AppKit -o $@ 
+	@$(CC) $(CFLAGS) $^  ./lib/libmlx.a -framework OpenGL -framework AppKit -o $@ 
 	@printf "$(GREEN)Done !"
 
 $(BDIR)/%.o : %.c $(HEADERS)

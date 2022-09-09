@@ -27,14 +27,23 @@ typedef struct s_imgarg
 	int		endian;
 }	t_imgarg;
 
+typedef struct s_color
+{
+	int	t;
+	int r;
+	int	g;
+	int	b;
+}	t_color;
+
 typedef struct s_vector
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 }	t_vector;
 
-void	draw_pixel(t_imgarg *data, int x, int y,int color);
-int		create_trgb(int t, int r, int g, int b);
-void	draw_line(t_vector *v1, t_vector *v2, t_imgarg *data);
+void	draw_pixel(t_imgarg *data, t_vector *v, int color);
+int		create_trgb(t_color *color);
+void	draw_line(t_vector *v1, t_vector *v2, t_imgarg *data, t_color *color);
+void	draw_circle(t_imgarg *data,t_vector *v, int rad, int color);
 
 #endif
