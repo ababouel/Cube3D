@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/25 01:03:00 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/25 01:18:13 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	main(void)
 	vars = malloc(sizeof(t_vars));
 	vars->img = malloc(sizeof(t_imgarg));
 	vars->img->color = malloc(sizeof(t_color));
-	v.x = 0;
-	v.y = 0;
+	v.x = 250;
+	v.y = 250;
 	v1.x = 500;
 	v1.y = 300;
 	vars->img->color->b = 0;
@@ -68,8 +68,8 @@ int	main(void)
    	vars->win = mlx_new_window(vars->mlx, 600, 600, "cub3d");	
 	vars->img->img = mlx_new_image(vars->mlx, 600, 600);
 	vars->img->addr = mlx_get_data_addr(vars->img->img, &vars->img->bpp, &vars->img->line_len, &vars->img->endian);
-	draw_line(&v,&v1,vars);
-	// draw_circle(vars, &v, 100);
+	// draw_line(&v,&v1,vars);
+	draw_circle(vars, &v, 0.09);
 	mlx_put_image_to_window( vars->mlx, vars->win, vars->img->img, 0,0);
 	mlx_key_hook(vars->win, ft_close, &vars);	
 	mlx_loop(vars->mlx);

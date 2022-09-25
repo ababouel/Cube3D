@@ -47,7 +47,7 @@ typedef struct s_vector
 void	draw_pixel(t_vars *data, t_vector *v);
 int		create_trgb(t_color *color);
 void	draw_line(t_vector *v1, t_vector *v2, t_vars *data);
-void	draw_circle(t_vars *data,t_vector *v, int rad);
+void	draw_circle(t_vars *data,t_vector *v, double rad);
 void	draw_rectangle(t_imgarg *data, t_vector *v, t_vector *v1);
 
 #endif

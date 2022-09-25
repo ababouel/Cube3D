@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/25 01:02:02 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/25 01:21:07 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,13 @@ int	create_trgb(t_color *color)
 void	draw_pixel(t_vars *data, t_vector *v)
 {
 	char		*dst;
+	t_imgarg	img;
 
+	img = *data->img;
 	if (v->x < 600 && v->x > 0 && v->y < 600 && v->y > 0)
 	{
-		dst = data->img->addr + ((int)v->y * data->img->line_len + (int)v->x * (data->img->bpp / 8));
+		dst = img.addr + ((int)v->y * img.line_len + 
+			(int)v->x * (img.bpp / 8));
 		*(unsigned int *)dst = create_trgb(data->img->color);
 	}	
 }
@@ -54,22 +57,20 @@ void draw_line(t_vector *v1, t_vector *v2, t_vars *data)
 	}
 }
 
-void	draw_circle(t_vars *data ,t_vector *v, int rad)
+void	draw_circle(t_vars *data ,t_vector *v, double rad)
 {
-	float PI = 3.1416;
-	float i;
-	float angle;
 	t_vector v1;
+	double PI = 3.1416;
+	double angle;
 	
-	i = 0;
-	while(i < 360)
+	angle = 0;
+	while(angle < 360)
 	{
-		angle = i;
 		v1.x = rad * cos(angle * PI / 180);
 		v1.y = rad * sin(angle * PI / 180);
 		v->x += v1.x;
 		v->y += v1.y; 
 		draw_pixel(data, v);
-		i += 0.1;
+		angle += 0.1;
 	}	
 }
