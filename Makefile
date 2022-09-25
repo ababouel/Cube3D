@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ababouel <ababouel@student.1337.ma>        +#+  +:+       +#+         #
+#    By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/03 16:04:53 by ababouel          #+#    #+#              #
-#    Updated: 2022/08/03 17:07:41 by ababouel         ###   ########.fr        #
+#    Updated: 2022/09/25 03:07:24 by fech-cha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,18 +15,21 @@ GREEN = \033[0;32m
 CC = cc 
 CFLAGS = -Wall -Werror -Wextra -g 
 BDIR = build
-FILES = main
+FILES = main draw/drawline events/events
 NAME = cub3d
+HEADERS = inc/draw.h inc/parsing.h inc/raycast.h inc/events.h
+INC = -I ./inc
 OBJ = $(addprefix $(BDIR)/, $(FILES:=.o))
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $^ -lmlx  -framework OpenGL -framework AppKit -o $@ 
+	@$(CC) $(CFLAGS) $^  ./lib/libmlx.a -framework OpenGL -framework AppKit -o $@ 
 	@printf "$(GREEN)Done !"
-$(BDIR)/%.o : %.c
+
+$(BDIR)/%.o : %.c $(HEADERS)
 	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) -c $< -o $@ 
+	@$(CC) $(CFLAGS) -c $<   -o $@ -I ./inc
 	 
 clean:
 	rm -rf $(BDIR)

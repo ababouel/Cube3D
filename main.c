@@ -3,85 +3,102 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/08/03 03:02:05 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/25 03:08:36 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
+#include <mlx.h>
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include "draw.h" 
+#include <assert.h>
+#include "events.h"
 
-enum {
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17
+char map[10][10] = {
+	"1111111111",
+	"1000000001",
+	"1000100001",
+	"1000100001",
+	"1000000001",
+	"10000N0001",
+	"1000000001",
+	"1000100001",
+	"1000100001",
+	"1111111111"
 };
-typedef struct	s_vars {
-	void	*mlx;
-	void	*win;
-	void	*img;
-}				t_vars;
-typedef struct	s_data {
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_data;
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+t_vector *addvect(float x, float y)
+{
+	t_vector *v;
+	v = malloc(sizeof(t_vector));
+	v->x = x;
+	v->y = y;
+
+	return (v);
 }
 
-int	create_trgb(int t, int r, int g, int b)
+
+t_vars	*allocate(void)
 {
-	return (t << 24 | r << 16 | g << 8 | b);
+	t_vars	*vars;
+
+	vars = (t_vars *)malloc(sizeof(t_vars));
+	if (vars == NULL)
+		return (NULL);
+	vars->iarg = (t_imgarg *)malloc(sizeof(t_imgarg));
+	if (vars->iarg == NULL)
+		return (NULL);
+	return (vars);
 }
 
-int	rans(int max_number, int minimum_number)
+int    ft_init(t_vars *vars)
 {
-	int number;
+    vars->mlx = mlx_init();
+	if (!vars->mlx)
+		return (MLX_ERROR);
+	vars->win = mlx_new_window(vars->mlx,
+			WINDOW_WIDTH, WINDOW_HEIGHT, "vars");
+	if (!vars->win)
+	{
+		free(vars);
+		return (MLX_ERROR);
+	}
+	vars->iarg->img= mlx_new_image(vars->mlx,
+			WINDOW_WIDTH, WINDOW_HEIGHT);
+	vars->iarg->addr = mlx_get_data_addr(vars->iarg->img,
+			&vars->iarg->bpp, &vars->iarg->line_len, &vars->iarg->endian);
+	return (0);
+}
 
-	number = rand() % (max_number + 1 - minimum_number) + minimum_number;
-	return (number);
-}
-int	close(int keycode, t_vars *vars)
-{
-	(void)keycode;
-	(void)vars;
-	exit(0);
-}
 int	main(void)
 {
-	t_vars	vars;
-	t_data	img;
+	t_vars		*vars;
+	t_vector	v1;
+	t_vector	v;
 
-	vars.mlx = mlx_init();
-	if (vars.mlx != NULL)
-    	vars.win = mlx_new_window(vars.mlx, 1280, 720, "cub3d");
-	vars.img = mlx_new_image(vars.mlx, 1280, 720);
-	img.addr = mlx_get_data_addr(vars.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	int x = 1;
-	while (x < 720)
-	{
-		int y = 1;
-		while (y < 1280)
-		{
-			my_mlx_pixel_put(&img, y, x, create_trgb(128, rans(255, 0), rans(255, 0), rans(255, 0)));
-			y++;
-		}
-		x++;
-	}
-	mlx_put_image_to_window(vars.mlx, vars.win, vars.img, 0, 0);
-	mlx_hook(vars.win, ON_DESTROY, 1L<<0, close, &vars);
-	mlx_loop(vars.mlx);
-}
+	vars = allocate();
+	v.color = malloc(sizeof(t_color));
+	v.x = 300;
+	v.y = 10;
+	v1.x = 300;
+	v1.y = 300;
+	v.color->bl = 0;
+	v.color->rd = 255;
+	v.color->gr = 0;
+	v.color->al= 0;
+	v1.color->bl = 0;
+	v1.color->rd = 255;
+	v1.color->gr = 0;
+	v1.color->al= 0;
+	ft_init(vars);
+	// draw_line(&v2,&v1,vars);
+	draw_circle(vars, &v1, &v, 0.1);
+	mlx_put_image_to_window( vars->mlx, vars->win, vars->iarg->img, 0,0);
+	mlx_key_hook(vars->win, esc_key, vars);
+	mlx_hook(vars->win, 17, 0, close_game, vars);
+	mlx_loop(vars->mlx);
+}	
