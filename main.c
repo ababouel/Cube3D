@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/25 03:08:36 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/09/25 05:32:49 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,26 +77,25 @@ int    ft_init(t_vars *vars)
 int	main(void)
 {
 	t_vars		*vars;
-	t_vector	v1;
 	t_vector	v;
+	t_rect		*rect;
 
 	vars = allocate();
 	v.color = malloc(sizeof(t_color));
-	v.x = 300;
-	v.y = 10;
-	v1.x = 300;
-	v1.y = 300;
+	rect = malloc(sizeof(t_rect));
+	rect->height = 32;
+	rect->width = 32;
+	v.x = 250;
+	v.y = 55;
 	v.color->bl = 0;
 	v.color->rd = 255;
 	v.color->gr = 0;
 	v.color->al= 0;
-	v1.color->bl = 0;
-	v1.color->rd = 255;
-	v1.color->gr = 0;
-	v1.color->al= 0;
+	rect->vrect = &v;
 	ft_init(vars);
 	// draw_line(&v2,&v1,vars);
-	draw_circle(vars, &v1, &v, 0.1);
+	// draw_circle(vars, &v1, &v, 0.1);
+	draw_rect(vars, rect);
 	mlx_put_image_to_window( vars->mlx, vars->win, vars->iarg->img, 0,0);
 	mlx_key_hook(vars->win, esc_key, vars);
 	mlx_hook(vars->win, 17, 0, close_game, vars);

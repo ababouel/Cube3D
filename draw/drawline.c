@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/25 05:10:46 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/25 05:31:45 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	draw_rect(t_vars *data, t_rect *rect)
 
 	v.color = rect->vrect->color;
 	v.y = rect->vrect->y;
-	while (v.y < rect->vrect->x + rect->height)
+	while (v.y < rect->vrect->y + rect->height)
 	{
 		v.x = rect->vrect->x;
 		while (v.x < rect->vrect->x + rect->width)
