@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/25 02:19:32 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/25 05:10:46 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	draw_pixel(t_vars *data, t_vector *v)
 	t_imgarg	img;
 
 	img = *data->iarg;
-	if (v->x < 600 && v->x > 0 && v->y < 600 && v->y > 0)
+	if (v->x < 600 && v->x >= 0 && v->y < 600 && v->y >= 0)
 	{
 		dst = img.addr + ((int)v->y * img.line_len + 
 			(int)v->x * (img.bpp / 8));
@@ -71,8 +71,25 @@ void	draw_circle(t_vars *data ,t_vector *v, t_vector *vfix, double rad)
 		v1.y = rad * sin(angle * PI / 180);
 		v->x += v1.x;
 		v->y += v1.y; 
-		// draw_line(vfix, v, data);
 		draw_pixel(data, v);
 		angle += 0.1;
 	}	
+}
+
+void	draw_rect(t_vars *data, t_rect *rect)
+{
+	t_vector v;
+
+	v.color = rect->vrect->color;
+	v.y = rect->vrect->y;
+	while (v.y < rect->vrect->x + rect->height)
+	{
+		v.x = rect->vrect->x;
+		while (v.x < rect->vrect->x + rect->width)
+		{
+			draw_pixel(data, &v);
+			v.x++;
+		}
+		v.y++;
+	}
 }

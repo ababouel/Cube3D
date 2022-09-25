@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/09/25 03:20:33 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/09/25 04:54:30 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,17 @@ typedef struct s_vector
 	t_color	*color;
 }	t_vector;
 
+typedef struct s_rect
+{
+	t_vector	*vrect;
+	int			width;
+	int			height;
+}	t_rect;
+
 void	draw_pixel(t_vars *data, t_vector *v);
 int		create_trgb(t_color *color);
 void	draw_line(t_vector *v1, t_vector *v2, t_vars *data);
 void	draw_circle(t_vars *data,t_vector *v, t_vector *vfix, double rad);
-void	draw_rectangle(t_imgarg *data, t_vector *v, t_vector *v1);
+void	draw_rect(t_vars *data, t_rect *rect);
 
 #endif
