@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/25 02:19:47 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/25 03:08:36 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <stdio.h>
 #include "draw.h" 
 #include <assert.h>
+#include "events.h"
+
 char map[10][10] = {
 	"1111111111",
 	"1000000001",
@@ -29,14 +31,6 @@ char map[10][10] = {
 	"1111111111"
 };
 
-int	ft_close(int keycode, t_vars *vars)
-{
-	(void)vars;
-	if (keycode == 49)
-		exit(0);
-	printf("%d\n", keycode);
-	return (0);
-}
 t_vector *addvect(float x, float y)
 {
 	t_vector *v;
@@ -47,14 +41,46 @@ t_vector *addvect(float x, float y)
 	return (v);
 }
 
+
+t_vars	*allocate(void)
+{
+	t_vars	*vars;
+
+	vars = (t_vars *)malloc(sizeof(t_vars));
+	if (vars == NULL)
+		return (NULL);
+	vars->iarg = (t_imgarg *)malloc(sizeof(t_imgarg));
+	if (vars->iarg == NULL)
+		return (NULL);
+	return (vars);
+}
+
+int    ft_init(t_vars *vars)
+{
+    vars->mlx = mlx_init();
+	if (!vars->mlx)
+		return (MLX_ERROR);
+	vars->win = mlx_new_window(vars->mlx,
+			WINDOW_WIDTH, WINDOW_HEIGHT, "vars");
+	if (!vars->win)
+	{
+		free(vars);
+		return (MLX_ERROR);
+	}
+	vars->iarg->img= mlx_new_image(vars->mlx,
+			WINDOW_WIDTH, WINDOW_HEIGHT);
+	vars->iarg->addr = mlx_get_data_addr(vars->iarg->img,
+			&vars->iarg->bpp, &vars->iarg->line_len, &vars->iarg->endian);
+	return (0);
+}
+
 int	main(void)
 {
 	t_vars		*vars;
 	t_vector	v1;
 	t_vector	v;
 
-	vars = malloc(sizeof(t_vars));
-	vars->iarg = malloc(sizeof(t_imgarg));
+	vars = allocate();
 	v.color = malloc(sizeof(t_color));
 	v.x = 300;
 	v.y = 10;
@@ -68,14 +94,11 @@ int	main(void)
 	v1.color->rd = 255;
 	v1.color->gr = 0;
 	v1.color->al= 0;
-	vars->mlx = mlx_init();
-	vars->mlx = mlx_init();
-   	vars->win = mlx_new_window(vars->mlx, 600, 600, "cub3d");	
-	vars->iarg->img = mlx_new_image(vars->mlx, 600, 600);
-	vars->iarg->addr = mlx_get_data_addr(vars->iarg->img, &vars->iarg->bpp, &vars->iarg->line_len, &vars->iarg->endian);
+	ft_init(vars);
 	// draw_line(&v2,&v1,vars);
 	draw_circle(vars, &v1, &v, 0.1);
 	mlx_put_image_to_window( vars->mlx, vars->win, vars->iarg->img, 0,0);
-	mlx_key_hook(vars->win, ft_close, &vars);	
+	mlx_key_hook(vars->win, esc_key, vars);
+	mlx_hook(vars->win, 17, 0, close_game, vars);
 	mlx_loop(vars->mlx);
 }	

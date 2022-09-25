@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.h                                         :+:      :+:    :+:   */
+/*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/06 15:19:03 by ababouel          #+#    #+#             */
-/*   Updated: 2022/08/06 15:19:08 by ababouel         ###   ########.fr       */
+/*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
+/*   Updated: 2022/09/25 02:47:35 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef DRAW_H
 # define DRAW_H
 
-#include "parsing.h"
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
+# define MLX_ERROR	1
 
+#include "parsing.h"
 typedef struct s_imgarg
 {
 	void	*img;
