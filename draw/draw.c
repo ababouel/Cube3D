@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/25 05:31:45 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/25 06:06:08 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-
 
 int	create_trgb(t_color *color)
 {
@@ -76,20 +75,21 @@ void	draw_circle(t_vars *data ,t_vector *v, t_vector *vfix, double rad)
 	}	
 }
 
-void	draw_rect(t_vars *data, t_rect *rect)
+void	draw_rect(t_vars *data)
 {
 	t_vector v;
 
-	v.color = rect->vrect->color;
-	v.y = rect->vrect->y;
-	while (v.y < rect->vrect->y + rect->height)
+	v.color = data->rect->color;
+	v.y = data->rect->y;
+	while (v.y < data->rect->y + RECT_SIZE)
 	{
-		v.x = rect->vrect->x;
-		while (v.x < rect->vrect->x + rect->width)
+		v.x = data->rect->x;
+		while (v.x < data->rect->x + RECT_SIZE)
 		{
 			draw_pixel(data, &v);
 			v.x++;
 		}
 		v.y++;
 	}
+	mlx_put_image_to_window( data->mlx, data->win, data->iarg->img, 0,0);
 }

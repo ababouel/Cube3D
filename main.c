@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/25 05:32:49 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/25 05:57:03 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,30 @@ char map[10][10] = {
 	"1111111111"
 };
 
-t_vector *addvect(float x, float y)
+t_vector *addvect(double x, double y, t_color *color)
 {
 	t_vector *v;
+
 	v = malloc(sizeof(t_vector));
+	if (v == NULL)
+		return (NULL);
 	v->x = x;
 	v->y = y;
-
+	v->color = color;
 	return (v);
 }
 
+t_color	*add_color(int rd, int gr, int bl, int al)
+{
+	t_color *color;
+
+	color = malloc(sizeof(t_color));
+	color->rd = rd;
+	color->bl = bl;
+	color->gr = gr;
+	color->al = al;
+	return color;
+}
 
 t_vars	*allocate(void)
 {
@@ -51,7 +65,7 @@ t_vars	*allocate(void)
 		return (NULL);
 	vars->iarg = (t_imgarg *)malloc(sizeof(t_imgarg));
 	if (vars->iarg == NULL)
-		return (NULL);
+		return (NULL);	
 	return (vars);
 }
 
@@ -77,25 +91,11 @@ int    ft_init(t_vars *vars)
 int	main(void)
 {
 	t_vars		*vars;
-	t_vector	v;
-	t_rect		*rect;
 
-	vars = allocate();
-	v.color = malloc(sizeof(t_color));
-	rect = malloc(sizeof(t_rect));
-	rect->height = 32;
-	rect->width = 32;
-	v.x = 250;
-	v.y = 55;
-	v.color->bl = 0;
-	v.color->rd = 255;
-	v.color->gr = 0;
-	v.color->al= 0;
-	rect->vrect = &v;
+	vars = allocate();	
+	vars->rect = addvect(0, 0, add_color(255,0,0,0));
 	ft_init(vars);
-	// draw_line(&v2,&v1,vars);
-	// draw_circle(vars, &v1, &v, 0.1);
-	draw_rect(vars, rect);
+	draw_rect(vars);
 	mlx_put_image_to_window( vars->mlx, vars->win, vars->iarg->img, 0,0);
 	mlx_key_hook(vars->win, esc_key, vars);
 	mlx_hook(vars->win, 17, 0, close_game, vars);
