@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/09/25 02:47:35 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/09/25 03:20:33 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct	s_vars {
 	void		*mlx;
 	void		*win;
 	t_imgarg	*iarg;
+	t_data		*data;
 }	t_vars;
 
 typedef struct s_vector
