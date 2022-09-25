@@ -13,14 +13,7 @@
 #ifndef DRAW_H
 # define DRAW_H
 
-
-typedef struct s_color
-{
-	int	t;
-	int r;
-	int	g;
-	int	b;
-}	t_color;
+#include "parsing.h"
 
 typedef struct s_imgarg
 {
@@ -29,19 +22,19 @@ typedef struct s_imgarg
 	int		bpp;
 	int		line_len;
 	int		endian;
-	t_color	*color;
 }	t_imgarg;
 
 typedef struct	s_vars {
 	void		*mlx;
 	void		*win;
-	t_imgarg	*img;
+	t_imgarg	*iarg;
 }	t_vars;
 
 typedef struct s_vector
 {
 	double	x;
 	double	y;
+	t_color	*color;
 }	t_vector;
 
 void	draw_pixel(t_vars *data, t_vector *v);

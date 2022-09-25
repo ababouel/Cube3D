@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/25 01:21:07 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/25 02:03:47 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 int	create_trgb(t_color *color)
 {
-	return (color->t << 24 | color->r << 16 | color->g << 8 | color->b);
+	return (color->al << 24 | color->rd << 16 | color->gr << 8 | color->bl);
 }
 
 void	draw_pixel(t_vars *data, t_vector *v)
@@ -26,12 +26,12 @@ void	draw_pixel(t_vars *data, t_vector *v)
 	char		*dst;
 	t_imgarg	img;
 
-	img = *data->img;
+	img = *data->iarg;
 	if (v->x < 600 && v->x > 0 && v->y < 600 && v->y > 0)
 	{
 		dst = img.addr + ((int)v->y * img.line_len + 
 			(int)v->x * (img.bpp / 8));
-		*(unsigned int *)dst = create_trgb(data->img->color);
+		*(unsigned int *)dst = create_trgb(v->color);
 	}	
 }
 

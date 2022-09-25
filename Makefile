@@ -6,7 +6,7 @@
 #    By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/03 16:04:53 by ababouel          #+#    #+#              #
-#    Updated: 2022/09/09 19:55:52 by ababouel         ###   ########.fr        #
+#    Updated: 2022/09/25 02:01:49 by ababouel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS = -Wall -Werror -Wextra -g
 BDIR = build
 FILES = main draw/drawline 
 NAME = cub3d
-HEADERS = inc/draw.h
+HEADERS = inc/draw.h inc/parsing.h inc/raycast.h
 INC = -I ./inc
 OBJ = $(addprefix $(BDIR)/, $(FILES:=.o))
 
