@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/25 02:03:47 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/25 02:19:32 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,13 @@ void draw_line(t_vector *v1, t_vector *v2, t_vars *data)
 	}
 }
 
-void	draw_circle(t_vars *data ,t_vector *v, double rad)
+void	draw_circle(t_vars *data ,t_vector *v, t_vector *vfix, double rad)
 {
 	t_vector v1;
 	double PI = 3.1416;
 	double angle;
-	
+	(void) vfix;
+
 	angle = 0;
 	while(angle < 360)
 	{
@@ -70,6 +71,7 @@ void	draw_circle(t_vars *data ,t_vector *v, double rad)
 		v1.y = rad * sin(angle * PI / 180);
 		v->x += v1.x;
 		v->y += v1.y; 
+		// draw_line(vfix, v, data);
 		draw_pixel(data, v);
 		angle += 0.1;
 	}	
