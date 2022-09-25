@@ -1,29 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.h                                           :+:      :+:    :+:   */
+/*   parsing_tools.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 02:37:52 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/09/25 06:07:37 by fech-cha         ###   ########.fr       */
+/*   Created: 2022/09/25 04:17:08 by fech-cha          #+#    #+#             */
+/*   Updated: 2022/09/25 06:09:41 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EVENTS_H
-# define EVENTS_H
+#include "parsing.h"
 
-#include "data.h"
+void	check_fd(int fd)
+{
+	if (fd < 0)
+	{
+		printf("Error opening the file\n");
+		exit(FILE_ERROR);
+	}
+}
 
-# define ON_DESTROY 17
-# define ESC_KEY 53
-# define ARROWLEFT 123
-# define ARROWRIGHT 124
-# define ARROWDOWN 125
-# define ARROWUP 126
+int	count_lines(char *path)
+{
+	int		count;
+	char	*line;
+	int		fd;
 
-int	close_game(t_vars *vars);
-int	esc_key(int keynum, t_vars *vars);
-void	clear_data(t_vars *vars);
-
-#endif
+	count = 0;
+	fd = open(path, O_RDONLY);
+	check_fd(fd);
+	line = get_next_line(fd);
+	while (line)
+	{
+		count++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return (count);
+}
