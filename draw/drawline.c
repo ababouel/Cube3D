@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/09 20:36:47 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/25 01:02:02 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,18 @@ int	create_trgb(t_color *color)
 	return (color->t << 24 | color->r << 16 | color->g << 8 | color->b);
 }
 
-void	draw_pixel(t_imgarg *data, t_vector *v, int color)
+void	draw_pixel(t_vars *data, t_vector *v)
 {
-	char	*dst;
-	int		pos;
+	char		*dst;
 
-	if (v->x < 500 && v->x > 0 && v->y < 500 && v->y > 0)
+	if (v->x < 600 && v->x > 0 && v->y < 600 && v->y > 0)
 	{
-		pos = (v->y * data->line_length + v->x * (data->bits_per_pixel / 8));
-		dst = data->addr + pos;
-		*(unsigned int*)dst = color;
-	}
+		dst = data->img->addr + ((int)v->y * data->img->line_len + (int)v->x * (data->img->bpp / 8));
+		*(unsigned int *)dst = create_trgb(data->img->color);
+	}	
 }
 
-void draw_line(t_vector *v1, t_vector *v2, t_imgarg *data, t_color *color)
+void draw_line(t_vector *v1, t_vector *v2, t_vars *data)
 {
 	int			step;
 	t_vector	vd;
@@ -49,29 +47,29 @@ void draw_line(t_vector *v1, t_vector *v2, t_imgarg *data, t_color *color)
 	vf.y = v1->y;	
 	while (step)
 	{
-		draw_pixel(data, &vf, create_trgb(color));
+		draw_pixel(data, &vf);
 		vf.x += vd.x;
 		vf.y += vd.y; 
 		step--;
 	}
 }
 
-void	draw_circle(t_imgarg *data ,t_vector *v, int r, int color)
+void	draw_circle(t_vars *data ,t_vector *v, int rad)
 {
-	double PI = 3.1415926535;
-	double i;
-	double angle;
+	float PI = 3.1416;
+	float i;
+	float angle;
 	t_vector v1;
 	
 	i = 0;
 	while(i < 360)
 	{
 		angle = i;
-		v1.x = r * cos(angle * PI / 180);
-		v1.y = r * sin(angle * PI / 180);
+		v1.x = rad * cos(angle * PI / 180);
+		v1.y = rad * sin(angle * PI / 180);
 		v->x += v1.x;
 		v->y += v1.y; 
-		draw_pixel(data, v, color);
+		draw_pixel(data, v);
 		i += 0.1;
 	}	
 }

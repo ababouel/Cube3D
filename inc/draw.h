@@ -13,19 +13,6 @@
 #ifndef DRAW_H
 # define DRAW_H
 
-typedef struct	s_vars {
-	void	*mlx;
-	void	*win;
-	void	*img;
-}	t_vars;
-
-typedef struct s_imgarg
-{
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_imgarg;
 
 typedef struct s_color
 {
@@ -35,15 +22,32 @@ typedef struct s_color
 	int	b;
 }	t_color;
 
+typedef struct s_imgarg
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	t_color	*color;
+}	t_imgarg;
+
+typedef struct	s_vars {
+	void		*mlx;
+	void		*win;
+	t_imgarg	*img;
+}	t_vars;
+
 typedef struct s_vector
 {
 	double	x;
 	double	y;
 }	t_vector;
 
-void	draw_pixel(t_imgarg *data, t_vector *v, int color);
+void	draw_pixel(t_vars *data, t_vector *v);
 int		create_trgb(t_color *color);
-void	draw_line(t_vector *v1, t_vector *v2, t_imgarg *data, t_color *color);
-void	draw_circle(t_imgarg *data,t_vector *v, int rad, int color);
+void	draw_line(t_vector *v1, t_vector *v2, t_vars *data);
+void	draw_circle(t_vars *data,t_vector *v, int rad);
+void	draw_rectangle(t_imgarg *data, t_vector *v, t_vector *v1);
 
 #endif
