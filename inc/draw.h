@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/09/25 06:09:43 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/26 04:54:31 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <math.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include "parsing.h"
 # include <assert.h>
+# include "parsing.h"
 
 typedef struct s_imgarg
 {
@@ -42,7 +42,6 @@ typedef struct s_vector
 	double	y;
 	t_color	*color;
 }	t_vector;
-
 
 typedef struct	s_vars {
 	void		*mlx;

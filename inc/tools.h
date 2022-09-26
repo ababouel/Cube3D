@@ -1,46 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   tools.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/06 14:28:41 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/26 03:08:17 by ababouel         ###   ########.fr       */
+/*   Created: 2022/09/26 02:43:41 by ababouel          #+#    #+#             */
+/*   Updated: 2022/09/26 04:54:44 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#ifndef TOOLS_H
+# define TOOLS_H
 
-typedef enum e_NSWE
-{
-    NO,
-    SO,
-    WE,
-    EA
-}   t_nswe;
+#include "draw.h"
+#include "events.h"
 
-typedef struct s_txtpath
-{
-    char    *path;
-    t_nswe  nswe; 
-}   t_txtpath;
-
-typedef struct s_color
-{
-    int rd;
-    int gr;
-    int bl;
-    int al;
-}   t_color;
-
-typedef struct s_data
-{
-    int         wth;
-    int         hgt;
-    t_txtpath   *txtpath; 
-    char        **map;
-}   t_data;
+t_vector    *addvect(double x, double y, t_color *color);
+t_color     *add_color(int rd, int gr, int bl, int al);
+t_vars      *allocate(void);
+void        rotation(t_vector *v, double angle);
 
 #endif

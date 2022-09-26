@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawline.c                                         :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/25 06:06:08 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/26 05:20:03 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
+#include "events.h"
+#include "tools.h"
 
 int	create_trgb(t_color *color)
 {
@@ -26,7 +25,7 @@ void	draw_pixel(t_vars *data, t_vector *v)
 	t_imgarg	img;
 
 	img = *data->iarg;
-	if (v->x < 600 && v->x >= 0 && v->y < 600 && v->y >= 0)
+	if (v->x < WINDOW_WIDTH && v->x >= 0 && v->y < WINDOW_HEIGHT && v->y >= 0)
 	{
 		dst = img.addr + ((int)v->y * img.line_len + 
 			(int)v->x * (img.bpp / 8));
@@ -46,7 +45,8 @@ void draw_line(t_vector *v1, t_vector *v2, t_vars *data)
 	vd.y /= step;
 	vd.x /= step;
 	vf.x = v1->x;
-	vf.y = v1->y;	
+	vf.y = v1->y;
+	vf.color = v1->color;	
 	while (step)
 	{
 		draw_pixel(data, &vf);
@@ -77,10 +77,9 @@ void	draw_circle(t_vars *data ,t_vector *v, t_vector *vfix, double rad)
 
 void	draw_rect(t_vars *data)
 {
-	t_vector v;
-
-	v.color = data->rect->color;
+	t_vector v;	
 	v.y = data->rect->y;
+	v.color = data->rect->color;
 	while (v.y < data->rect->y + RECT_SIZE)
 	{
 		v.x = data->rect->x;
