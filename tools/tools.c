@@ -6,11 +6,12 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 02:43:28 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/26 05:30:00 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/27 04:07:21 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
+#include "raycast.h"
 
 t_vector *addvect(double x, double y, t_color *color)
 {
@@ -22,6 +23,7 @@ t_vector *addvect(double x, double y, t_color *color)
 	v->x = x;
 	v->y = y;
 	v->color = color;
+	
 	return (v);
 }
 
@@ -56,6 +58,6 @@ void    rotation(t_vector *vf, double angle)
     double  v;
 
     v = vf->x;
-    vf->x = vf->x * cos(angle * (3.1348/180)) - vf->y * sin(angle * (3.1348/180));
-    vf->y = vf->y * cos(angle * (3.1348/180)) + v * sin(angle * (3.1348/180)); 
+    vf->x = vf->x * cos(angle * (M_PI/180)) - vf->y * sin(angle * (M_PI/180));
+    vf->y = vf->y * cos(angle * (M_PI/180)) + v * sin(angle * (M_PI/180)); 
 }

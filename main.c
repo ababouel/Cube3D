@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/26 05:29:15 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/27 04:27:37 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <assert.h>
 #include "events.h"
 #include "tools.h"
+#include "raycast.h"
 
 char map[10][10] = {
 	"1111111111",
@@ -54,17 +55,13 @@ int    ft_init(t_vars *vars)
 int	main(void)
 {
 	t_vars		*vars;
-	t_vector	*v1,*v2;
 
 	vars = allocate();
-	vars->rect = addvect(500,500,add_color(255,0,0,0));
-	v1 = addvect(516,516,add_color(0,0,255,0));
-	v2 = addvect(189.264295,210.188074,add_color(0,0,255,0));
+	vars->ordr.origin = addvect(5,5,add_color(255,0,0,0));
+	vars->ordr.dir = addvect(10,0,add_color(255,0,0,0));
+	vars->ordr.angle = 0;
 	ft_init(vars);
-	draw_rect(vars);
-	draw_line(v1,v2,vars);
-	rotation(v2, 90);	
-	draw_line(v1,v2,vars);
+	debug_draw_vect(50,vars);	
 	mlx_put_image_to_window( vars->mlx, vars->win, vars->iarg->img, 0,0);
 	mlx_key_hook(vars->win, esc_key, vars);
 	mlx_hook(vars->win, 17, 0, close_game, vars);

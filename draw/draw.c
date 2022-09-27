@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/26 05:20:03 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/27 03:11:49 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void draw_line(t_vector *v1, t_vector *v2, t_vars *data)
 		vf.y += vd.y; 
 		step--;
 	}
+	mlx_put_image_to_window( data->mlx, data->win, data->iarg->img, 0,0);
 }
 
 void	draw_circle(t_vars *data ,t_vector *v, t_vector *vfix, double rad)
@@ -75,20 +76,20 @@ void	draw_circle(t_vars *data ,t_vector *v, t_vector *vfix, double rad)
 	}	
 }
 
-void	draw_rect(t_vars *data)
-{
-	t_vector v;	
-	v.y = data->rect->y;
-	v.color = data->rect->color;
-	while (v.y < data->rect->y + RECT_SIZE)
-	{
-		v.x = data->rect->x;
-		while (v.x < data->rect->x + RECT_SIZE)
-		{
-			draw_pixel(data, &v);
-			v.x++;
-		}
-		v.y++;
-	}
-	mlx_put_image_to_window( data->mlx, data->win, data->iarg->img, 0,0);
-}
+// void	draw_rect(t_vars *data)
+// {
+// 	t_vector v;	
+// 	v.y = data->rect->y;
+// 	v.color = data->rect->color;
+// 	while (v.y < data->rect->y + RECT_SIZE)
+// 	{
+// 		v.x = data->rect->x;
+// 		while (v.x < data->rect->x + RECT_SIZE)
+// 		{
+// 			draw_pixel(data, &v);
+// 			v.x++;
+// 		}
+// 		v.y++;
+// 	}
+// 	mlx_put_image_to_window( data->mlx, data->win, data->iarg->img, 0,0);
+// }

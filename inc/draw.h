@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/09/26 04:54:31 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/27 03:41:58 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,20 @@ typedef struct s_vector
 	t_color	*color;
 }	t_vector;
 
+typedef struct s_org_dir
+{
+	t_vector	*origin;
+	t_vector	*dir;
+	double		angle;
+}	t_org_dir;
+
+
 typedef struct	s_vars {
 	void		*mlx;
 	void		*win;
 	t_imgarg	*iarg;
 	t_data		*data;
-	t_vector	*rect;
+	t_org_dir	ordr;
 }	t_vars;
 
 void	draw_pixel(t_vars *data, t_vector *v);
