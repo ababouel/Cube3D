@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/09/27 03:41:58 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/27 23:04:45 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ typedef struct s_vector
 typedef struct s_org_dir
 {
 	t_vector	*origin;
-	t_vector	*dir;
+	t_vector	*dir1;
+	t_vector	*dir2;
+	t_vector	*dir3;
 	double		angle;
 }	t_org_dir;
 

@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:35:59 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/09/27 04:34:53 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/27 23:53:50 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,45 +22,37 @@ int	close_game(t_vars *vars)
 
 int	esc_key(int keynum, t_vars *vars)
 {
+	// t_vector *v;
 	if (keynum == ESC_KEY)
 		clear_data(vars);
 	if (keynum == ARROWRIGHT)
 	{ 
 		climg(vars->iarg);
-		vars->ordr.angle += 10;
+		vars->ordr.angle += 5;
+		rotation(vars->ordr.dir1, vars->ordr.angle);
 		debug_draw_vect(50,vars);
 	}
 	else if (keynum == ARROWLEFT)
 	{
 		climg(vars->iarg);
-		vars->ordr.angle -= 10;
+		vars->ordr.angle -= 5;
+		rotation(vars->ordr.dir1, vars->ordr.angle);
 		debug_draw_vect(50,vars);
 	}
 	else if (keynum == ARROWUP)
 	{
-		climg(vars->iarg);
-		if (vars->ordr.dir->x >= 0 && vars->ordr.dir->y >= 0  && vars->ordr.origin->x >= 0 && vars->ordr.origin->y >= 0)
-		{
-			vars->ordr.origin->x = vars->ordr.dir->x;
-			vars->ordr.origin->y = vars->ordr.dir->y;
-			vars->ordr.dir->x += -10 * cos(vars->ordr.angle * (M_PI/180));
-			vars->ordr.dir->y += -10 * sin(vars->ordr.angle * (M_PI/180));
-		}
-		debug_draw_vect(50,vars);		
+		// climg(vars->iarg);
+		// v = addvect(-1,-1,add_color(255,0,0,0));	
+		// vect_add(vars->ordr.origin, v);
+		// debug_draw_vect(50,vars);		
 	}
 	else if (keynum == ARROWDOWN)
 	{
-		climg(vars->iarg);
-		if (vars->ordr.dir->x < WINDOW_WIDTH && vars->ordr.dir->y < WINDOW_HEIGHT 
-			&& vars->ordr.origin->x < WINDOW_WIDTH && vars->ordr.dir->x < WINDOW_HEIGHT)
-		{
-			vars->ordr.origin->x = vars->ordr.dir->x;
-			vars->ordr.origin->y = vars->ordr.dir->y;
-			vars->ordr.dir->x += 10 * cos(vars->ordr.angle * (M_PI/180));
-			vars->ordr.dir->y += 10 * sin(vars->ordr.angle * (M_PI/180));
-			
-		}
-		debug_draw_vect(50,vars);			
+		// climg(vars->iarg);
+		// v = addvect(1,1,add_color(255,0,0,0));
+		// rotation(v,vars->ordr.angle);
+		// vect_add(vars->ordr.origin, v);	
+		// debug_draw_vect(50,vars);			
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/27 04:27:37 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/27 23:11:38 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ int	main(void)
 	t_vars		*vars;
 
 	vars = allocate();
-	vars->ordr.origin = addvect(5,5,add_color(255,0,0,0));
-	vars->ordr.dir = addvect(10,0,add_color(255,0,0,0));
+	vars->ordr.origin = addvect(WINDOW_WIDTH/2,WINDOW_HEIGHT/2,add_color(255,0,0,0));
+	vars->ordr.dir1 = addvect(WINDOW_WIDTH/2+10,WINDOW_HEIGHT/2+10,add_color(255,0,0,0));
+	vars->ordr.dir2 = addvect(WINDOW_WIDTH/2+20,WINDOW_HEIGHT/2,add_color(255,0,0,0));
+	vars->ordr.dir3 = addvect(WINDOW_WIDTH/2,WINDOW_HEIGHT/2+20,add_color(255,0,0,0));
 	vars->ordr.angle = 0;
 	ft_init(vars);
 	debug_draw_vect(50,vars);	

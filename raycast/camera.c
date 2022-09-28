@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:55:30 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/27 04:23:25 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/28 03:38:13 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@ void    norm_vect(t_vector *vect)
 
 void    debug_draw_vect(double scale, t_vars *vars)
 {
-    rotation(vars->ordr.dir, vars->ordr.angle); 
-    norm_vect(vars->ordr.dir);
-    vect_multi(vars->ordr.dir, scale);
-    vect_add(vars->ordr.dir, vars->ordr.origin);
-    draw_line(vars->ordr.origin, vars->ordr.dir, vars);
+    norm_vect(vars->ordr.dir1);
+    vect_multi(vars->ordr.dir1, scale);
+    vect_add(vars->ordr.origin, vars->ordr.dir1);
+    draw_line(vars->ordr.origin, vars->ordr.dir1, vars);
 }
 void    vect_multi(t_vector *dir,double scale)
 {
