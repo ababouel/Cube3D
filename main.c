@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/27 23:11:38 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/29 00:10:54 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,15 @@ int	main(void)
 	t_vars		*vars;
 
 	vars = allocate();
-	vars->ordr.origin = addvect(WINDOW_WIDTH/2,WINDOW_HEIGHT/2,add_color(255,0,0,0));
-	vars->ordr.dir1 = addvect(WINDOW_WIDTH/2+10,WINDOW_HEIGHT/2+10,add_color(255,0,0,0));
-	vars->ordr.dir2 = addvect(WINDOW_WIDTH/2+20,WINDOW_HEIGHT/2,add_color(255,0,0,0));
-	vars->ordr.dir3 = addvect(WINDOW_WIDTH/2,WINDOW_HEIGHT/2+20,add_color(255,0,0,0));
-	vars->ordr.angle = 0;
+	vars->ordr.origin = addvect(WINDOW_WIDTH/2,WINDOW_HEIGHT/2,add_color(255,0,0,0),0);
+	vars->ordr.dir1 = addvect(1,1,add_color(255,0,0,0), 50);	
+	vars->ordr.minplane = addvect(cos(M_PI/6.0),sin(M_PI/6.0),add_color(255,0,0,0),75);
+	vars->ordr.maxplane = addvect(cos((M_PI/3.0)),sin((M_PI/3.0)),add_color(255,0,0,0),75);
+	vars->ordr.dir1->angle = -M_PI/2;
+	vars->ordr.maxplane->angle = -M_PI/3;
+	vars->ordr.minplane->angle = -M_PI/3;
 	ft_init(vars);
-	debug_draw_vect(50,vars);	
+	debug_draw_vect(1,vars);	
 	mlx_put_image_to_window( vars->mlx, vars->win, vars->iarg->img, 0,0);
 	mlx_key_hook(vars->win, esc_key, vars);
 	mlx_hook(vars->win, 17, 0, close_game, vars);

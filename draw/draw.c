@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/27 03:11:49 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/28 22:34:50 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,15 @@ void draw_line(t_vector *v1, t_vector *v2, t_vars *data)
 
 	vd.x = v2->x - v1->x;
 	vd.y = v2->y - v1->y;
-	step = sqrt((vd.x * vd.x) + (vd.y * vd.y));
+	step = v2->mag;
 	vd.y /= step;
 	vd.x /= step;
-	vf.x = v1->x;
-	vf.y = v1->y;
-	vf.color = v1->color;	
+	vf = *v1;	
 	while (step)
 	{
 		draw_pixel(data, &vf);
-		vf.x += vd.x;
-		vf.y += vd.y; 
+		vf.x += v2->x;
+		vf.y += v2->y; 
 		step--;
 	}
 	mlx_put_image_to_window( data->mlx, data->win, data->iarg->img, 0,0);

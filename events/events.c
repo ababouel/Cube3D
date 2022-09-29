@@ -6,13 +6,14 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:35:59 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/09/27 23:53:50 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/29 00:00:00 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
 #include "tools.h"
 #include "raycast.h"
+
 
 int	close_game(t_vars *vars)
 {
@@ -22,37 +23,41 @@ int	close_game(t_vars *vars)
 
 int	esc_key(int keynum, t_vars *vars)
 {
-	// t_vector *v;
 	if (keynum == ESC_KEY)
 		clear_data(vars);
 	if (keynum == ARROWRIGHT)
 	{ 
 		climg(vars->iarg);
-		vars->ordr.angle += 5;
-		rotation(vars->ordr.dir1, vars->ordr.angle);
-		debug_draw_vect(50,vars);
+		vars->ordr.dir1->angle = M_PI/4;
+		vars->ordr.maxplane->angle = M_PI/4;
+		vars->ordr.minplane->angle = M_PI/4;	
+		rotation(vars->ordr.dir1, vars->ordr.dir1->angle);
+		rotation(vars->ordr.minplane, vars->ordr.minplane->angle);
+		rotation(vars->ordr.maxplane, vars->ordr.maxplane->angle);
+		debug_draw_vect(1,vars);
 	}
 	else if (keynum == ARROWLEFT)
 	{
 		climg(vars->iarg);
-		vars->ordr.angle -= 5;
-		rotation(vars->ordr.dir1, vars->ordr.angle);
-		debug_draw_vect(50,vars);
+		vars->ordr.dir1->angle = M_PI/4;
+		vars->ordr.maxplane->angle = M_PI/4;
+		vars->ordr.minplane->angle = M_PI/4;
+		rotation(vars->ordr.dir1, -vars->ordr.dir1->angle);
+		rotation(vars->ordr.maxplane, -vars->ordr.maxplane->angle);
+		rotation(vars->ordr.minplane, -vars->ordr.minplane->angle);
+		debug_draw_vect(1,vars);
 	}
 	else if (keynum == ARROWUP)
 	{
-		// climg(vars->iarg);
-		// v = addvect(-1,-1,add_color(255,0,0,0));	
-		// vect_add(vars->ordr.origin, v);
-		// debug_draw_vect(50,vars);		
+		climg(vars->iarg);
+		vect_add(vars->ordr.origin, vars->ordr.dir1, 6);
+		debug_draw_vect(1,vars);		
 	}
 	else if (keynum == ARROWDOWN)
 	{
-		// climg(vars->iarg);
-		// v = addvect(1,1,add_color(255,0,0,0));
-		// rotation(v,vars->ordr.angle);
-		// vect_add(vars->ordr.origin, v);	
-		// debug_draw_vect(50,vars);			
+		climg(vars->iarg);
+		vect_add(vars->ordr.origin, vars->ordr.dir1, -6);	
+		debug_draw_vect(1,vars);			
 	}
 	return (0);
 }

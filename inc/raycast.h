@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:30:05 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/27 03:19:42 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/28 20:05:50 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 void    norm_vect(t_vector *vect);
 void    debug_draw_vect(double scale, t_vars *vars);
 void    vect_multi(t_vector *dir,double scale);
-void    vect_add(t_vector *dir,t_vector *origin);
-
+void    vect_add(t_vector *origin, t_vector *dir, double angle);
 
 #endif

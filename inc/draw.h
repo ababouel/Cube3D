@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/09/27 23:04:45 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/28 23:09:15 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #ifndef DRAW_H
 # define DRAW_H
 
-# define WINDOW_WIDTH	1920
-# define WINDOW_HEIGHT	1080
+# define WINDOW_WIDTH	600
+# define WINDOW_HEIGHT	600
 # define MLX_ERROR	1
 # define RECT_SIZE	32
 
@@ -40,6 +40,8 @@ typedef struct s_vector
 {
 	double	x;
 	double	y;
+	double	angle;
+	double	mag;
 	t_color	*color;
 }	t_vector;
 
@@ -47,9 +49,8 @@ typedef struct s_org_dir
 {
 	t_vector	*origin;
 	t_vector	*dir1;
-	t_vector	*dir2;
-	t_vector	*dir3;
-	double		angle;
+	t_vector	*minplane;
+	t_vector	*maxplane;	
 }	t_org_dir;
 
 
