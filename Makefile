@@ -6,7 +6,7 @@
 #    By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/03 16:04:53 by ababouel          #+#    #+#              #
-#    Updated: 2022/09/25 06:04:08 by fech-cha         ###   ########.fr        #
+#    Updated: 2022/09/27 00:23:56 by fech-cha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,13 @@ GREEN = \033[0;32m
 CC = cc 
 CFLAGS = -Wall -Werror -Wextra -g 
 BDIR = build
-FILES = main draw/drawline parsing/parsing_tools events/events parsing/parsing  parsing/get_next_line parsing/get_next_line_utils
+FILES = main draw/drawline \
+	parsing/parsing_tools \
+	events/events parsing/parsing \
+	parsing/get_next_line \
+	parsing/get_next_line_utils \
+	parsing/split \
+	parsing/ft_atoi
 NAME = cub3d
 HEADERS = inc/data.h inc/parsing.h inc/draw.h  inc/raycast.h inc/events.h
 INC = -I ./inc

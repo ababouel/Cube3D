@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 06:01:46 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/09/25 06:08:17 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/09/27 20:11:45 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,24 @@ typedef enum e_NSWE
 
 typedef struct s_txtpath
 {
-    char    *path;
+    char    **path;
     t_nswe  nswe; 
 }   t_txtpath;
 
 typedef struct s_color
 {
-    int rd;
-    int gr;
-    int bl;
-    int al;
+    int     rd;
+    int     gr;
+    int     bl;
+    int     al;
+    char    type;
 }   t_color;
 
 typedef struct s_data
 {
     int         wth;
     int         hgt;
+    t_color     *color;
     t_txtpath   *txtpath; 
     char        **map;
 }   t_data;

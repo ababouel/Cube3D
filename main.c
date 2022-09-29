@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/25 06:05:38 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/09/28 23:05:32 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,21 @@ int	main(int argc, char **argv)
 {
 	t_vars	*vars;
 	int		check;	
-
+	int i = 0;
 	if (argc == 2)
 	{
 		vars = allocate();
 		check = ft_parse(argv[1], vars);
-		if (check < 0)
-		{
-			printf("Error.\n");
-			return (1);
-		}
-		ft_init(vars);
-		mlx_put_image_to_window( vars->mlx, vars->win, vars->iarg->img, 0,0);
-		mlx_key_hook(vars->win, esc_key, vars);
-		mlx_hook(vars->win, 17, 0, close_game, vars);
-		mlx_loop(vars->mlx);
+		// if (check < 0)
+		// {
+		// 	printf("Error.\n");
+		// 	return (1);
+		// }
+		// ft_init(vars);
+		// mlx_put_image_to_window( vars->mlx, vars->win, vars->iarg->img, 0,0);
+		// mlx_key_hook(vars->win, esc_key, vars);
+		// mlx_hook(vars->win, 17, 0, close_game, vars);
+		// mlx_loop(vars->mlx);
 	}
 	else
 		printf("Usage ./cub3d map_name \n");
