@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:41 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/28 20:06:39 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/09/29 17:59:54 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ int     ft_atoi(const char *str);
 int		ft_is_space(char c);
 int     ft_check_whitespace(char *str);
 int     ft_invalid_line(char *line);
+int     ft_is_in_wall(char **c, int x, int y, int lenx, int leny);
 
 #endif

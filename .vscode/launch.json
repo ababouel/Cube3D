@@ -8,8 +8,8 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug",
-            "program": "./parsing/a.out",
-            "args": [],
+            "program": "cub3d",
+            "args": "map.cub",
         }
     ]
 }

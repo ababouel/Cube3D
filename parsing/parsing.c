@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 04:00:33 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/09/28 23:05:12 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/09/30 00:00:13 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ int ft_check_whitespace(char *str)
     i = 0;
     while (str && str[i])
     {
-        if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n' 
-            && str[i] != '\v' && str[i] != '\f' && str[i] != '\r')
+        if (ft_is_space(str[i]) == 0)
             return (0);
         i++;
     }
@@ -84,15 +83,48 @@ void    ft_copy_colors(t_vars *vars, char **tmp, int index)
     color = my_free(color);
 }
 
+int ft_is_in_wall(char **map, int x, int y, int lenx, int leny)
+{
+    if ((x == 0 || y == 0 || x == lenx - 1 || y == leny - 1 
+        || ft_is_space(map[y + 1][x]) || ft_is_space(map[y - 1][x]) || ft_is_space(map[y][x + 1]) 
+        || ft_is_space(map[y][x  - 1])))
+        return (1);
+    return (0);
+}
+
+int ft_check_map(t_vars *vars)
+{
+    int x;
+    int y;
+
+    y = 0;
+    while (y < vars->data->hgt)
+    {
+        x = 0;
+        while (x < vars->data->wth)
+        {
+            if (ft_is_in_wall(vars->data->map, x, y, vars->data->wth, vars->data->hgt) == 1
+                && vars->data->map[y][x] != '1' && ft_is_space(vars->data->map[y][x]) != 1)
+            {
+                // printf("%d\n", ft_is_in_wall(vars->data->map, x, y, vars->data->wth, vars->data->hgt));
+                // printf("%c in %d,%d ----- lenx = %d,, leny = %d\n", vars->data->map[y][x], y, x, vars->data->wth, vars->data->hgt);
+                // printf("%s", vars->data->map[y]);
+                return (-1);
+            }
+            x++;
+        }
+        y++;
+    }
+    return (0);
+}
+
 int ft_parse(char *path, t_vars *vars)
 {
     int     i;
     int     j;
-    int     char_len;
     int     fd;
     int     col;
     int     count;
-    int     line_count;
     char    *line;
     char    **tmp;
   
@@ -102,14 +134,14 @@ int ft_parse(char *path, t_vars *vars)
     count = 6;
     line = NULL;
     tmp = NULL;
-    line_count = count_lines(path);
-    fd = open(path, O_RDONLY);
-    check_fd(fd);
     vars->data = (t_data *)malloc(sizeof(t_data));
     vars->data->color = (t_color *)malloc(sizeof(t_color) * 2);
     vars->data->txtpath = (t_txtpath *)malloc(sizeof(t_txtpath) * 4);
     vars->data->txtpath->path = (char **)malloc(sizeof(char *) * 5);
-    vars->data->map = (char **)malloc(sizeof(int *) * (line_count + 1));
+    vars->data->hgt = count_lines(path);
+    vars->data->map = (char **)malloc(sizeof(int *) * (vars->data->hgt + 1));
+    fd = open(path, O_RDONLY);
+    check_fd(fd);
     line = get_next_line(fd);
     while (line)
     {
@@ -140,8 +172,11 @@ int ft_parse(char *path, t_vars *vars)
         }
         else
         {
-            char_len = ft_invalid_line(line);
-            vars->data->map[j] = (char *)malloc(sizeof(char) * (char_len + 1));
+            vars->data->wth = ft_invalid_line(line);
+           // printf("%d\n", vars->data->wth);
+            if (vars->data->wth < 0)
+                return (-1);
+            vars->data->map[j] = (char *)malloc(sizeof(char) * (vars->data->wth + 1));
             ft_push_data(line, vars->data->map[j]);
             j++;
         }
@@ -150,5 +185,5 @@ int ft_parse(char *path, t_vars *vars)
     }
     vars->data->map[j] = NULL;
     //free all splits
-    return (0);
+    return (ft_check_map(vars));
 }

@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 04:17:08 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/09/28 20:06:28 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/09/29 20:53:23 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,17 @@ char	*ft_strdup(const char *s)
 
 int	ft_strcmp(char *s1, char *s2)
 {
-	while (*s1 == *s2 && *s1)
+	int i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (s1[i] == s2[j] && s1[i])
 	{
-		s1++;
-		s2++;
+		i++;
+		j++;
 	}
-	return ((unsigned char)*s1 - (unsigned char)*s2);
+	return ((unsigned char)s1[i] - (unsigned char)s2[j]);
 }
 
 void	check_fd(int fd)
@@ -64,7 +69,7 @@ int	ft_invalid_line(char *line)
 int ft_check_line(char *line)
 {
 	if (ft_check_whitespace(line) == 1 || ft_invalid_line(line) < 0)
-		return (1);
+		return (-1);
 	return (0);
 }
 
