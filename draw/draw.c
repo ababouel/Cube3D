@@ -6,13 +6,14 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/28 22:34:50 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/01 13:59:38 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 #include "events.h"
 #include "tools.h"
+#include "raycast.h"
 
 int	create_trgb(t_color *color)
 {
@@ -74,20 +75,70 @@ void	draw_circle(t_vars *data ,t_vector *v, t_vector *vfix, double rad)
 	}	
 }
 
-// void	draw_rect(t_vars *data)
-// {
-// 	t_vector v;	
-// 	v.y = data->rect->y;
-// 	v.color = data->rect->color;
-// 	while (v.y < data->rect->y + RECT_SIZE)
-// 	{
-// 		v.x = data->rect->x;
-// 		while (v.x < data->rect->x + RECT_SIZE)
-// 		{
-// 			draw_pixel(data, &v);
-// 			v.x++;
-// 		}
-// 		v.y++;
-// 	}
-// 	mlx_put_image_to_window( data->mlx, data->win, data->iarg->img, 0,0);
-// }
+void	draw_rect(t_vars *data, double x, double y)
+{
+	t_vector v;
+		
+	y *= RECT_SIZE;
+	x *= RECT_SIZE;
+	v.y = y; 
+	v.color = data->rect.color;
+	while (v.y < y + RECT_SIZE - 1)
+	{
+		v.x = x;
+		while (v.x < x + RECT_SIZE - 1)
+		{
+			draw_pixel(data, &v);
+			v.x++;
+		}
+		v.y++;
+	}
+	mlx_put_image_to_window( data->mlx, data->win, data->iarg->img, 0,0);
+}
+
+void	add_camera_data(t_vars *vars, t_vector *v)
+{
+	vars->ordr.origin = addvect(v->x * RECT_SIZE, v->y * RECT_SIZE, v->color, 0);
+	rotation(vars->ordr.dir1, v->angle);
+	rotation(vars->ordr.minplane, v->angle);
+	rotation(vars->ordr.maxplane, v->angle);
+}
+
+void	draw_map(t_vars *vars)
+{
+	t_vector v;
+
+	v.y = 0;
+	v.color = add_color(255,0,0,0);
+	while (v.y < vars->data->hgt)
+	{
+		v.x = 0;
+		while (v.x < vars->data->wth)
+		{
+			if (vars->data->map[(int)v.y][(int)v.x] == '1')
+				draw_rect(vars, v.x, v.y);
+			else if (vars->ordr.origin == NULL && vars->data->map[(int)v.y][(int)v.x] == 'N')
+			{
+				v.angle = -3*M_PI/4;
+				add_camera_data(vars,&v);	
+			}
+			else if (vars->ordr.origin == NULL && vars->data->map[(int)v.y][(int)v.x] == 'S')
+			{
+				v.angle = M_PI/4;
+				add_camera_data(vars,&v);	
+			}
+			else if (vars->ordr.origin == NULL && vars->data->map[(int)v.y][(int)v.x] == 'E')
+			{
+				v.angle = -M_PI/4;
+				add_camera_data(vars,&v);	
+			}
+			else if (vars->ordr.origin == NULL && vars->data->map[(int)v.y][(int)v.x] == 'W')
+			{
+				v.angle = 3*M_PI/4;
+				add_camera_data(vars,&v);
+			}	
+			v.x++;
+		}
+		v.y++;
+	}
+}

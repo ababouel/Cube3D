@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera.c                                           :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   Bin: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/27 00:55:30 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/28 19:48:46 by ababouel         ###   ########.fr       */
+/*   Created: 2022/10/01 11:00:33 by ababouel          #+#    #+#             */
+/*   Updated: 2022/10/01 11:01:38 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycast.h"
 #include "tools.h"
 
-void    camera(t_vars *vars)
+void debug(t_vector *v, int x, double angle)
 {
-    draw_line(vars->ordr.origin, vars->ordr.dir1, vars);
-    draw_line(vars->ordr.origin, vars->ordr.maxplane, vars);
-    draw_line(vars->ordr.origin, vars->ordr.minplane, vars); 
+    if (x)
+        printf("origin =>\n");
+    else
+        printf("dir =>\n");
+	printf("vector x => %f\n", v->x);
+	printf("vector y => %f\n", v->y);	
+	printf("vector angle => %f\n", angle);	
 }

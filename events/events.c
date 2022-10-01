@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:35:59 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/09/29 00:00:00 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/01 13:13:43 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,42 +22,40 @@ int	close_game(t_vars *vars)
 }
 
 int	esc_key(int keynum, t_vars *vars)
-{
+{	
 	if (keynum == ESC_KEY)
 		clear_data(vars);
 	if (keynum == ARROWRIGHT)
 	{ 
 		climg(vars->iarg);
-		vars->ordr.dir1->angle = M_PI/4;
-		vars->ordr.maxplane->angle = M_PI/4;
-		vars->ordr.minplane->angle = M_PI/4;	
 		rotation(vars->ordr.dir1, vars->ordr.dir1->angle);
 		rotation(vars->ordr.minplane, vars->ordr.minplane->angle);
 		rotation(vars->ordr.maxplane, vars->ordr.maxplane->angle);
-		debug_draw_vect(1,vars);
+		draw_map(vars);
+		camera(vars);
 	}
 	else if (keynum == ARROWLEFT)
 	{
 		climg(vars->iarg);
-		vars->ordr.dir1->angle = M_PI/4;
-		vars->ordr.maxplane->angle = M_PI/4;
-		vars->ordr.minplane->angle = M_PI/4;
 		rotation(vars->ordr.dir1, -vars->ordr.dir1->angle);
 		rotation(vars->ordr.maxplane, -vars->ordr.maxplane->angle);
 		rotation(vars->ordr.minplane, -vars->ordr.minplane->angle);
-		debug_draw_vect(1,vars);
+		draw_map(vars);
+		camera(vars);
 	}
 	else if (keynum == ARROWUP)
 	{
 		climg(vars->iarg);
 		vect_add(vars->ordr.origin, vars->ordr.dir1, 6);
-		debug_draw_vect(1,vars);		
+		draw_map(vars);	
+		camera(vars);
 	}
 	else if (keynum == ARROWDOWN)
 	{
 		climg(vars->iarg);
 		vect_add(vars->ordr.origin, vars->ordr.dir1, -6);	
-		debug_draw_vect(1,vars);			
+		draw_map(vars);			
+		camera(vars);
 	}
 	return (0);
 }
