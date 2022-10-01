@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/01 13:55:36 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/01 18:21:24 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #ifndef DRAW_H
 # define DRAW_H
 
-# define WINDOW_WIDTH	600
-# define WINDOW_HEIGHT	600
+# define WINDOW_WIDTH	600.0
+# define WINDOW_HEIGHT	600.0
 # define MLX_ERROR	1
 # define RECT_SIZE	32.0
 
@@ -60,6 +60,11 @@ typedef struct  s_rect
 	t_color *color;
 }	t_rect;
 
+typedef struct s_ray
+{
+	t_vector	**ray;
+	double		nray;
+}	t_ray;
 
 typedef struct	s_vars {
 	void		*mlx;
@@ -68,6 +73,7 @@ typedef struct	s_vars {
 	t_data		*data;
 	t_org_dir	ordr;
 	t_rect		rect;
+	t_ray		ray;
 }	t_vars;
 
 void	draw_pixel(t_vars *data, t_vector *v);
@@ -76,4 +82,5 @@ void	draw_line(t_vector *v1, t_vector *v2, t_vars *data);
 void	draw_circle(t_vars *data,t_vector *v, t_vector *vfix, double rad);
 void	draw_rect(t_vars *data, double x, double y);
 void	draw_map(t_vars *vars);
+
 #endif

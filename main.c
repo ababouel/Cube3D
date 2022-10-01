@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/01 14:02:32 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/01 19:48:15 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char *map[10] = {
 	"1000100001",
 	"1000100001",
 	"1000000001",
-	"10000W0001",
+	"10000N0001",
 	"1000000001",
 	"1000100001",
 	"1000100001",
@@ -35,12 +35,36 @@ char *map[10] = {
 
 int	ft_init_vars(t_vars *vars)
 {
-	vars->ordr.dir1 = addvect( 1, 1, add_color(255,0,0,0), 50);
-	vars->ordr.minplane = addvect( cos(M_PI/6.0), sin(M_PI/6.0), add_color(255,0,0,0), 75);
-	vars->ordr.maxplane = addvect( cos((M_PI/3.0)), sin((M_PI/3.0)), add_color(255,0,0,0), 75);	
+	int		x;
+	double	angle;
+	
+	x = 0;
+	angle = 0;
+	vars->ordr.dir1 = addvect(1, 1, add_color(255,0,0,0), 10);
+	vars->ordr.minplane = addvect(cos(M_PI/6.0), sin(M_PI/6.0), add_color(255,0,0,0), 20);
+	vars->ordr.maxplane = addvect(cos((M_PI/3.0)), sin((M_PI/3.0)), add_color(255,0,0,0), 20);	
 	vars->ordr.dir1->angle = M_PI/10;
 	vars->ordr.maxplane->angle = M_PI/10;
 	vars->ordr.minplane->angle = M_PI/10;
+	// angle = (1 / WINDOW_WIDTH) * vars->ordr.minplane->angle;
+	// vars->ray.nray = WINDOW_WIDTH;
+	// vars->ray.ray = malloc(sizeof(t_vector *) * WINDOW_WIDTH + 1);
+	// while(x < vars->ray.nray)
+	// {
+	// 	if (x == 0)
+	// 	{
+	// 		vars->ray.ray[x] = vars->ordr.minplane;
+	// 		vars->ray.ray[x]->mag = WINDOW_WIDTH;
+	// 	}
+	// 	else
+	// 	{
+	// 		vars->ray.ray[x] = addvect(cos(angle), sin(angle), add_color(255,0,0,0), WINDOW_WIDTH);
+	// 		vars->ray.ray[x]->angle = M_PI/10;
+	// 	}
+	// 	angle += (1.0 / WINDOW_WIDTH) * (M_PI / 6.0);
+	// 	printf("index=>%d\nangle=>%f\n", x,angle);
+	// 	x++;
+	// }
 	vars->rect.color = add_color(0,0,255,0);
 	vars->rect.x = 5;
 	vars->rect.y = 5;

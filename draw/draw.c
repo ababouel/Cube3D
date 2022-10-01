@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/01 13:59:38 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/01 19:55:16 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	draw_circle(t_vars *data ,t_vector *v, t_vector *vfix, double rad)
 	t_vector v1;
 	double PI = 3.1416;
 	double angle;
+	
 	(void) vfix;
-
 	angle = 0;
 	while(angle < 360)
 	{
@@ -98,10 +98,19 @@ void	draw_rect(t_vars *data, double x, double y)
 
 void	add_camera_data(t_vars *vars, t_vector *v)
 {
+	double x;
+
+	x = 0;
 	vars->ordr.origin = addvect(v->x * RECT_SIZE, v->y * RECT_SIZE, v->color, 0);
 	rotation(vars->ordr.dir1, v->angle);
 	rotation(vars->ordr.minplane, v->angle);
 	rotation(vars->ordr.maxplane, v->angle);
+	// while(x < WINDOW_WIDTH)
+	// {
+	// 	rotation(vars->ray.ray[(int)x], v->angle);
+	// 	v->angle += (1 / WINDOW_WIDTH) * v->angle;
+	// 	x++;
+	// }
 }
 
 void	draw_map(t_vars *vars)
