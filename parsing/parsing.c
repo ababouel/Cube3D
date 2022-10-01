@@ -6,11 +6,18 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 04:00:33 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/09/30 00:00:13 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/02 00:47:59 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+int ft_iscolor(char c)
+{
+    if ((c >= '0' && c <= '9') || c == ',')
+        return (1);
+    return (-1);
+}
 
 void	*my_free(void *ptr)
 {
@@ -68,19 +75,51 @@ int ft_assign_nswe(char *nswe, t_vars *vars, int i)
     return (1);   
 }
 
-void    ft_copy_colors(t_vars *vars, char **tmp, int index)
+int ft_check_format(char *color)
+{
+    int i;
+    int count;
+
+    i = 0;
+    count = 0;
+    while (color[i])
+    {
+        if (ft_iscolor(color[i]) && count <= 2)
+        {
+            if (color[i] == ',')
+                count++;
+            i++;
+        }
+        else
+            return (-1);
+    }
+    return (1);
+}
+
+int ft_copy_colors(t_vars *vars, char **tmp, int index)
 {
     char    **color;
     
-    vars->data->color[index].type = tmp[0][0];
-    color = ft_split(tmp[1], ',', ',');
-    vars->data->color[index].rd = ft_atoi(color[0]);
-    vars->data->color[index].gr = ft_atoi(color[1]);
-    vars->data->color[index].bl = ft_atoi(color[2]);
-    color[0] = my_free(color[0]);
-    color[1] = my_free(color[1]);
-    color[2] = my_free(color[2]);
-    color = my_free(color);
+    if (tmp[0][0] == 'F' || tmp[0][0] == 'C')
+    {
+        vars->data->color[index].type = tmp[0][0];
+        if (ft_check_format(tmp[1]) == 1)
+        {
+            color = ft_split(tmp[1], ',', ',');
+            vars->data->color[index].rd = ft_atoi(color[0]);
+            vars->data->color[index].gr = ft_atoi(color[1]);
+            vars->data->color[index].bl = ft_atoi(color[2]);
+            color[0] = my_free(color[0]);
+            color[1] = my_free(color[1]);
+            color[2] = my_free(color[2]);
+            color = my_free(color);
+            return (1);
+        }
+        else
+            return (-1);
+    }
+    else
+        return (-1);
 }
 
 int ft_is_in_wall(char **map, int x, int y, int lenx, int leny)
@@ -101,14 +140,11 @@ int ft_check_map(t_vars *vars)
     while (y < vars->data->hgt)
     {
         x = 0;
-        while (x < vars->data->wth)
+        while (x < vars->data->wth[y])
         {
-            if (ft_is_in_wall(vars->data->map, x, y, vars->data->wth, vars->data->hgt) == 1
+            if (ft_is_in_wall(vars->data->map, x, y, vars->data->wth[x], vars->data->hgt) == 1
                 && vars->data->map[y][x] != '1' && ft_is_space(vars->data->map[y][x]) != 1)
             {
-                // printf("%d\n", ft_is_in_wall(vars->data->map, x, y, vars->data->wth, vars->data->hgt));
-                // printf("%c in %d,%d ----- lenx = %d,, leny = %d\n", vars->data->map[y][x], y, x, vars->data->wth, vars->data->hgt);
-                // printf("%s", vars->data->map[y]);
                 return (-1);
             }
             x++;
@@ -139,6 +175,7 @@ int ft_parse(char *path, t_vars *vars)
     vars->data->txtpath = (t_txtpath *)malloc(sizeof(t_txtpath) * 4);
     vars->data->txtpath->path = (char **)malloc(sizeof(char *) * 5);
     vars->data->hgt = count_lines(path);
+    vars->data->wth = (int *)malloc(sizeof(int) * vars->data->hgt);
     vars->data->map = (char **)malloc(sizeof(int *) * (vars->data->hgt + 1));
     fd = open(path, O_RDONLY);
     check_fd(fd);
@@ -156,13 +193,15 @@ int ft_parse(char *path, t_vars *vars)
             tmp = ft_split(line, ' ', '\t');
             if (ft_strlen(tmp[0]) > 1)
             {
-                ft_assign_nswe(tmp[0], vars, i);
+                if (ft_assign_nswe(tmp[0], vars, i) == 0)
+                    return (-1);
                 vars->data->txtpath->path[i] = ft_strdup(tmp[1]);
                 i++;
             }
             else
             {
-                ft_copy_colors(vars, tmp, col);
+                if (ft_copy_colors(vars, tmp, col) == -1)
+                    return (-1);
                 col++;
             }
             count--;
@@ -172,11 +211,10 @@ int ft_parse(char *path, t_vars *vars)
         }
         else
         {
-            vars->data->wth = ft_invalid_line(line);
-           // printf("%d\n", vars->data->wth);
-            if (vars->data->wth < 0)
+            vars->data->wth[j] = ft_invalid_line(line);
+            if (vars->data->wth[j] < 0)
                 return (-1);
-            vars->data->map[j] = (char *)malloc(sizeof(char) * (vars->data->wth + 1));
+            vars->data->map[j] = (char *)malloc(sizeof(char) * (vars->data->wth[j] + 1));
             ft_push_data(line, vars->data->map[j]);
             j++;
         }

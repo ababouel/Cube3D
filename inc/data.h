@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 06:01:46 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/09/29 20:29:12 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/01 20:14:24 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_color
 
 typedef struct s_data
 {
-    int         wth;
+    int         *wth;
     int         hgt;
     t_color     *color;
     t_txtpath   *txtpath; 
