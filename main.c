@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/02 22:05:49 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/02 22:28:45 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,15 @@ int    ft_init(t_vars *vars)
 	return (0);
 }
 
+// int render_next_frame(void *vars)
+// {
+// 	t_vars *v;
+
+// 	v = (t_vars *)vars;
+	
+// 	return (1);
+// }
+
 int	main(void)
 {
 	t_vars		*vars;
@@ -83,8 +92,9 @@ int	main(void)
 	vars = allocate();
 	ft_init_vars(vars);
 	ft_init(vars);
-	draw_map(vars);
+	draw_map(vars);	
 	camera(vars);	
+	// mlx_loop_hook(vars->mlx, render_next_frame, (void *)vars);	
 	mlx_put_image_to_window( vars->mlx, vars->win, vars->iarg->img, 0,0);
 	mlx_key_hook(vars->win, esc_key, vars);
 	mlx_hook(vars->win, 17, 0, close_game, vars);
