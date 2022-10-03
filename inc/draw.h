@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/01 18:21:24 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/03 19:04:41 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ typedef struct  s_rect
 
 typedef struct s_ray
 {
-	t_vector	**ray;
-	double		nray;
+	double		dx;
+	double		dy;
+	t_vector	ray;
+		
 }	t_ray;
 
 typedef struct	s_vars {

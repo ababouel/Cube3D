@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:35:59 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/02 22:02:59 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/03 19:37:48 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ int	esc_key(int keynum, t_vars *vars)
 		rotation(vars->ordr.dir1, vars->ordr.dir1->angle);
 		rotation(vars->ordr.minplane, vars->ordr.minplane->angle);
 		rotation(vars->ordr.maxplane, vars->ordr.maxplane->angle);
-		draw_map(vars);
-		camera(vars);
 	}
 	else if (keynum == ARROWLEFT)
 	{
@@ -40,22 +38,16 @@ int	esc_key(int keynum, t_vars *vars)
 		rotation(vars->ordr.dir1, -vars->ordr.dir1->angle);
 		rotation(vars->ordr.maxplane, -vars->ordr.maxplane->angle);
 		rotation(vars->ordr.minplane, -vars->ordr.minplane->angle);
-		draw_map(vars);
-		camera(vars);
 	}
 	else if (keynum == ARROWUP)
 	{
 		climg(vars->iarg);
 		vect_add(vars->ordr.origin, vars->ordr.dir1, 6);
-		draw_map(vars);	
-		camera(vars);
 	}
 	else if (keynum == ARROWDOWN)
 	{
 		climg(vars->iarg);
 		vect_add(vars->ordr.origin, vars->ordr.dir1, -6);	
-		draw_map(vars);			
-		camera(vars);
 	}
 	return (0);
 }

@@ -12,23 +12,38 @@
 
 #include "raycast.h"
 #include "tools.h"
+#include <math.h>
+
+// void    draw_ray(t_vars *vars)
+// {
+//     int step;
+//     int is_inter;
+//     int mag;
+//     t_vector dv;
+
+//     mag = 0;
+//     step = 0;
+//     is_inter = 0;
+//     vars->ray.ray = *vars->ordr.dir1;
+//     while (step < 20 && !is_inter)
+//     {
+
+//         step++;
+//     }
+// }
 
 void    camera(t_vars *vars)
 {
-    t_vector    v;
-    int         x;
-
-    x = 0;
-    v = *vars->ordr.minplane;
-    v.mag = WINDOW_WIDTH;
     draw_line(vars->ordr.origin, vars->ordr.dir1, vars);
     draw_line(vars->ordr.origin, vars->ordr.maxplane, vars);
     draw_line(vars->ordr.origin, vars->ordr.minplane, vars);
-    while (x < WINDOW_WIDTH)
-    {
-        draw_line(vars->ordr.origin, &v, vars);
-        v.angle = (1.0 / (WINDOW_WIDTH)) * (M_PI / 6.0);
-        rotation(&v, v.angle); 
-        x++;
-    }
+    // draw_ray(vars);
 }
+
+    // while (x < WINDOW_WIDTH)
+    // {
+    //     draw_line(vars->ordr.origin, &v, vars);
+    //     v.angle = (1.0 / (WINDOW_WIDTH)) * (M_PI / 6.0);
+    //     rotation(&v, v.angle); 
+    //     x++;
+    // }
