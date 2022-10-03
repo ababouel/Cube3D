@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/02 21:54:59 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/03 22:03:00 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,6 @@ void	draw_rect(t_vars *data, double x, double y)
 
 void	add_camera_data(t_vars *vars, t_vector *v)
 {
-	double		x;
-
-	x = 0;
 	vars->ordr.origin = addvect(v->x * RECT_SIZE, v->y * RECT_SIZE, v->color, 0);
 	rotation(vars->ordr.dir1, v->angle);
 	rotation(vars->ordr.minplane, v->angle);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:35:59 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/03 19:37:48 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/03 22:03:14 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int	esc_key(int keynum, t_vars *vars)
 
 void	clear_data(t_vars *vars)
 {
-	int	i;
+	// int	i;
 
-	i = 0;
+	// i = 0;
 	mlx_destroy_image(vars->mlx, vars->iarg->img);
 	mlx_destroy_window(vars->mlx, vars->win);
 	//free array of map

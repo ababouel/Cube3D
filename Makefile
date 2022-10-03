@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+         #
+#    By: ababouel <ababouel@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/03 16:04:53 by ababouel          #+#    #+#              #
-#    Updated: 2022/10/01 11:13:26 by ababouel         ###   ########.fr        #
+#    Updated: 2022/10/03 22:17:24 by ababouel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,9 @@ OBJ = $(addprefix $(BDIR)/, $(FILES:=.o))
 all: $(NAME)
 
 $(NAME): $(OBJ)
+	@cd ./lib && make
 	@$(CC) $(CFLAGS) $^  ./lib/libmlx.a -framework OpenGL -framework AppKit -o $@ 
-	@printf "$(GREEN)Done !"
+	@printf "\n$(GREEN)Done !\n"
 
 $(BDIR)/%.o : %.c $(HEADERS)
 	@mkdir -p $(@D)
@@ -35,6 +36,7 @@ clean:
 	rm -rf $(BDIR)
 
 fclean: clean
+	cd ./lib && make clean
 	rm -rf $(NAME)
 
 re: fclean all
