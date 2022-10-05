@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/04 03:54:18 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/05 18:57:12 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #ifndef DRAW_H
 # define DRAW_H
 
-# define WINDOW_WIDTH	600.0
-# define WINDOW_HEIGHT	600.0
+# define WINDOW_WIDTH	1280.0
+# define WINDOW_HEIGHT	720.0
 # define MLX_ERROR	1
 # define RECT_SIZE	32.0
 
@@ -98,5 +98,6 @@ void	draw_line(t_vector *v1, t_vector *v2, t_vars *data);
 void	draw_circle(t_vars *data,t_vector *v, t_vector *vfix, double rad);
 void	draw_rect(t_vars *data, double x, double y);
 void	draw_map(t_vars *vars);
+void	draw_ceil_floor(t_vars *vars,t_color *ceil, t_color *floor);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/05 16:51:09 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/05 18:10:11 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	draw_rect(t_vars *data, double x, double y)
 		}
 		v.y++;
 	}
-	mlx_put_image_to_window( data->mlx, data->win, data->iarg->img, 0,0);
+	// mlx_put_image_to_window( data->mlx, data->win, data->iarg->img, 0,0);
 }
 
 void	add_camera_data(t_vars *vars, t_vector *v)
@@ -114,14 +114,10 @@ void	draw_map(t_vars *vars)
 	{
 		v.x = 0;
 		while (v.x < vars->data->wth)
-		{
-			if (vars->data->map[(int)v.y][(int)v.x] == '1')
-			{
-				draw_rect(vars, v.x, v.y);
-			}
+		{	
 			if (vars->ordr.origin == NULL && vars->data->map[(int)v.y][(int)v.x] == 'N')
 			{
-				v.angle = -3*M_PI/4;
+				v.angle = -3 * M_PI/4;
 				add_camera_data(vars,&v);	
 			}
 			else if (vars->ordr.origin == NULL && vars->data->map[(int)v.y][(int)v.x] == 'S')
@@ -143,4 +139,39 @@ void	draw_map(t_vars *vars)
 		}
 		v.y++;
 	}
+}
+
+void	draw_ceil_floor(t_vars *vars,t_color *ceil, t_color *floor)
+{
+	int x;
+	int y;
+	t_vector v;
+
+	y = 0;
+	while (y < WINDOW_HEIGHT/2)
+	{
+		x = 0;
+		while (x < WINDOW_WIDTH)
+		{
+			v.x = x;
+			v.y = y;
+			v.color = ceil;
+			draw_pixel(vars,&v); 
+			x++;
+		}
+		y++;
+	}
+	while (y < WINDOW_HEIGHT)
+	{
+		x = 0;
+		while (x < WINDOW_WIDTH)
+		{
+			v.x = x;
+			v.y = y;
+			v.color = floor;
+			draw_pixel(vars,&v); 
+			x++;
+		}
+		y++;
+	}		
 }

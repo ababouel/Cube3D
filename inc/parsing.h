@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:41 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/26 03:08:17 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/05 18:45:02 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ typedef struct s_txtpath
 
 typedef struct s_color
 {
-    int rd;
-    int gr;
-    int bl;
-    int al;
+    unsigned char rd;
+    unsigned char gr;
+    unsigned char bl;
+    unsigned char al;
 }   t_color;
 
 typedef struct s_data
