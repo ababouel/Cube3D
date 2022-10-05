@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/25 02:19:32 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/09/25 06:06:08 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-
 
 int	create_trgb(t_color *color)
 {
@@ -27,7 +26,7 @@ void	draw_pixel(t_vars *data, t_vector *v)
 	t_imgarg	img;
 
 	img = *data->iarg;
-	if (v->x < 600 && v->x > 0 && v->y < 600 && v->y > 0)
+	if (v->x < 600 && v->x >= 0 && v->y < 600 && v->y >= 0)
 	{
 		dst = img.addr + ((int)v->y * img.line_len + 
 			(int)v->x * (img.bpp / 8));
@@ -71,8 +70,26 @@ void	draw_circle(t_vars *data ,t_vector *v, t_vector *vfix, double rad)
 		v1.y = rad * sin(angle * PI / 180);
 		v->x += v1.x;
 		v->y += v1.y; 
-		// draw_line(vfix, v, data);
 		draw_pixel(data, v);
 		angle += 0.1;
 	}	
+}
+
+void	draw_rect(t_vars *data)
+{
+	t_vector v;
+
+	v.color = data->rect->color;
+	v.y = data->rect->y;
+	while (v.y < data->rect->y + RECT_SIZE)
+	{
+		v.x = data->rect->x;
+		while (v.x < data->rect->x + RECT_SIZE)
+		{
+			draw_pixel(data, &v);
+			v.x++;
+		}
+		v.y++;
+	}
+	mlx_put_image_to_window( data->mlx, data->win, data->iarg->img, 0,0);
 }
