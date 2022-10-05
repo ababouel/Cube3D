@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+         #
+#    By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/03 16:04:53 by ababouel          #+#    #+#              #
-#    Updated: 2022/09/25 06:11:09 by ababouel         ###   ########.fr        #
+#    Updated: 2022/10/05 17:44:24 by fech-cha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,18 @@ GREEN = \033[0;32m
 CC = cc 
 CFLAGS = -Wall -Werror -Wextra -g 
 BDIR = build
-FILES = main draw/draw events/events
+FILES = main draw/drawline \
+	parsing/parsing_tools \
+	events/events parsing/parsing \
+	parsing/get_next_line \
+	parsing/get_next_line_utils \
+	parsing/split \
+	parsing/ft_atoi \
+	parsing/libft_func \
+	parsing/parser_check \
+	parsing/small_tools
 NAME = cub3d
-HEADERS = inc/draw.h inc/parsing.h inc/raycast.h inc/events.h
+HEADERS = inc/data.h inc/parsing.h inc/draw.h  inc/raycast.h inc/events.h
 INC = -I ./inc
 OBJ = $(addprefix $(BDIR)/, $(FILES:=.o))
 
