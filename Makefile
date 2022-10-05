@@ -6,7 +6,7 @@
 #    By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/03 16:04:53 by ababouel          #+#    #+#              #
-#    Updated: 2022/09/27 00:23:56 by fech-cha         ###   ########.fr        #
+#    Updated: 2022/10/05 17:44:24 by fech-cha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,10 @@ FILES = main draw/drawline \
 	parsing/get_next_line \
 	parsing/get_next_line_utils \
 	parsing/split \
-	parsing/ft_atoi
+	parsing/ft_atoi \
+	parsing/libft_func \
+	parsing/parser_check \
+	parsing/small_tools
 NAME = cub3d
 HEADERS = inc/data.h inc/parsing.h inc/draw.h  inc/raycast.h inc/events.h
 INC = -I ./inc

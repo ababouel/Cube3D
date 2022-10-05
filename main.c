@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/01 21:28:50 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/05 17:48:46 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	main(int argc, char **argv)
 		check = ft_parse(argv[1], vars);
 		if (check < 0)
 		{
+			//free all
 			printf("Error.\n");
 			return (1);
 		}

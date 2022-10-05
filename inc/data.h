@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 06:01:46 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/01 20:14:24 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/05 18:02:04 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,23 @@ typedef struct s_imgarg
 	int		endian;
 }	t_imgarg;
 
-typedef struct	s_vars {
+typedef struct	s_vars 
+{
 	void		*mlx;
 	void		*win;
 	t_imgarg	*iarg;
 	t_data		*data;
 }	t_vars;
 
-
+typedef struct s_pars 
+{
+    int     i;
+    int     j;
+    int     fd;
+    int     col;
+    int     count;
+    char    *line;
+    char    **tmp;
+}   t_pars;
 
 #endif

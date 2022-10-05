@@ -6,46 +6,11 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 04:00:33 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/02 00:47:59 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/05 18:57:21 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-int ft_iscolor(char c)
-{
-    if ((c >= '0' && c <= '9') || c == ',')
-        return (1);
-    return (-1);
-}
-
-void	*my_free(void *ptr)
-{
-	free(ptr);
-	return (NULL);
-}
-
-int		ft_is_space(char c)
-{
-	if (c == '\t' || c == '\n' || c == '\r' ||
-			c == '\v' || c == '\f' || c == ' ')
-		return (1);
-	return (0);
-}
-
-int ft_check_whitespace(char *str)
-{
-    int i;
-
-    i = 0;
-    while (str && str[i])
-    {
-        if (ft_is_space(str[i]) == 0)
-            return (0);
-        i++;
-    }
-    return (1);
-}
 
 void    ft_push_data(char *line, char *arr)
 {
@@ -75,27 +40,6 @@ int ft_assign_nswe(char *nswe, t_vars *vars, int i)
     return (1);   
 }
 
-int ft_check_format(char *color)
-{
-    int i;
-    int count;
-
-    i = 0;
-    count = 0;
-    while (color[i])
-    {
-        if (ft_iscolor(color[i]) && count <= 2)
-        {
-            if (color[i] == ',')
-                count++;
-            i++;
-        }
-        else
-            return (-1);
-    }
-    return (1);
-}
-
 int ft_copy_colors(t_vars *vars, char **tmp, int index)
 {
     char    **color;
@@ -122,54 +66,14 @@ int ft_copy_colors(t_vars *vars, char **tmp, int index)
         return (-1);
 }
 
-int ft_is_in_wall(char **map, int x, int y, int lenx, int leny)
+void    ft_init_pars(t_vars *vars, t_pars *pars, char *path)
 {
-    if ((x == 0 || y == 0 || x == lenx - 1 || y == leny - 1 
-        || ft_is_space(map[y + 1][x]) || ft_is_space(map[y - 1][x]) || ft_is_space(map[y][x + 1]) 
-        || ft_is_space(map[y][x  - 1])))
-        return (1);
-    return (0);
-}
-
-int ft_check_map(t_vars *vars)
-{
-    int x;
-    int y;
-
-    y = 0;
-    while (y < vars->data->hgt)
-    {
-        x = 0;
-        while (x < vars->data->wth[y])
-        {
-            if (ft_is_in_wall(vars->data->map, x, y, vars->data->wth[x], vars->data->hgt) == 1
-                && vars->data->map[y][x] != '1' && ft_is_space(vars->data->map[y][x]) != 1)
-            {
-                return (-1);
-            }
-            x++;
-        }
-        y++;
-    }
-    return (0);
-}
-
-int ft_parse(char *path, t_vars *vars)
-{
-    int     i;
-    int     j;
-    int     fd;
-    int     col;
-    int     count;
-    char    *line;
-    char    **tmp;
-  
-    i = 0; 
-    j = 0;
-    col = 0;
-    count = 6;
-    line = NULL;
-    tmp = NULL;
+    pars->i = 0; 
+    pars->j = 0;
+    pars->col = 0;
+    pars->count = 6;
+    pars->line = NULL;
+    pars->tmp = NULL;
     vars->data = (t_data *)malloc(sizeof(t_data));
     vars->data->color = (t_color *)malloc(sizeof(t_color) * 2);
     vars->data->txtpath = (t_txtpath *)malloc(sizeof(t_txtpath) * 4);
@@ -177,51 +81,75 @@ int ft_parse(char *path, t_vars *vars)
     vars->data->hgt = count_lines(path);
     vars->data->wth = (int *)malloc(sizeof(int) * vars->data->hgt);
     vars->data->map = (char **)malloc(sizeof(int *) * (vars->data->hgt + 1));
-    fd = open(path, O_RDONLY);
-    check_fd(fd);
-    line = get_next_line(fd);
-    while (line)
+}
+
+int ft_parse_setups(t_vars *vars, t_pars *pars)
+{
+    if (pars->count > 0 && ft_check_whitespace(pars->line) == 0)
     {
-        if (ft_check_whitespace(line))
+        pars->tmp = ft_split(pars->line, ' ', '\t');
+        if (ft_strlen(pars->tmp[0]) > 1)
         {
-            line = my_free(line);
-            line = get_next_line(fd);
-            continue;
-        }
-        if (count > 0 && ft_check_whitespace(line) == 0)
-        {
-            tmp = ft_split(line, ' ', '\t');
-            if (ft_strlen(tmp[0]) > 1)
-            {
-                if (ft_assign_nswe(tmp[0], vars, i) == 0)
-                    return (-1);
-                vars->data->txtpath->path[i] = ft_strdup(tmp[1]);
-                i++;
-            }
-            else
-            {
-                if (ft_copy_colors(vars, tmp, col) == -1)
-                    return (-1);
-                col++;
-            }
-            count--;
-            tmp[0] = my_free(tmp[0]);
-            tmp[1] = my_free(tmp[1]);
-            tmp = my_free(tmp);
+            if (ft_assign_nswe(pars->tmp[0], vars, pars->i) == 0)
+                return (-1);
+            vars->data->txtpath->path[pars->i] = ft_strdup(pars->tmp[1]);
+            pars->i++;
         }
         else
         {
-            vars->data->wth[j] = ft_invalid_line(line);
-            if (vars->data->wth[j] < 0)
+            if (ft_copy_colors(vars, pars->tmp, pars->col) == -1)
                 return (-1);
-            vars->data->map[j] = (char *)malloc(sizeof(char) * (vars->data->wth[j] + 1));
-            ft_push_data(line, vars->data->map[j]);
-            j++;
+            pars->col++;
         }
-        line = my_free(line);
-        line = get_next_line(fd);
+        pars->count--;
+        pars->tmp[0] = my_free(pars->tmp[0]);
+        pars->tmp[1] = my_free(pars->tmp[1]);
+        pars->tmp = my_free(pars->tmp);
+        return (1);
     }
-    vars->data->map[j] = NULL;
-    //free all splits
+    else
+        return (2);
+}
+
+int ft_parse_map(t_vars *vars, t_pars *pars)
+{
+    vars->data->wth[pars->j] = ft_invalid_line(pars->line);
+    if (vars->data->wth[pars->j] < 0)
+        return (-1);
+    vars->data->map[pars->j] = (char *)malloc(sizeof(char) * (vars->data->wth[pars->j] + 1));
+    ft_push_data(pars->line, vars->data->map[pars->j]);
+    pars->j++;
+    return (1);
+}
+
+int ft_parse(char *path, t_vars *vars)
+{  
+    int     hold;
+    t_pars  pars;
+    
+    ft_init_pars(vars, &pars, path);
+    pars.fd = open(path, O_RDONLY);
+    check_fd(pars.fd);
+    pars.line = get_next_line(pars.fd);
+    while (pars.line)
+    {
+        if (ft_check_whitespace(pars.line))
+        {
+            pars.line = my_free(pars.line);
+            pars.line = get_next_line(pars.fd);
+            continue;
+        }
+        hold = ft_parse_setups(vars, &pars);
+        if (hold == 2)
+        {
+            if (ft_parse_map(vars, &pars) == -1)
+                return (-1);
+        }
+        else
+            return (hold);
+        pars.line = my_free(pars.line);
+        pars.line = get_next_line(pars.fd);
+    }
+    vars->data->map[pars.j] = NULL;
     return (ft_check_map(vars));
 }
