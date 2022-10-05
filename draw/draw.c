@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawline.c                                         :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/25 06:06:08 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/05 23:25:27 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,23 +73,4 @@ void	draw_circle(t_vars *data ,t_vector *v, t_vector *vfix, double rad)
 		draw_pixel(data, v);
 		angle += 0.1;
 	}	
-}
-
-void	draw_rect(t_vars *data)
-{
-	t_vector v;
-
-	v.color = data->rect->color;
-	v.y = data->rect->y;
-	while (v.y < data->rect->y + RECT_SIZE)
-	{
-		v.x = data->rect->x;
-		while (v.x < data->rect->x + RECT_SIZE)
-		{
-			draw_pixel(data, &v);
-			v.x++;
-		}
-		v.y++;
-	}
-	mlx_put_image_to_window( data->mlx, data->win, data->iarg->img, 0,0);
 }
