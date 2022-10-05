@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 04:00:33 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/05 18:57:21 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/05 21:23:03 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,32 +40,6 @@ int ft_assign_nswe(char *nswe, t_vars *vars, int i)
     return (1);   
 }
 
-int ft_copy_colors(t_vars *vars, char **tmp, int index)
-{
-    char    **color;
-    
-    if (tmp[0][0] == 'F' || tmp[0][0] == 'C')
-    {
-        vars->data->color[index].type = tmp[0][0];
-        if (ft_check_format(tmp[1]) == 1)
-        {
-            color = ft_split(tmp[1], ',', ',');
-            vars->data->color[index].rd = ft_atoi(color[0]);
-            vars->data->color[index].gr = ft_atoi(color[1]);
-            vars->data->color[index].bl = ft_atoi(color[2]);
-            color[0] = my_free(color[0]);
-            color[1] = my_free(color[1]);
-            color[2] = my_free(color[2]);
-            color = my_free(color);
-            return (1);
-        }
-        else
-            return (-1);
-    }
-    else
-        return (-1);
-}
-
 void    ft_init_pars(t_vars *vars, t_pars *pars, char *path)
 {
     pars->i = 0; 
@@ -83,34 +57,6 @@ void    ft_init_pars(t_vars *vars, t_pars *pars, char *path)
     vars->data->map = (char **)malloc(sizeof(int *) * (vars->data->hgt + 1));
 }
 
-int ft_parse_setups(t_vars *vars, t_pars *pars)
-{
-    if (pars->count > 0 && ft_check_whitespace(pars->line) == 0)
-    {
-        pars->tmp = ft_split(pars->line, ' ', '\t');
-        if (ft_strlen(pars->tmp[0]) > 1)
-        {
-            if (ft_assign_nswe(pars->tmp[0], vars, pars->i) == 0)
-                return (-1);
-            vars->data->txtpath->path[pars->i] = ft_strdup(pars->tmp[1]);
-            pars->i++;
-        }
-        else
-        {
-            if (ft_copy_colors(vars, pars->tmp, pars->col) == -1)
-                return (-1);
-            pars->col++;
-        }
-        pars->count--;
-        pars->tmp[0] = my_free(pars->tmp[0]);
-        pars->tmp[1] = my_free(pars->tmp[1]);
-        pars->tmp = my_free(pars->tmp);
-        return (1);
-    }
-    else
-        return (2);
-}
-
 int ft_parse_map(t_vars *vars, t_pars *pars)
 {
     vars->data->wth[pars->j] = ft_invalid_line(pars->line);
@@ -124,7 +70,6 @@ int ft_parse_map(t_vars *vars, t_pars *pars)
 
 int ft_parse(char *path, t_vars *vars)
 {  
-    int     hold;
     t_pars  pars;
     
     ft_init_pars(vars, &pars, path);
@@ -139,14 +84,8 @@ int ft_parse(char *path, t_vars *vars)
             pars.line = get_next_line(pars.fd);
             continue;
         }
-        hold = ft_parse_setups(vars, &pars);
-        if (hold == 2)
-        {
-            if (ft_parse_map(vars, &pars) == -1)
-                return (-1);
-        }
-        else
-            return (hold);
+        if (ft_proccess_file(vars, &pars) == -1)
+            return (-1);
         pars.line = my_free(pars.line);
         pars.line = get_next_line(pars.fd);
     }

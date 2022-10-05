@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:37:04 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/05 17:45:36 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/05 21:15:31 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,3 +42,17 @@ int ft_is_in_wall(char **map, int x, int y, int lenx, int leny)
     return (0);
 }
 
+int arr_len(char **arr)
+{
+    int index;
+    int count;
+
+    index = 0;
+    count = 0;
+    while (arr[index])
+    {
+        count++;
+        index++;
+    }
+    return (count);
+}

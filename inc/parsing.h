@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:41 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/05 17:42:04 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/05 21:20:14 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,11 @@ int     ft_is_in_wall(char **c, int x, int y, int lenx, int leny);
 int     ft_check_whitespace(char *str);
 int     ft_check_format(char *color);
 int     ft_check_map(t_vars *vars);
+int     ft_proccess_file(t_vars *vars, t_pars *pars);
+int     ft_parse_setups(t_vars *vars, t_pars *pars);
+int     ft_parse_map(t_vars *vars, t_pars *pars);
+int     arr_len(char **arr);
+int     ft_assign_nswe(char *nswe, t_vars *vars, int i);
+int     ft_copy_colors(t_vars *vars, char **tmp, int index);
 
 #endif
