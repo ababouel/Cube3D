@@ -43,7 +43,7 @@ int intersect_with_y(t_inters   *inters, t_vars *vars)
     return (0);
 }
 
-void    draw_ray(t_vars *vars)
+double  draw_ray(t_vars *vars)
 {
     int         x;
     int         is_inters;
@@ -90,24 +90,54 @@ void    draw_ray(t_vars *vars)
         x++;
     } 
     vars->ray.dir.mag = dis;
-    printf("mag=> %f\n",dis);
-    draw_line(&vars->ray.origin, &vars->ray.dir, vars);
+    // draw_line(&vars->ray.origin, &vars->ray.dir, vars);
+    return (dis);
 }
 
+void    draw_wall(double dis_ray, t_vars *vars, int x)
+{
+    double      distance;
+    int         top_y;
+    int         bottom_y;
+    int         wall_height;
+    t_vector    v; 
+
+    distance = (WINDOW_WIDTH / 2) / tan(M_PI / 6);
+    wall_height = (RECT_SIZE / dis_ray) * distance;
+    top_y = WINDOW_HEIGHT / 2 - wall_height / 2;
+    bottom_y = top_y + wall_height;
+    if (top_y < 0)
+        top_y = 0;
+    if (bottom_y > WINDOW_HEIGHT)
+        bottom_y = WINDOW_HEIGHT;
+    v.x = x;
+    while (top_y <= bottom_y)
+    {
+        v.y = top_y;
+        v.color = add_color(255,255,255,0);
+        draw_pixel(vars, &v);
+        top_y++;
+    }
+}
 void    camera(t_vars *vars)
 {
+    int x;
+    double dis;
+
+    x = 0;
+    dis = 0.0;
     vars->ray.origin = *vars->ordr.origin;
-    vars->ray.dir = *vars->ordr.dir1;
-    draw_line(vars->ordr.origin, vars->ordr.dir1, vars);
-    draw_line(vars->ordr.origin, vars->ordr.maxplane, vars);
-    draw_line(vars->ordr.origin, vars->ordr.minplane, vars);
-    draw_ray(vars);
+    vars->ray.dir = *vars->ordr.minplane;
+    // draw_line(vars->ordr.origin, vars->ordr.dir1, vars);
+    // draw_line(vars->ordr.origin, vars->ordr.maxplane, vars);
+    // draw_line(vars->ordr.origin, vars->ordr.minplane, vars);
+    while (x < WINDOW_WIDTH)
+    {
+        dis = draw_ray(vars);
+        draw_wall(dis, vars, x);
+        vars->ray.dir.angle= (1.0 / (WINDOW_WIDTH)) * (M_PI / 6.0);
+        rotation(&vars->ray.dir, vars->ray.dir.angle); 
+        x++;
+    }
 }
 
-    // while (x < WINDOW_WIDTH)
-    // {
-    //     draw_line(vars->ordr.origin, &v, vars);
-    //     v.angle = (1.0 / (WINDOW_WIDTH)) * (M_PI / 6.0);
-    //     rotation(&v, v.angle); 
-    //     x++;
-    // }

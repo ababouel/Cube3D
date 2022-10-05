@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/03 22:02:33 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:49:10 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 #include "events.h"
 #include "tools.h"
 #include "raycast.h"
-
+#include<unistd.h>
 char *map[10] = {
 	"1111111111",
 	"1000000001",
 	"1000100001",
 	"1000100001",
 	"1000000001",
-	"10000N0001",
+	"10000S0001",
 	"1000000001",
 	"1000100001",
 	"1000100001",
@@ -34,12 +34,7 @@ char *map[10] = {
 };
 
 int	ft_init_vars(t_vars *vars)
-{
-	// int		x;
-	// double	angle;
-	
-	// x = 0;
-	// angle = 0;
+{	
 	vars->ordr.dir1 = addvect(1, 1, add_color(255,0,0,0), 10);
 	vars->ordr.minplane = addvect(cos(M_PI/6.0), sin(M_PI/6.0), add_color(255,0,0,0), 20);
 	vars->ordr.maxplane = addvect(cos((M_PI/3.0)), sin((M_PI/3.0)), add_color(255,0,0,0), 20);	
@@ -84,6 +79,7 @@ int render_next_frame(void *vars)
 	climg(v->iarg->img);
 	draw_map(v);
 	camera(v);
+	usleep(2000);
 	return (1);
 }
 
@@ -94,8 +90,6 @@ int	main(void)
 	vars = allocate();
 	ft_init_vars(vars);
 	ft_init(vars);
-	draw_map(vars);	
-	camera(vars);	
 	mlx_loop_hook(vars->mlx, render_next_frame, (void *)vars);	
 	mlx_put_image_to_window( vars->mlx, vars->win, vars->iarg->img, 0,0);
 	mlx_key_hook(vars->win, esc_key, vars);
