@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/06 17:17:00 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/06 20:51:09 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,24 @@ typedef struct  s_rect
 	t_color color;
 }	t_rect;
 
+typedef	struct s_point
+{
+	int	px;
+	int	py;
+}	t_point;
+
 typedef struct s_inter
 {
 	t_vector	current_pos;
-	int			pos_grid_x;
-	int			pos_grid_y;
-	int			next_pos_x;
-	int			next_pos_y;
-	int			next_pos_grid_x;
-	int			next_pos_grid_y;	
+	t_point		pos_grid;
+	t_point		next_pos;
+	t_point		next_pos_grid;
 	double		dx;
 	double		dy;
 	double		final_d;
 	int			sign_x;	
-	int			sign_y;	
+	int			sign_y;
+	int			is_inters;	
 }	t_inters;
 
 typedef struct s_ray

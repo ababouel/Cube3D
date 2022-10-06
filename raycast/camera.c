@@ -15,12 +15,12 @@
 
 void    draw_wall(double dis_ray, t_vars *vars, int x)
 {
-    double          distance;
+    t_vector        v; 
     int             top_y;
     int             bottom_y;
+    double          distance;
     int             wall_height;
-    t_vector        v; 
-
+    
     distance = (WINDOW_WIDTH / 2) / tan(M_PI / 6);
     wall_height = (RECT_SIZE / dis_ray) * distance;
     top_y = WINDOW_HEIGHT / 2 - wall_height / 2;
@@ -29,11 +29,7 @@ void    draw_wall(double dis_ray, t_vars *vars, int x)
         top_y = 0;
     if (bottom_y > WINDOW_HEIGHT)
         bottom_y = WINDOW_HEIGHT;
-    v.x = x;
-    if (dis_ray < 1)
-        dis_ray = 0;
-    if (dis_ray > 255)
-        dis_ray = 255;
+    v.x = x; 
     while (top_y <= bottom_y)
     {
         v.y = top_y;
