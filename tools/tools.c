@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 02:43:28 by ababouel          #+#    #+#             */
-/*   Updated: 2022/09/28 22:57:15 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:42:02 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 #include "raycast.h"
 
-t_vector *addvect(double x, double y, t_color *color, double mag)
+t_vector *addvect(double x, double y, t_color color, double mag)
 {
 	t_vector *v;
 
@@ -28,15 +28,14 @@ t_vector *addvect(double x, double y, t_color *color, double mag)
 }
 
 
-t_color	*add_color(int rd, int gr, int bl, int al)
+t_color	add_color(int rd, int gr, int bl, int al)
 {
-	t_color *color;
+	t_color color;
 
-	color = malloc(sizeof(t_color));
-	color->rd = rd;
-	color->bl = bl;
-	color->gr = gr;
-	color->al = al;
+	color.rd = rd;
+	color.bl = bl;
+	color.gr = gr;
+	color.al = al;
 	return color;
 }
 

@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "tools.h": "c",
+        "draw.h": "c",
+        "raycast.h": "c"
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/Users/abdelghani/Documents/Cube3D",
+            "binaryPath": "/Users/abdelghani/Documents/Cube3D/cub3d",
+            "binaryArgs": []
+        }
+    ]
+}

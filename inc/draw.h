@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/05 18:57:12 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/06 17:17:00 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_vector
 	double	y;
 	double	angle;
 	double	mag;
-	t_color	*color;
+	t_color	color;
 }	t_vector;
 
 typedef struct s_org_dir
@@ -57,7 +57,7 @@ typedef struct  s_rect
 {
 	double	x;
 	double	y;
-	t_color *color;
+	t_color color;
 }	t_rect;
 
 typedef struct s_inter
@@ -90,14 +90,16 @@ typedef struct	s_vars {
 	t_org_dir	ordr;
 	t_rect		rect;
 	t_ray		ray;
+	t_color		ceil;
+	t_color		floor;
 }	t_vars;
 
 void	draw_pixel(t_vars *data, t_vector *v);
 int		create_trgb(t_color *color);
 void	draw_line(t_vector *v1, t_vector *v2, t_vars *data);
-void	draw_circle(t_vars *data,t_vector *v, t_vector *vfix, double rad);
+void	draw_circle(t_vars *data, t_vector *v, double rad);
 void	draw_rect(t_vars *data, double x, double y);
 void	draw_map(t_vars *vars);
-void	draw_ceil_floor(t_vars *vars,t_color *ceil, t_color *floor);
+void	draw_ceil_floor(t_vars *vars);
 
 #endif

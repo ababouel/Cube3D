@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 02:43:41 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/01 11:15:17 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:43:53 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 #include "draw.h"
 #include "events.h"
 
-t_vector    *addvect(double x, double y, t_color *color, double mag);
-t_color     *add_color(int rd, int gr, int bl, int al);
+t_vector    *addvect(double x, double y, t_color color, double mag);
+t_color     add_color(int rd, int gr, int bl, int al);
 t_vars      *allocate(void);
 void        rotation(t_vector *v, double angle);
 void        debug(t_vector *v, int x, double angle);

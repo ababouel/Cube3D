@@ -6,20 +6,16 @@
 /*   By: ababouel <ababouel@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/05 23:43:51 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:42:54 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include <math.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include "draw.h" 
-#include <assert.h>
 #include "events.h"
 #include "tools.h"
 #include "raycast.h"
 #include<unistd.h>
+
 char *map[10] = {
 	"1111111111",
 	"1000000001",
@@ -48,6 +44,8 @@ int	ft_init_vars(t_vars *vars)
 	vars->data->map = map;
 	vars->data->hgt = 10;
 	vars->data->wth = 10;
+	vars->ceil = add_color(225, 30, 0, 0);
+	vars->floor = add_color(220, 100, 0, 0);
 	return(0);
 }
 
@@ -77,11 +75,10 @@ int render_next_frame(void *vars)
 
 	v = (t_vars *)vars;
 	climg(v->iarg->img);
-	draw_ceil_floor(vars, add_color(225,30,0,0),add_color(220,100,0,0));
+	draw_ceil_floor(vars);
 	draw_map(v);
 	camera(v);
 	mlx_put_image_to_window( v->mlx, v->win, v->iarg->img, 0,0);
-	usleep(2000);
 	return (1);
 }
 

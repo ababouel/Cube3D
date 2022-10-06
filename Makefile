@@ -6,7 +6,7 @@
 #    By: ababouel <ababouel@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/03 16:04:53 by ababouel          #+#    #+#              #
-#    Updated: 2022/10/03 22:17:24 by ababouel         ###   ########.fr        #
+#    Updated: 2022/10/06 17:34:44 by ababouel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,10 @@ GREEN = \033[0;32m
 CC = cc 
 CFLAGS = -Wall -Werror -Wextra -g 
 BDIR = build
-FILES = main draw/draw events/events tools/tools raycast/camera tools/vect_tools tools/debug
+FILES = main draw/draw events/events tools/tools\
+			raycast/camera tools/vect_tools tools/debug\
+			draw/drawshape raycast/raycast
+			
 NAME = cub3d
 HEADERS = inc/draw.h inc/parsing.h inc/raycast.h inc/events.h inc/tools.h
 INC = -I ./inc
