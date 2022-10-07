@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/06 20:51:09 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/07 05:44:36 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,27 @@ typedef struct s_inter
 
 typedef struct s_ray
 {
-	t_vector origin;
-	t_vector dir;
+	t_vector	dir;
+	t_vector	origin;
+	t_inters	inters;
+	int			is_vertical;
 }	t_ray;
+
+typedef struct	s_texture
+{
+	int 		width;
+	int 		height;
+	char 		*path;
+	t_imgarg	*ig;
+}	t_texture;
+
 
 typedef struct	s_vars {
 	void		*mlx;
 	void		*win;
 	t_imgarg	*iarg;
 	t_data		*data;
+	t_texture	txtre;
 	t_org_dir	ordr;
 	t_rect		rect;
 	t_ray		ray;

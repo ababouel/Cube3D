@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 17:18:19 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/06 21:19:51 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/07 05:27:08 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ static int intersect_with_x(t_inters   *inters, t_vars *vars)
     if (gridX < 0 || gridX >= 10 || gridY < 0 || gridY >= 10)
         return (0);
     if(vars->data->map[gridY][gridX] == '1')
+    {
+        vars->ray.is_vertical = 1;
         return (1);
+    }
     return (0);
 }
 
@@ -36,7 +39,10 @@ static int intersect_with_y(t_inters   *inters, t_vars *vars)
     if (gridX < 0 || gridX >= 10 || gridY < 0 || gridY >= 10)
         return (0);
     if(vars->data->map[gridY][gridX] == '1')
+    {
+        vars->ray.is_vertical = 0;
         return (1);
+    }
     return (0);
 }
 
@@ -73,23 +79,22 @@ static double   op_distance(t_inters *inters, t_vars *vars)
 double  cast_ray(t_vars *vars)
 {
     int         x;
-    t_inters    inters;
     double      dis;
     
     x = 0;
     dis = 0;
-    inters.is_inters = 0;
-    inters.current_pos = vars->ray.origin;
-    inters.sign_x = 1;
-    inters.sign_y = 1;
+    vars->ray.inters.is_inters = 0;
+    vars->ray.inters.current_pos = vars->ray.origin;
+    vars->ray.inters.sign_x = 1;
+    vars->ray.inters.sign_y = 1;
     if(vars->ray.dir.x < 0)
-        inters.sign_x = 0;
+        vars->ray.inters.sign_x = 0;
     if(vars->ray.dir.y < 0)
-        inters.sign_y = 0;
-    while(x < 200 && !inters.is_inters)
+        vars->ray.inters.sign_y = 0;
+    while(x < 200 && !vars->ray.inters.is_inters)
     {
-        op_params(&inters, vars); 
-        dis += op_distance(&inters, vars); 
+        op_params(&vars->ray.inters, vars); 
+        dis += op_distance(&vars->ray.inters, vars); 
         x++;
     } 
     vars->ray.dir.mag = dis;
