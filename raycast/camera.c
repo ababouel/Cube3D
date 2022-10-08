@@ -97,11 +97,11 @@ void    camera(t_vars *vars)
     dis = 0.0;
     vars->ray.origin = *vars->ordr.origin;
     vars->ray.dir = *vars->ordr.minplane;
+    vars->ray.dir.angle = M_PI / 6.0;
     while (x < WINDOW_WIDTH)
     {
         dis = cast_ray(vars);
         pdis = dis * cos(vars->ray.dir.angle - vars->ordr.dir1->angle);
-        // pdis = dis;
         draw_wall(pdis, vars, x);
         vars->ray.dir.angle= (1.0 / (WINDOW_WIDTH)) * (M_PI / 6.0);
         rotation(&vars->ray.dir, vars->ray.dir.angle); 

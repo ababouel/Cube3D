@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/07 23:22:13 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/08 01:49:46 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #ifndef DRAW_H
 # define DRAW_H
 
-# define WINDOW_WIDTH	640.0
-# define WINDOW_HEIGHT	400.0
+# define WINDOW_WIDTH	1280.0
+# define WINDOW_HEIGHT	800.0
 # define MLX_ERROR	1
 # define RECT_SIZE	60.0
 
@@ -93,7 +93,7 @@ typedef struct	s_texture
 	int 		width;
 	int 		height;
 	char 		*path;
-	t_imgarg	*ig;
+	t_imgarg	ig;
 }	t_texture;
 
 
