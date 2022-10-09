@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/08 01:49:46 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/09 23:39:40 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,11 @@ typedef struct	s_vars {
 	t_ray		ray;
 	t_color		ceil;
 	t_color		floor;
+	uint32_t	*wall_text;
 }	t_vars;
 
+
+uint32_t	*generate_pixels(t_vars *vars, char *path);
 void	draw_pixel(t_vars *data, t_vector *v);
 int		create_trgb(t_color *color);
 void	draw_line(t_vector *v1, t_vector *v2, t_vars *data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/09 20:21:25 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/09 23:46:57 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,33 +46,8 @@ int	ft_init_vars(t_vars *vars)
 	vars->data->wth = 10;
 	vars->ceil = add_color(225, 30, 0, 0);
 	vars->floor = add_color(220, 100, 0, 0);	
+	vars->wall_text = generate_pixels(vars, "./texture/berserk.xpm");
 	return(0);
-}
-
-uint32_t	*generate_pixels(t_vars *vars, char *path)
-{
-	t_point		t;
-	t_imgarg	ig;
-	char		*ttc;
-	uint32_t	*txtcolor;
-
-	t.py = 0;
-	ig = vars->txtre.ig;
-	ig.img = mlx_xpm_file_to_image(vars->mlx, path, &vars->txtre.width, &vars->txtre.height);
-	ig.addr = mlx_get_data_addr(ig.img, &ig.bpp, &ig.line_len, &ig.endian);
-	txtcolor = malloc(sizeof(uint32_t) * (uint32_t)vars->txtre.width * (uint32_t) vars->txtre.height);
-	while (t.py <= vars->txtre.height)
-	{
-		t.px = 0;
-		while (t.px <= vars->txtre.width)
-		{
-			ttc = ig.addr + ((int) t.py * ig.line_len + (int) t.px * (ig.bpp / 8));
-			txtcolor[(vars->txtre.width * t.py) + t.px] = ttc;
-			t.px++;	
-		}
-		t.py++;
-	}
-	return (txtcolor);
 }
 
 int    ft_init(t_vars *vars)
@@ -112,8 +87,8 @@ int	main(void)
 	t_vars		*vars;
 
 	vars = allocate();
-	ft_init_vars(vars);
 	ft_init(vars);
+	ft_init_vars(vars);
 	mlx_loop_hook(vars->mlx, render_next_frame, (void *)vars);	
 	mlx_key_hook(vars->win, esc_key, vars);
 	mlx_hook(vars->win, 17, 0, close_game, vars);
