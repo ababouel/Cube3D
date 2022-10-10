@@ -29,23 +29,23 @@ static void	draw_pixels(t_vars *data, t_vector *v, unsigned int color)
 
 uint32_t	*generate_pixels(t_vars *vars, char *path)
 {
-	t_point		t;
-	t_imgarg	ig;
-	char		*ttc;
-	uint32_t	*txtcolor;
+	t_point         t;
+	t_imgarg        ig;
+	char            *ttc;
+	unsigned int    *txtcolor;
 
 	t.py = 0;
 	ig = vars->txtre.ig;
 	ig.img = mlx_xpm_file_to_image(vars->mlx, path, &vars->txtre.width, &vars->txtre.height);
 	ig.addr = mlx_get_data_addr(ig.img, &ig.bpp, &ig.line_len, &ig.endian);
-	txtcolor = malloc(sizeof(uint32_t) * (uint32_t)vars->txtre.width * (uint32_t) vars->txtre.height);
+	txtcolor = malloc(sizeof(unsigned int) * (unsigned int)vars->txtre.width * (unsigned int) vars->txtre.height);
 	while (t.py <= vars->txtre.height)
 	{
 		t.px = 0;
 		while (t.px <= vars->txtre.width)
 		{
 			ttc = ig.addr + ((int) t.py * ig.line_len + (int) t.px * (ig.bpp / 8));
-			txtcolor[(vars->txtre.width * t.py) + t.px] = *(uint32_t *)ttc;
+			txtcolor[(vars->txtre.width * t.py) + t.px] = *(unsigned int *)ttc;
 			t.px++;	
 		}
 		t.py++;
@@ -63,7 +63,7 @@ void    draw_wall(double dis_ray, t_vars *vars, int *x)
     int             wall_height;
     t_imgarg        ig;
     int             y;
-    int             distance_from_top;
+    // int             distance_from_top;
 
     top_y = 0;
     ig = vars->txtre.ig;
@@ -84,8 +84,7 @@ void    draw_wall(double dis_ray, t_vars *vars, int *x)
     while (y <= bottom_y)
     {
         v.y = y;
-        distance_from_top = y + (wall_height/2)-(WINDOW_HEIGHT/2);
-        offset.py = distance_from_top * (RECT_SIZE / wall_height);
+        offset.py = (top_y - y) * (RECT_SIZE / wall_height);
         draw_pixels(vars, &v, (unsigned int) vars->wall_text[((int)RECT_SIZE * offset.py) + offset.px]);
         y++;
     }
