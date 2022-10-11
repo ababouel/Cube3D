@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/09 23:39:40 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/10 05:50:24 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,91 +26,7 @@
 # include <assert.h>
 # include "parsing.h"
 
-typedef struct s_imgarg
-{
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}	t_imgarg;
-
-
-typedef struct s_vector
-{
-	double	x;
-	double	y;
-	double	angle;
-	double	mag;
-	t_color	color;
-}	t_vector;
-
-typedef struct s_org_dir
-{
-	t_vector	*origin;
-	t_vector	*dir1;
-	t_vector	*minplane;
-	t_vector	*maxplane;	
-}	t_org_dir;
-
-typedef struct  s_rect
-{
-	double	x;
-	double	y;
-	t_color color;
-}	t_rect;
-
-typedef	struct s_point
-{
-	int	px;
-	int	py;
-}	t_point;
-
-typedef struct s_inter
-{
-	t_vector	current_pos;
-	t_point		pos_grid;
-	t_point		next_pos;
-	t_point		next_pos_grid;
-	double		dx;
-	double		dy;
-	double		final_d;
-	int			sign_x;	
-	int			sign_y;
-	int			is_inters;	
-}	t_inters;
-
-typedef struct s_ray
-{
-	t_vector	dir;
-	t_vector	origin;
-	t_inters	inters;
-	int			is_vertical;
-}	t_ray;
-
-typedef struct	s_texture
-{
-	int 		width;
-	int 		height;
-	char 		*path;
-	t_imgarg	ig;
-}	t_texture;
-
-
-typedef struct	s_vars {
-	void		*mlx;
-	void		*win;
-	t_imgarg	*iarg;
-	t_data		*data;
-	t_texture	txtre;
-	t_org_dir	ordr;
-	t_rect		rect;
-	t_ray		ray;
-	t_color		ceil;
-	t_color		floor;
-	uint32_t	*wall_text;
-}	t_vars;
-
+#include "data.h"
 
 uint32_t	*generate_pixels(t_vars *vars, char *path);
 void	draw_pixel(t_vars *data, t_vector *v);
