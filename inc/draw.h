@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/09 23:39:40 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/11 01:35:57 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,23 +96,30 @@ typedef struct	s_texture
 	t_imgarg	ig;
 }	t_texture;
 
+typedef struct	s_wall_text
+{
+	t_imgarg n_txt;
+	t_imgarg s_txt;
+	t_imgarg e_txt;
+	t_imgarg w_txt;
+}	t_wall_text;
 
 typedef struct	s_vars {
-	void		*mlx;
-	void		*win;
-	t_imgarg	*iarg;
-	t_data		*data;
-	t_texture	txtre;
+	t_ray		ray;
 	t_org_dir	ordr;
 	t_rect		rect;
-	t_ray		ray;
+	void		*win;
+	void		*mlx;
 	t_color		ceil;
 	t_color		floor;
-	uint32_t	*wall_text;
+	t_texture	txtre;
+	t_data		*data;
+	t_imgarg	*iarg;
+	t_wall_text	wall_txt;
 }	t_vars;
 
 
-uint32_t	*generate_pixels(t_vars *vars, char *path);
+void	generate_image(t_vars *vars, char *path, char dir);
 void	draw_pixel(t_vars *data, t_vector *v);
 int		create_trgb(t_color *color);
 void	draw_line(t_vector *v1, t_vector *v2, t_vars *data);
