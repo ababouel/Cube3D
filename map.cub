@@ -1,18 +1,18 @@
 
-NO ./path_to_the_north_texture
+NO ./texture/berserk.xpm
 
 SO ./path_to_the_south_texture
 
 WE ./path_to_the_west_texture
 
-EA ./path_to_the_east_texture
-
 
 F 220,100,0
 
+EA ./path_to_the_east_texture
+
+
+
 C 220,100,100
-
-
 
 
            1111111111111111111111111

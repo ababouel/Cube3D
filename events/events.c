@@ -6,11 +6,14 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:35:59 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/05 23:26:41 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/10 05:29:06 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
+#include "tools.h"
+#include "raycast.h"
+
 
 int	close_game(t_vars *vars)
 {
@@ -19,17 +22,41 @@ int	close_game(t_vars *vars)
 }
 
 int	esc_key(int keynum, t_vars *vars)
-{
+{	
 	if (keynum == ESC_KEY)
 		clear_data(vars);
+	if (keynum == ARROWRIGHT)
+	{ 
+		climg(vars->iarg);
+		rotation(vars->ordr.dir1, vars->ordr.dir1->angle);
+		rotation(vars->ordr.minplane, vars->ordr.minplane->angle);
+		rotation(vars->ordr.maxplane, vars->ordr.maxplane->angle);
+	}
+	else if (keynum == ARROWLEFT)
+	{
+		climg(vars->iarg);
+		rotation(vars->ordr.dir1, -vars->ordr.dir1->angle);
+		rotation(vars->ordr.maxplane, -vars->ordr.maxplane->angle);
+		rotation(vars->ordr.minplane, -vars->ordr.minplane->angle);
+	}
+	else if (keynum == ARROWUP)
+	{
+		climg(vars->iarg);
+		vect_add(vars->ordr.origin, vars->ordr.dir1, 6);
+	}
+	else if (keynum == ARROWDOWN)
+	{
+		climg(vars->iarg);
+		vect_add(vars->ordr.origin, vars->ordr.dir1, -6);	
+	}
 	return (0);
 }
 
 void	clear_data(t_vars *vars)
 {
-	int	i;
+	// int	i;
 
-	i = 0;
+	// i = 0;
 	mlx_destroy_image(vars->mlx, vars->iarg->img);
 	mlx_destroy_window(vars->mlx, vars->win);
 	//free array of map
@@ -44,4 +71,23 @@ void	clear_data(t_vars *vars)
 	free(vars->iarg);
 	free(vars);
 	exit(0);
+}
+
+void	climg(t_imgarg *img)
+{
+	t_vector	v;
+	char		*pixel;
+
+	v.y = 0;
+	while (v.y < WINDOW_HEIGHT)
+	{
+		v.x = 0;
+		while (v.x < WINDOW_WIDTH)
+		{
+			pixel = img->addr +((int)v.y * img->line_len + (int)v.x * (img->bpp / 8));
+			*(unsigned int *)pixel = 0x000000;
+			v.x++;
+		}
+		v.y++;
+	}
 }

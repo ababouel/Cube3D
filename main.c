@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/05 17:48:46 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/10 23:31:57 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,26 @@
 #include <stdio.h>
 #include "parsing.h"
 #include "draw.h" 
-#include <assert.h>
 #include "events.h"
-#include <unistd.h>
+#include "tools.h"
+#include "raycast.h"
+#include<unistd.h>
 #include <fcntl.h>
 #include <sys/errno.h>
 
-t_vars	*allocate(void)
-{
-	t_vars	*vars;
-
-	vars = (t_vars *)malloc(sizeof(t_vars));
-	if (vars == NULL)
-		return (NULL);
-	vars->iarg = (t_imgarg *)malloc(sizeof(t_imgarg));
-	if (vars->iarg == NULL)
-		return (NULL);
-	return (vars);
+int	ft_init_vars(t_vars *vars)
+{	
+	vars->ordr.dir1 = addvect(1, 1, add_color(255,0,0), 10);
+	vars->ordr.minplane = addvect(cos(M_PI/6.0), sin(M_PI/6.0), add_color(255,0,0), 20);
+	vars->ordr.maxplane = addvect(cos((M_PI/3.0)), sin((M_PI/3.0)), add_color(255,0,0), 20);	
+	vars->ordr.dir1->angle = M_PI/50;
+	vars->ordr.maxplane->angle = M_PI/50;
+	vars->ordr.minplane->angle = M_PI/50;	
+	vars->rect.color = add_color(0,0,255);
+	vars->rect.x = 5;
+	vars->rect.y = 5;
+	vars->wall_text = generate_pixels(vars, vars->data->txtpath[0].path);
+	return(0);
 }
 
 int    ft_init(t_vars *vars)
@@ -54,6 +57,19 @@ int    ft_init(t_vars *vars)
 	return (0);
 }
 
+int render_next_frame(void *vars)
+{
+	t_vars	*v;
+	
+	v = (t_vars *)vars;
+	climg(v->iarg->img);
+	draw_ceil_floor(vars);
+	draw_map(v);
+	camera(v);
+	mlx_put_image_to_window( v->mlx, v->win, v->iarg->img, 0, 0);
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_vars	*vars;
@@ -70,11 +86,13 @@ int	main(int argc, char **argv)
 		}
 		else
 			printf("Valid map.\n");
-		// ft_init(vars);
-		// mlx_put_image_to_window( vars->mlx, vars->win, vars->iarg->img, 0,0);
-		// mlx_key_hook(vars->win, esc_key, vars);
-		// mlx_hook(vars->win, 17, 0, close_game, vars);
-		// mlx_loop(vars->mlx);
+		ft_init(vars);
+		ft_init_vars(vars);
+		mlx_loop_hook(vars->mlx, render_next_frame, (void *)vars);	
+		mlx_key_hook(vars->win, esc_key, vars);
+		mlx_hook(vars->win, 17, 0, close_game, vars);
+		mlx_do_sync(vars->mlx);
+		mlx_loop(vars->mlx);
 	}
 	else
 		printf("Usage ./cub3d map_name \n");

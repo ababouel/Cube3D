@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 04:00:33 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/05 21:23:03 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/10 23:25:38 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,8 @@ void    ft_init_pars(t_vars *vars, t_pars *pars, char *path)
     pars->line = NULL;
     pars->tmp = NULL;
     vars->data = (t_data *)malloc(sizeof(t_data));
-    vars->data->color = (t_color *)malloc(sizeof(t_color) * 2);
     vars->data->txtpath = (t_txtpath *)malloc(sizeof(t_txtpath) * 4);
-    vars->data->txtpath->path = (char **)malloc(sizeof(char *) * 5);
+    // vars->data->txtpath->path = (char **)malloc(sizeof(char *) * 5);
     vars->data->hgt = count_lines(path);
     vars->data->wth = (int *)malloc(sizeof(int) * vars->data->hgt);
     vars->data->map = (char **)malloc(sizeof(int *) * (vars->data->hgt + 1));
@@ -70,25 +69,29 @@ int ft_parse_map(t_vars *vars, t_pars *pars)
 
 int ft_parse(char *path, t_vars *vars)
 {  
-    t_pars  pars;
+    t_pars  *pars;
     
-    ft_init_pars(vars, &pars, path);
-    pars.fd = open(path, O_RDONLY);
-    check_fd(pars.fd);
-    pars.line = get_next_line(pars.fd);
-    while (pars.line)
+
+    pars = (t_pars *)malloc(sizeof(t_pars));
+    if (pars == NULL)
+        return (-1);
+    ft_init_pars(vars, pars, path);
+    pars->fd = open(path, O_RDONLY);
+    check_fd(pars->fd);
+    pars->line = get_next_line(pars->fd);
+    while (pars->line)
     {
-        if (ft_check_whitespace(pars.line))
+        if (ft_check_whitespace(pars->line))
         {
-            pars.line = my_free(pars.line);
-            pars.line = get_next_line(pars.fd);
+            pars->line = my_free(pars->line);
+            pars->line = get_next_line(pars->fd);
             continue;
         }
-        if (ft_proccess_file(vars, &pars) == -1)
+        if (ft_proccess_file(vars, pars) == -1)
             return (-1);
-        pars.line = my_free(pars.line);
-        pars.line = get_next_line(pars.fd);
+        pars->line = my_free(pars->line);
+        pars->line = get_next_line(pars->fd);
     }
-    vars->data->map[pars.j] = NULL;
+    vars->data->map[pars->j] = NULL;
     return (ft_check_map(vars));
 }

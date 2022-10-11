@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:37:52 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/09/25 06:07:37 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/10 05:34:28 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@
 # define ARROWDOWN 125
 # define ARROWUP 126
 
-int	close_game(t_vars *vars);
-int	esc_key(int keynum, t_vars *vars);
-void	clear_data(t_vars *vars);
+#include "draw.h" 
 
+int     close_game(t_vars *vars);
+int     esc_key(int keynum, t_vars *vars);
+void    clear_data(t_vars *vars);
+void	climg(t_imgarg *img);
 #endif

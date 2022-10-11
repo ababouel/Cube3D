@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:32:36 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/05 21:16:32 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/10 23:42:29 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ int ft_proccess_file(t_vars *vars, t_pars *pars)
 
 int ft_parse_setups(t_vars *vars, t_pars *pars)
 {
+    int len;
+
+    
     pars->tmp = ft_split(pars->line, ' ', '\t');
     if (arr_len(pars->tmp) > 2)
         return (-1);
@@ -95,14 +98,17 @@ int ft_parse_setups(t_vars *vars, t_pars *pars)
     {
         if (ft_assign_nswe(pars->tmp[0], vars, pars->i) == 0)
             return (-1);
-        vars->data->txtpath->path[pars->i] = ft_strdup(pars->tmp[1]);
+        vars->data->txtpath[pars->i].path = ft_strdup(pars->tmp[1]);
+        len = ft_strlen(vars->data->txtpath[pars->i].path);
+        if (ft_strchr(vars->data->txtpath[pars->i].path, '\n') == 0)
+            vars->data->txtpath[pars->i].path[len - 1] = '\0';
         pars->i++;
     }
     else
     {
-        if (ft_copy_colors(vars, pars->tmp, pars->col) == -1)
+        if (ft_copy_colors(vars, pars->tmp) == -1)
             return (-1);
-        pars->col++;
+        //pars->col++;
     }
     pars->count--;
     pars->tmp[0] = my_free(pars->tmp[0]);

@@ -6,11 +6,12 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 04:17:08 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/05 21:21:28 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/10 21:16:47 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "tools.h"
 
 void	check_fd(int fd)
 {
@@ -64,19 +65,19 @@ int	count_lines(char *path)
 	return (count);
 }
 
-int ft_copy_colors(t_vars *vars, char **tmp, int index)
+int ft_copy_colors(t_vars *vars, char **tmp)
 {
     char    **color;
     
     if (tmp[0][0] == 'F' || tmp[0][0] == 'C')
     {
-        vars->data->color[index].type = tmp[0][0];
         if (ft_check_format(tmp[1]) == 1)
         {
             color = ft_split(tmp[1], ',', ',');
-            vars->data->color[index].rd = ft_atoi(color[0]);
-            vars->data->color[index].gr = ft_atoi(color[1]);
-            vars->data->color[index].bl = ft_atoi(color[2]);
+			if (tmp[0][0] == 'C')
+				vars->ceil = add_color(ft_atoi(color[0]), ft_atoi(color[1]), ft_atoi(color[2]));
+			else
+				vars->floor = add_color(ft_atoi(color[0]), ft_atoi(color[1]), ft_atoi(color[2]));
             color[0] = my_free(color[0]);
             color[1] = my_free(color[1]);
             color[2] = my_free(color[2]);
