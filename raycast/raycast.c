@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 17:18:19 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/10 22:08:24 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/11 06:34:56 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int intersect_with_x(t_inters   *inters, t_vars *vars)
 
     gridX = inters->next_pos.px - 1 + inters->sign_x;
     gridY = inters->pos_grid.py;
-    if (gridX < 0 || gridX >= 10 || gridY < 0 || gridY >= 10)
+    if (gridX < 0 || gridX >= *vars->data->wth || gridY < 0 || gridY >= vars->data->hgt)
         return (0);
     if(vars->data->map[gridY][gridX] == '1')
     {
@@ -36,7 +36,7 @@ static int intersect_with_y(t_inters   *inters, t_vars *vars)
 
     gridX = inters->pos_grid.px;
     gridY = inters->next_pos.py - 1 + inters->sign_y;
-    if (gridX < 0 || gridX >= 10 || gridY < 0 || gridY >= 10)
+    if (gridX < 0 || gridX >= *vars->data->wth || gridY < 0 || gridY >= vars->data->hgt)
         return (0);
     if(vars->data->map[gridY][gridX] == '1')
     {
@@ -91,7 +91,7 @@ double  cast_ray(t_vars *vars)
         vars->ray.inters.sign_x = 0;
     if(vars->ray.dir.y < 0)
         vars->ray.inters.sign_y = 0;
-    while(x < 200 && !vars->ray.inters.is_inters)
+    while(x < 100 && !vars->ray.inters.is_inters)
     {
         op_params(&vars->ray.inters, vars); 
         dis += op_distance(&vars->ray.inters, vars); 

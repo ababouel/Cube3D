@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:35:59 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/10 05:29:06 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/11 05:49:55 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ int	esc_key(int keynum, t_vars *vars)
 	else if (keynum == ARROWUP)
 	{
 		climg(vars->iarg);
-		vect_add(vars->ordr.origin, vars->ordr.dir1, 6);
+		vect_add(vars->ordr.origin, vars->ordr.dir1, 20);
 	}
 	else if (keynum == ARROWDOWN)
 	{
 		climg(vars->iarg);
-		vect_add(vars->ordr.origin, vars->ordr.dir1, -6);	
+		vect_add(vars->ordr.origin, vars->ordr.dir1, -20);	
 	}
 	return (0);
 }

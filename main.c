@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/10 23:31:57 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/11 06:19:41 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #include <sys/errno.h>
 
 int	ft_init_vars(t_vars *vars)
-{	
+{
 	vars->ordr.dir1 = addvect(1, 1, add_color(255,0,0), 10);
 	vars->ordr.minplane = addvect(cos(M_PI/6.0), sin(M_PI/6.0), add_color(255,0,0), 20);
 	vars->ordr.maxplane = addvect(cos((M_PI/3.0)), sin((M_PI/3.0)), add_color(255,0,0), 20);	
@@ -34,7 +34,13 @@ int	ft_init_vars(t_vars *vars)
 	vars->rect.color = add_color(0,0,255);
 	vars->rect.x = 5;
 	vars->rect.y = 5;
-	vars->wall_text = generate_pixels(vars, vars->data->txtpath[0].path);
+	int x;
+	x = 0;
+	while (x < 4)
+	{
+		generate_image(vars, vars->data->txtpath[x].path,vars->data->txtpath[x].nswe);
+		x++;
+	}
 	return(0);
 }
 

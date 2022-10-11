@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 06:01:46 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/10 23:26:19 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/11 04:57:08 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,17 @@ typedef struct	s_texture
 {
 	int 		width;
 	int 		height;
-	char 		*path;
-	t_imgarg	ig;
+	t_imgarg	txt_img;
 }	t_texture;
+
+typedef struct s_wall_txt
+{
+	t_texture	n_txt;	
+	t_texture	s_txt;	
+	t_texture	w_txt;	
+	t_texture	e_txt;	
+}	t_wall_txt;
+
 
 typedef struct	s_vars 
 {
@@ -127,13 +135,12 @@ typedef struct	s_vars
 	void		*win;
 	t_imgarg	*iarg;
 	t_data		*data;
-    t_texture	txtre;
 	t_org_dir	ordr;
 	t_rect		rect;
 	t_ray		ray;
 	t_color		ceil;
 	t_color		floor;
-	unsigned int	*wall_text;
+	t_wall_txt	wall_txt;
 }	t_vars;
 
 typedef struct s_pars 
