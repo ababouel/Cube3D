@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 02:43:28 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/06 16:42:02 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/10 21:13:42 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,13 @@ t_vector *addvect(double x, double y, t_color color, double mag)
 }
 
 
-t_color	add_color(int rd, int gr, int bl, int al)
+t_color	add_color(int rd, int gr, int bl)
 {
 	t_color color;
 
 	color.rd = rd;
 	color.bl = bl;
 	color.gr = gr;
-	color.al = al;
 	return color;
 }
 

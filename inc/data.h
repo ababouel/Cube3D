@@ -1,36 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.h                                             :+:      :+:    :+:   */
+/*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/10/11 01:35:57 by ababouel         ###   ########.fr       */
-=======
-/*   Updated: 2022/10/10 05:50:24 by fech-cha         ###   ########.fr       */
->>>>>>> 88b74b27cc8232cd480675a684ddbc1e70ff61a0
+/*   Created: 2022/09/25 06:01:46 by fech-cha          #+#    #+#             */
+/*   Updated: 2022/10/10 23:26:19 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef DATA_H
+# define DATA_H
 
-#ifndef DRAW_H
-# define DRAW_H
+#include <mlx.h>
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <assert.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/errno.h>
 
-# define WINDOW_WIDTH	1280.0
-# define WINDOW_HEIGHT	800.0
-# define MLX_ERROR	1
-# define RECT_SIZE	60.0
+typedef enum e_NSWE
+{
+    NO,
+    SO,
+    WE,
+    EA
+}   t_nswe;
 
-# include <mlx.h>
-# include <math.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <assert.h>
-# include "parsing.h"
+typedef struct s_txtpath
+{
+    char    *path;	
+    t_nswe  nswe; 
+}   t_txtpath;
 
-<<<<<<< HEAD
+typedef struct s_color
+{
+    unsigned int    rd;
+    unsigned int    gr;
+    unsigned int    bl;
+}   t_color;
+
+typedef struct s_data
+{
+    int         *wth;
+    int         hgt;
+    t_txtpath   *txtpath; 
+    char        **map;
+}   t_data;
+
 typedef struct s_imgarg
 {
 	void	*img;
@@ -39,7 +59,6 @@ typedef struct s_imgarg
 	int		line_len;
 	int		endian;
 }	t_imgarg;
-
 
 typedef struct s_vector
 {
@@ -71,6 +90,7 @@ typedef	struct s_point
 	int	py;
 }	t_point;
 
+
 typedef struct s_inter
 {
 	t_vector	current_pos;
@@ -101,39 +121,30 @@ typedef struct	s_texture
 	t_imgarg	ig;
 }	t_texture;
 
-typedef struct	s_wall_text
+typedef struct	s_vars 
 {
-	t_imgarg n_txt;
-	t_imgarg s_txt;
-	t_imgarg e_txt;
-	t_imgarg w_txt;
-}	t_wall_text;
-
-typedef struct	s_vars {
-	t_ray		ray;
+	void		*mlx;
+	void		*win;
+	t_imgarg	*iarg;
+	t_data		*data;
+    t_texture	txtre;
 	t_org_dir	ordr;
 	t_rect		rect;
-	void		*win;
-	void		*mlx;
+	t_ray		ray;
 	t_color		ceil;
 	t_color		floor;
-	t_texture	txtre;
-	t_data		*data;
-	t_imgarg	*iarg;
-	t_wall_text	wall_txt;
+	unsigned int	*wall_text;
 }	t_vars;
 
-=======
-#include "data.h"
->>>>>>> 88b74b27cc8232cd480675a684ddbc1e70ff61a0
-
-void	generate_image(t_vars *vars, char *path, char dir);
-void	draw_pixel(t_vars *data, t_vector *v);
-int		create_trgb(t_color *color);
-void	draw_line(t_vector *v1, t_vector *v2, t_vars *data);
-void	draw_circle(t_vars *data, t_vector *v, double rad);
-void	draw_rect(t_vars *data, double x, double y);
-void	draw_map(t_vars *vars);
-void	draw_ceil_floor(t_vars *vars);
+typedef struct s_pars 
+{
+    int     i;
+    int     j;
+    int     fd;
+    int     col;
+    int     count;
+    char    *line;
+    char    **tmp;
+}   t_pars;
 
 #endif

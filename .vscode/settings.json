@@ -25,4 +25,10 @@
             "binaryArgs": []
         }
     ]
+        "parsing.h": "c",
+        "string.h": "c",
+        "chrono": "c",
+        "unordered_map": "c"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }

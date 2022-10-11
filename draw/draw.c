@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/06 17:11:56 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/10 22:24:27 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int	create_trgb(t_color *color)
 {
-	return (color->al << 24 | color->rd << 16 | color->gr << 8 | color->bl);
+	return (color->rd << 16 | color->gr << 8 | color->bl);
 }
 
 void	draw_pixel(t_vars *data, t_vector *v)
@@ -49,11 +49,11 @@ void	draw_map(t_vars *vars)
 	t_vector	v;
 
 	v.y = 0;
-	v.color = add_color(255, 0, 0, 0);
+	// v.color = add_color(255, 0, 0, 0);
 	while (v.y < vars->data->hgt)
 	{
 		v.x = 0;
-		while (v.x < vars->data->wth)
+		while (v.x < vars->data->wth[(int)v.y])
 		{	
 			if (vars->ordr.origin == NULL
 				&& vars->data->map[(int)v.y][(int)v.x] == 'N')

@@ -6,47 +6,35 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/09 23:46:57 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/10 23:31:57 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <mlx.h>
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include "parsing.h"
 #include "draw.h" 
 #include "events.h"
 #include "tools.h"
 #include "raycast.h"
 #include<unistd.h>
-
-char *map[10] = {
-	"1111111111",
-	"1000000001",
-	"1000100001",
-	"1000100001",
-	"1000000001",
-	"10000S0001",
-	"1000000001",
-	"1000100001",
-	"1000100001",
-	"1111111111"
-};
+#include <fcntl.h>
+#include <sys/errno.h>
 
 int	ft_init_vars(t_vars *vars)
 {	
-	vars->ordr.dir1 = addvect(1, 1, add_color(255,0,0,0), 10);
-	vars->ordr.minplane = addvect(cos(M_PI/6.0), sin(M_PI/6.0), add_color(255,0,0,0), 20);
-	vars->ordr.maxplane = addvect(cos((M_PI/3.0)), sin((M_PI/3.0)), add_color(255,0,0,0), 20);	
+	vars->ordr.dir1 = addvect(1, 1, add_color(255,0,0), 10);
+	vars->ordr.minplane = addvect(cos(M_PI/6.0), sin(M_PI/6.0), add_color(255,0,0), 20);
+	vars->ordr.maxplane = addvect(cos((M_PI/3.0)), sin((M_PI/3.0)), add_color(255,0,0), 20);	
 	vars->ordr.dir1->angle = M_PI/50;
 	vars->ordr.maxplane->angle = M_PI/50;
 	vars->ordr.minplane->angle = M_PI/50;	
-	vars->rect.color = add_color(0,0,255,0);
+	vars->rect.color = add_color(0,0,255);
 	vars->rect.x = 5;
 	vars->rect.y = 5;
-	vars->data = malloc(sizeof(t_data));
-	vars->data->map = map;
-	vars->data->hgt = 10;
-	vars->data->wth = 10;
-	vars->ceil = add_color(225, 30, 0, 0);
-	vars->floor = add_color(220, 100, 0, 0);	
-	vars->wall_text = generate_pixels(vars, "./texture/berserk.xpm");
+	vars->wall_text = generate_pixels(vars, vars->data->txtpath[0].path);
 	return(0);
 }
 
@@ -82,16 +70,31 @@ int render_next_frame(void *vars)
 	return (1);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	t_vars		*vars;
-
-	vars = allocate();
-	ft_init(vars);
-	ft_init_vars(vars);
-	mlx_loop_hook(vars->mlx, render_next_frame, (void *)vars);	
-	mlx_key_hook(vars->win, esc_key, vars);
-	mlx_hook(vars->win, 17, 0, close_game, vars);
-	mlx_do_sync(vars->mlx);
-	mlx_loop(vars->mlx);
-}
+	t_vars	*vars;
+	int		check;
+	if (argc == 2)
+	{
+		vars = allocate();
+		check = ft_parse(argv[1], vars);
+		if (check < 0)
+		{
+			//free all
+			printf("Error.\n");
+			return (1);
+		}
+		else
+			printf("Valid map.\n");
+		ft_init(vars);
+		ft_init_vars(vars);
+		mlx_loop_hook(vars->mlx, render_next_frame, (void *)vars);	
+		mlx_key_hook(vars->win, esc_key, vars);
+		mlx_hook(vars->win, 17, 0, close_game, vars);
+		mlx_do_sync(vars->mlx);
+		mlx_loop(vars->mlx);
+	}
+	else
+		printf("Usage ./cub3d map_name \n");
+	return (0);
+}	
