@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/11 06:19:41 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/11 22:54:49 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ int	main(int argc, char **argv)
 		}
 		else
 			printf("Valid map.\n");
-		ft_init(vars);
-		ft_init_vars(vars);
-		mlx_loop_hook(vars->mlx, render_next_frame, (void *)vars);	
-		mlx_key_hook(vars->win, esc_key, vars);
-		mlx_hook(vars->win, 17, 0, close_game, vars);
-		mlx_do_sync(vars->mlx);
-		mlx_loop(vars->mlx);
+		// ft_init(vars);
+		// ft_init_vars(vars);
+		// mlx_loop_hook(vars->mlx, render_next_frame, (void *)vars);	
+		// mlx_key_hook(vars->win, esc_key, vars);
+		// mlx_hook(vars->win, 17, 0, close_game, vars);
+		// mlx_do_sync(vars->mlx);
+		// mlx_loop(vars->mlx);
 	}
 	else
 		printf("Usage ./cub3d map_name \n");

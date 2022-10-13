@@ -73,7 +73,7 @@ static unsigned int generate_pixels(t_vars *vars, t_nswe ns, t_point pt)
     t_texture   text;
     
     text = get_texture(vars, ns);
-    pixels = *(unsigned int *)text.txt_img.addr + (text.width * pt.py) + pt.px;
+    pixels = *(unsigned int *)(text.txt_img.addr + (text.width * pt.py) + pt.px);
     return (pixels);
 }
 
@@ -103,7 +103,7 @@ void    draw_wall(double dis_ray, t_vars *vars, int *x, double angle)
     top_y = 0;
     correct_dis = dis_ray * cos(M_PI/6 - angle);
     distance = (WINDOW_WIDTH / 2) / tan(M_PI / 6);
-    wall_height = (RECT_SIZE / correct_dis) * distance;
+    wall_height = (60 / correct_dis) * distance;
     top_y = (int)WINDOW_HEIGHT / 2 - (int)wall_height / 2;
     if (top_y < 0)
         top_y = 0;
@@ -111,9 +111,9 @@ void    draw_wall(double dis_ray, t_vars *vars, int *x, double angle)
     if (bottom_y > WINDOW_HEIGHT)
         bottom_y = WINDOW_HEIGHT;
     if (vars->ray.is_vertical)
-        offset.px = (int)vars->ray.dir.y % (int)RECT_SIZE;
+        offset.px = (int)vars->ray.dir.y % 60;
     else
-        offset.px = (int)vars->ray.dir.x % (int)RECT_SIZE;
+        offset.px = (int)vars->ray.dir.x % 60;
     v.x = *x;
     y = top_y; 
     while (y <= bottom_y)
@@ -149,24 +149,24 @@ void    map(t_vars *vars)
 
 void    camera(t_vars *vars)
 {
-    // int x;
-    // double dis;
-    // double  angle;
+    int x;
+    double dis;
+    double  angle;
 
-    // x = 0;
-    // dis = 0.0;
-    // angle = 0;
-    // vars->ray.origin = *vars->ordr.origin;
-    // vars->ray.dir = *vars->ordr.minplane;
-    // vars->ray.dir.angle = M_PI / 6.0;
-    // while (x < WINDOW_WIDTH)
-    // {
-    //     dis = cast_ray(vars); 
-    //     draw_wall(dis, vars, &x, angle);
-    //     vars->ray.dir.angle= (1.0 / (WINDOW_WIDTH)) * (M_PI / 6.0);
-    //     angle += vars->ray.dir.angle;
-    //     rotation(&vars->ray.dir, vars->ray.dir.angle); 
-    //     x++;
-    // }
-    map(vars);
+    x = 0;
+    dis = 0.0;
+    angle = 0;
+    vars->ray.origin = *vars->ordr.origin;
+    vars->ray.dir = *vars->ordr.minplane;
+    vars->ray.dir.angle = M_PI / 6.0;
+    while (x < WINDOW_WIDTH)
+    {
+        dis = cast_ray(vars); 
+        draw_wall(dis, vars, &x, angle);
+        vars->ray.dir.angle= (1.0 / (WINDOW_WIDTH)) * (M_PI / 6.0);
+        angle += vars->ray.dir.angle;
+        rotation(&vars->ray.dir, vars->ray.dir.angle); 
+        x++;
+    }
+   map(vars);
 }
