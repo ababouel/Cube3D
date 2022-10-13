@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/11 06:13:23 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/12 05:12:03 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,14 @@ void	draw_map(t_vars *vars)
 {
 	t_vector	v;
 
-	v.y = 0;
-	// v.color = add_color(255, 0, 0, 0);
+	v.y = 0;	
 	while (v.y < vars->data->hgt)
 	{
 		v.x = 0;
 		while (v.x < vars->data->wth[(int)v.y])
 		{
-			if (vars->data->map[(int)v.y][(int)v.x] == '1')
-				draw_rect(vars,v.x,v.y);	
+			// if (vars->data->map[(int)v.y][(int)v.x] == '1')
+			// 	draw_rect(vars, v.x, v.y);	
 			if (vars->ordr.origin == NULL
 				&& vars->data->map[(int)v.y][(int)v.x] == 'S')
 				add_camera_data(vars, &v, -3 * M_PI / 4);

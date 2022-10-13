@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/11 06:19:41 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/12 04:09:08 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,22 @@
 #include <fcntl.h>
 #include <sys/errno.h>
 
+void	ft_generate_texture(t_vars *vars, char *path, t_nswe ns)
+{
+	t_texture	*text;
+	t_imgarg	*img;
+	
+	text = NULL;
+	if (ns == WE)
+		text = &vars->wall_txt.w_txt;
+	else if (ns == NO)
+		text = &vars->wall_txt.n_txt;
+	text->txt_img.img = mlx_xpm_file_to_image(vars->mlx, path, &text->width, &text->height);
+	img = &text->txt_img;
+	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->line_len, &img->endian);
+}
+
+
 int	ft_init_vars(t_vars *vars)
 {
 	vars->ordr.dir1 = addvect(1, 1, add_color(255,0,0), 10);
@@ -34,13 +50,8 @@ int	ft_init_vars(t_vars *vars)
 	vars->rect.color = add_color(0,0,255);
 	vars->rect.x = 5;
 	vars->rect.y = 5;
-	int x;
-	x = 0;
-	while (x < 4)
-	{
-		generate_image(vars, vars->data->txtpath[x].path,vars->data->txtpath[x].nswe);
-		x++;
-	}
+	ft_generate_texture(vars, vars->data->txtpath[2].path, WE);
+	ft_generate_texture(vars, vars->data->txtpath[0].path, NO); 	
 	return(0);
 }
 
@@ -86,7 +97,6 @@ int	main(int argc, char **argv)
 		check = ft_parse(argv[1], vars);
 		if (check < 0)
 		{
-			//free all
 			printf("Error.\n");
 			return (1);
 		}
