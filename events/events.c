@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:35:59 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/11 05:49:55 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/15 21:56:21 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ int	esc_key(int keynum, t_vars *vars)
 	else if (keynum == ARROWUP)
 	{
 		climg(vars->iarg);
-		vect_add(vars->ordr.origin, vars->ordr.dir1, 20);
+		vect_add(vars->ordr.origin, vars->ordr.dir1, 10);
 	}
 	else if (keynum == ARROWDOWN)
 	{
 		climg(vars->iarg);
-		vect_add(vars->ordr.origin, vars->ordr.dir1, -20);	
+		vect_add(vars->ordr.origin, vars->ordr.dir1, -10);	
 	}
 	return (0);
 }

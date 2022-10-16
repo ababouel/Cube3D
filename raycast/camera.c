@@ -62,30 +62,21 @@ void    draw_wall(double dis_ray, t_vars *vars, int *x, double angle)
         bottom_y = WINDOW_HEIGHT;
     if (vars->ray.is_vertical)
     {
-        offset.px = *x % vars->wall_txt.w_txt.width;
+        offset.px = (double)( *x / wall_height) * vars->wall_txt.w_txt.width;
         color = (unsigned int *) vars->wall_txt.w_txt.txt_img.addr;
     }
     else
     {
-        offset.px = *x % vars->wall_txt.n_txt.width;
+        offset.px = (double)(*x / wall_height) * vars->wall_txt.n_txt.width;
         color = (unsigned int *) vars->wall_txt.n_txt.txt_img.addr;
     }
     v.x = *x;
     y = top_y; 
     while (y <= bottom_y)
     {
-        // printf("offset =>\nx->%d\ny->%d\n", offset.px, offset.py);
         v.y = y;
-        // if (vars->ray.is_vertical)
-        // {
-            offset.py = (double)(((y - top_y) / wall_height) * 60);
-            draw_pixels(vars, &v, color[(int)(60 * offset.py) + offset.px]);
-        // }
-        // else
-        // {
-        //     offset.py = (double)(((y - top_y) / wall_height) * 60);
-        //     draw_pixels(vars, &v, color[(int)(128 * offset.py) + offset.px]);
-        // }
+        offset.py = (double)(((y - top_y) / wall_height) * 60);
+        draw_pixels(vars, &v, color[(int)(60 * offset.py) + (offset.px % 60)]); 
         y++;
     }
 }
@@ -95,17 +86,6 @@ void    map(t_vars *vars)
     t_point v;
 
     v.py = 0;	
-	// while (v.py < vars->data->hgt)
-	// {
-	// 	v.px = 0;
-	// 	while (v.px < vars->data->wth[v.py])
-    //     {
-    //         if (vars->data->map[v.py][v.px] == '1')
-    //             draw_rect(vars, v.px, v.py);
-    //         v.px++;
-    //     }
-    //     v.py++;
-    // }
     int x = 0;
     draw_line(vars->ordr.origin,vars->ordr.dir1, vars);
     draw_line(vars->ordr.origin,vars->ordr.minplane, vars);

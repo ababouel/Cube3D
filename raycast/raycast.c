@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 17:18:19 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/12 00:56:14 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/15 22:02:05 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int intersect_with_y(t_inters   *inters, t_vars *vars)
 
     gridX = inters->pos_grid.px;
     gridY = inters->next_pos.py - 1 + inters->sign_y;
-    if (gridX < 0 || gridX > *vars->data->wth || gridY < 0 || gridY > vars->data->hgt)
+    if ((gridX < 0 && gridX > *vars->data->wth) && gridY < 0 && gridY > vars->data->hgt)
         return (0);
     if(vars->data->map[gridY][gridX] == '1')
     {

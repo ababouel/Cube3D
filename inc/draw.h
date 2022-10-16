@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/12 05:02:21 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/15 21:33:15 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #ifndef DRAW_H
 # define DRAW_H
 
-# define WINDOW_WIDTH	1920.0
-# define WINDOW_HEIGHT	1080.0
+# define WINDOW_WIDTH	600.0
+# define WINDOW_HEIGHT	600.0
 # define MLX_ERROR	1
 # define RECT_SIZE	64.0
 
