@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 06:01:46 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/11 21:27:09 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/16 04:44:49 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct s_ray
 	t_vector	dir;
 	t_vector	origin;
 	t_inters	inters;
+	double		top_x;
 	int			is_vertical;
 }	t_ray;
 

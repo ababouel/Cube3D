@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/12 04:09:08 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/16 22:12:00 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	ft_init_vars(t_vars *vars)
 	vars->ordr.maxplane->angle = M_PI/50;
 	vars->ordr.minplane->angle = M_PI/50;	
 	vars->rect.color = add_color(0,0,255);
+	vars->ray.top_x = 0;
 	vars->rect.x = 5;
 	vars->rect.y = 5;
 	ft_generate_texture(vars, vars->data->txtpath[2].path, WE);
@@ -107,7 +108,6 @@ int	main(int argc, char **argv)
 		mlx_loop_hook(vars->mlx, render_next_frame, (void *)vars);	
 		mlx_key_hook(vars->win, esc_key, vars);
 		mlx_hook(vars->win, 17, 0, close_game, vars);
-		mlx_do_sync(vars->mlx);
 		mlx_loop(vars->mlx);
 	}
 	else

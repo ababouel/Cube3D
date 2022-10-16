@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "raycast.h": "c",
+        "draw.h": "c",
+        "data.h": "c",
+        "mlx.h": "c",
+        "stdlib.h": "c",
+        "stdio.h": "c",
+        "parsing.h": "c",
+        "events.h": "c"
+    }
+}
