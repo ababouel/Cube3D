@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 04:00:33 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/10 23:25:38 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/17 23:48:21 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,20 @@ int ft_parse_map(t_vars *vars, t_pars *pars)
     return (1);
 }
 
+int ft_check_path(char *path)
+{
+    if (ft_strcmp(ft_getchr(path, '.'), ".cub") == 0)
+        return (1);
+    return (-1);
+}
+
 int ft_parse(char *path, t_vars *vars)
 {  
     t_pars  *pars;
     
 
     pars = (t_pars *)malloc(sizeof(t_pars));
-    if (pars == NULL)
+    if (pars == NULL || ft_check_path(path) == -1)
         return (-1);
     ft_init_pars(vars, pars, path);
     pars->fd = open(path, O_RDONLY);

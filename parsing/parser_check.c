@@ -6,12 +6,11 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:32:36 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/10 23:42:29 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/18 00:35:34 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
 
 int ft_check_whitespace(char *str)
 {
@@ -59,11 +58,9 @@ int ft_check_map(t_vars *vars)
         x = 0;
         while (x < vars->data->wth[y])
         {
-            if (ft_is_in_wall(vars->data->map, x, y, vars->data->wth[x], vars->data->hgt) == 1
+            if (ft_is_in_wall(vars->data->map, x, y, vars->data->wth, vars->data->hgt) == 1
                 && vars->data->map[y][x] != '1' && ft_is_space(vars->data->map[y][x]) != 1)
-            {
                 return (-1);
-            }
             x++;
         }
         y++;
@@ -90,7 +87,6 @@ int ft_parse_setups(t_vars *vars, t_pars *pars)
 {
     int len;
 
-    
     pars->tmp = ft_split(pars->line, ' ', '\t');
     if (arr_len(pars->tmp) > 2)
         return (-1);
@@ -108,7 +104,6 @@ int ft_parse_setups(t_vars *vars, t_pars *pars)
     {
         if (ft_copy_colors(vars, pars->tmp) == -1)
             return (-1);
-        //pars->col++;
     }
     pars->count--;
     pars->tmp[0] = my_free(pars->tmp[0]);
