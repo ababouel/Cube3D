@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 06:01:46 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/16 04:44:49 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/17 03:05:06 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ typedef struct  s_rect
 {
 	double	x;
 	double	y;
-	t_color color;
+	t_color cwall;
+	t_color cfloo;
 }	t_rect;
 
 typedef	struct s_point
@@ -129,12 +130,20 @@ typedef struct s_wall_txt
 	t_texture	e_txt;	
 }	t_wall_txt;
 
+typedef	struct s_minimap
+{
+	t_imgarg	iarg;
+	double		width;
+	double		height;
+	double		rect;	
+}	t_minimap;
 
 typedef struct	s_vars 
 {
 	void		*mlx;
 	void		*win;
 	t_imgarg	*iarg;
+	t_minimap	minimap;
 	t_data		*data;
 	t_org_dir	ordr;
 	t_rect		rect;
@@ -143,6 +152,7 @@ typedef struct	s_vars
 	t_color		floor;
 	t_wall_txt	wall_txt;
 }	t_vars;
+
 
 typedef struct s_pars 
 {

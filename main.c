@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/16 22:12:00 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/17 03:14:22 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int	ft_init_vars(t_vars *vars)
 	vars->ordr.dir1->angle = M_PI/50;
 	vars->ordr.maxplane->angle = M_PI/50;
 	vars->ordr.minplane->angle = M_PI/50;	
-	vars->rect.color = add_color(0,0,255);
+	vars->rect.cwall = add_color(0,0,255);
+	vars->rect.cfloo = add_color(255, 255, 255);
 	vars->ray.top_x = 0;
 	vars->rect.x = 5;
 	vars->rect.y = 5;
@@ -68,10 +69,13 @@ int    ft_init(t_vars *vars)
 		free(vars);
 		return (MLX_ERROR);
 	}
-	vars->iarg->img= mlx_new_image(vars->mlx,
+	vars->iarg->img = mlx_new_image(vars->mlx,
 			WINDOW_WIDTH, WINDOW_HEIGHT);
 	vars->iarg->addr = mlx_get_data_addr(vars->iarg->img,
 			&vars->iarg->bpp, &vars->iarg->line_len, &vars->iarg->endian);
+	vars->minimap.iarg.img = mlx_new_image(vars->mlx, vars->minimap.width, vars->minimap.height); 
+	vars->minimap.iarg.addr = mlx_get_data_addr(vars->minimap.iarg.img,
+			&vars->minimap.iarg.bpp, &vars->minimap.iarg.line_len, &vars->minimap.iarg.endian);
 	return (0);
 }
 
@@ -81,10 +85,13 @@ int render_next_frame(void *vars)
 	
 	v = (t_vars *)vars;
 	climg(v->iarg->img);
-	draw_ceil_floor(vars);
+	climg(v->minimap.iarg.img);
+	draw_ceil_floor(v);
 	draw_map(v);
 	camera(v);
+	draw_minimap(v);
 	mlx_put_image_to_window( v->mlx, v->win, v->iarg->img, 0, 0);
+	mlx_put_image_to_window(v->mlx, v->win, v->minimap.iarg.img, 0,0);
 	return (1);
 }
 

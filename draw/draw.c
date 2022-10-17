@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/16 21:58:04 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/17 02:58:01 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ int	create_trgb(t_color *color)
 	return (color->rd << 16 | color->gr << 8 | color->bl);
 }
 
-void	draw_pixel(t_vars *data, t_vector *v)
+void	draw_pixel(t_imgarg *data, t_vector *v)
 {
 	char		*dst;
-	t_imgarg	img;
+	t_imgarg	*img;
 
-	img = *data->iarg;
+	img = data;
 	if (v->x < WINDOW_WIDTH && v->x >= 0 && v->y < WINDOW_HEIGHT && v->y >= 0)
 	{
-		dst = img.addr + ((int) v->y * img.line_len
-				+ (int)v->x * (img.bpp / 8));
+		dst = img->addr + ((int) v->y * img->line_len
+				+ (int)v->x * (img->bpp / 8));
 		*(unsigned int *) dst = create_trgb(&v->color);
 	}	
 }
@@ -53,9 +53,7 @@ void	draw_map(t_vars *vars)
 	{
 		v.x = 0;
 		while (v.x < vars->data->wth[(int)v.y])
-		{
-			// if (vars->data->map[(int)v.y][(int)v.x] == '1')
-			// 	draw_rect(vars, v.x, v.y);
+		{	
 			if (vars->ordr.origin == NULL
 				&& vars->data->map[(int)v.y][(int)v.x] == 'S')
 				add_camera_data(vars, &v, 3 * M_PI / 4 );

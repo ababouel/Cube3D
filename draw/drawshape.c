@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 15:37:08 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/11 06:26:08 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/17 03:03:31 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void draw_line(t_vector *v1, t_vector *v2, t_vars *data)
 	vf = *v1;	
 	while (step)
 	{
-		draw_pixel(data, &vf);
+		draw_pixel(data->iarg, &vf);
 		vf.x += v2->x;
 		vf.y += v2->y; 
 		step--;
@@ -45,25 +45,25 @@ void    draw_circle(t_vars *data ,t_vector *v, double rad)
 		v1.y = rad * sin(angle * M_PI / 180);
 		v->x += v1.x;
 		v->y += v1.y; 
-		draw_pixel(data, v);
+		draw_pixel(data->iarg, v);
 		angle += 0.1;
 	}	
 }
 
-void	draw_rect(t_vars *data, double x, double y)
+void	draw_rect(t_vars *data, double rect,double x, double y)
 {
 	t_vector v;
 		
-	y *= RECT_SIZE;
-	x *= RECT_SIZE;
+	y *= rect;
+	x *= rect;
 	v.y = y; 
 	v.color = data->rect.color;
-	while (v.y < y + RECT_SIZE - 1)
+	while (v.y < y + rect - 1)
 	{
 		v.x = x;
-		while (v.x < x + RECT_SIZE - 1)
+		while (v.x < x + rect - 1)
 		{
-			draw_pixel(data, &v);
+			draw_pixel(&data->minimap.iarg, &v);
 			v.x++;
 		}
 		v.y++;
@@ -81,7 +81,7 @@ static void    draw_loop(int y, t_color *color, t_vars *vars)
     {
         v.x = x;
         v.color = *color;
-        draw_pixel(vars,&v);
+        draw_pixel(vars->iarg,&v);
         x++;
 	}
 }
