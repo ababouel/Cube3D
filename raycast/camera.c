@@ -13,101 +13,105 @@
 #include "raycast.h"
 #include "tools.h"
 
-static void	draw_pixels(t_vars *data, t_vector *v, unsigned int color)
+void    draw_pixels(t_vars *data, t_vector *v, unsigned int color)
 {
-	char		*dst;
-	t_imgarg	img;
+    t_imgarg        *img;
+    unsigned int    *dst;
 
-	img = *data->iarg;
-	if (v->x < WINDOW_WIDTH && v->x >= 0 && v->y < WINDOW_HEIGHT && v->y >= 0)
-	{
-		dst = img.addr + ((int) v->y * img.line_len
-				+ (int)v->x * (img.bpp / 8));
-		*(unsigned int *) dst = color;
-	}	
+    img = data->iarg;
+    dst = (unsigned int *) data->iarg->addr;
+    dst[((int)WINDOW_WIDTH * (int)v->y) + (int)v->x] = color;
 }
 
-uint32_t	*generate_pixels(t_vars *vars, char *path)
-{
-	t_point		t;
-	t_imgarg	ig;
-	char		*ttc;
-	uint32_t	*txtcolor;
-
-	t.py = 0;
-	ig = vars->txtre.ig;
-	ig.img = mlx_xpm_file_to_image(vars->mlx, path, &vars->txtre.width, &vars->txtre.height);
-	ig.addr = mlx_get_data_addr(ig.img, &ig.bpp, &ig.line_len, &ig.endian);
-	txtcolor = malloc(sizeof(uint32_t) * (uint32_t)vars->txtre.width * (uint32_t) vars->txtre.height);
-	while (t.py <= vars->txtre.height)
-	{
-		t.px = 0;
-		while (t.px <= vars->txtre.width)
-		{
-			ttc = ig.addr + ((int) t.py * ig.line_len + (int) t.px * (ig.bpp / 8));
-			txtcolor[(vars->txtre.width * t.py) + t.px] = *(uint32_t *)ttc;
-			t.px++;	
-		}
-		t.py++;
-	}
-	return (txtcolor);
-}
-
-void    draw_wall(double dis_ray, t_vars *vars, int *x)
+void    draw_wall(double dis_ray, t_vars *vars, int *x, double angle)
 {
     t_point         offset;
     t_vector        v;
+    double          correct_dis;
     int             top_y;
     int             bottom_y;
     double          distance;
-    int             wall_height;
-    t_imgarg        ig;
+    double             wall_height; 
     int             y;
-    int             distance_from_top;
+    unsigned int    *color;
 
     top_y = 0;
-    ig = vars->txtre.ig;
+    y = 0;
+    offset.px = 0;
+    offset.py = 0;
+    correct_dis = dis_ray * cos(M_PI/6 - angle);
     distance = (WINDOW_WIDTH / 2) / tan(M_PI / 6);
-    wall_height = (int)((RECT_SIZE / dis_ray) * distance);
-    top_y = (int)WINDOW_HEIGHT / 2 - wall_height / 2;
-    bottom_y = top_y + wall_height;
-    if (top_y < 0)
-        top_y = 0;
-    if (bottom_y > WINDOW_HEIGHT)
-        bottom_y = WINDOW_HEIGHT;
-    if (vars->ray.is_vertical)
-        offset.px = (int)vars->ray.dir.y % (int)RECT_SIZE;
-    else
-        offset.px = (int)vars->ray.dir.x % (int)RECT_SIZE;
+    wall_height = (60 / correct_dis) * distance; 
+    top_y = (int)WINDOW_HEIGHT / 2 - (int)wall_height / 2;
+    // if (top_y < 0)
+    //     top_y = 0;
+    bottom_y = top_y + (int)wall_height;
     v.x = *x;
+    if (vars->ray.is_vertical)
+        color = (unsigned int *) vars->wall_txt.w_txt.txt_img.addr;
+    else
+        color = (unsigned int *) vars->wall_txt.n_txt.txt_img.addr;
     y = top_y; 
-    while (y <= bottom_y)
+    while (y <= bottom_y && y <= WINDOW_HEIGHT)
     {
         v.y = y;
-        distance_from_top = y + (wall_height/2)-(WINDOW_HEIGHT/2);
-        offset.py = distance_from_top * (RECT_SIZE / wall_height);
-        draw_pixels(vars, &v, (unsigned int) vars->wall_text[((int)RECT_SIZE * offset.py) + offset.px]);
+        if (vars->ray.is_vertical)
+        {
+            offset.px = (int) vars->ray.inters.current_pos.y % vars->wall_txt.w_txt.width;
+            offset.py = (double)(((y - top_y) / wall_height) * vars->wall_txt.w_txt.height);
+            draw_pixels(vars, &v, color[(int)( vars->wall_txt.w_txt.width * offset.py) + offset.px]); 
+        }
+        else
+        {
+            offset.px = (int) vars->ray.inters.current_pos.x % vars->wall_txt.n_txt.width;
+            offset.py = (double)(((y - top_y) / wall_height) * vars->wall_txt.n_txt.height);
+            draw_pixels(vars, &v, color[(int)( vars->wall_txt.n_txt.width * offset.py) + offset.px]); 
+        }
         y++;
-    }
+    } 
 }
-void    camera(t_vars *vars)
-{
-    int x;
-    double dis;
-    double pdis;
+void    map(t_vars *vars)
+{   
+    t_point v;
 
-    x = 0;
-    dis = 0.0;
+    v.py = 0;	
+    int x = 0;
+    draw_line(vars->ordr.origin,vars->ordr.dir1, vars);
+    draw_line(vars->ordr.origin,vars->ordr.minplane, vars);
+    draw_line(vars->ordr.origin,vars->ordr.maxplane, vars);
     vars->ray.origin = *vars->ordr.origin;
     vars->ray.dir = *vars->ordr.minplane;
     vars->ray.dir.angle = M_PI / 6.0;
     while (x < WINDOW_WIDTH)
     {
-        dis = cast_ray(vars);
-        pdis = dis * cos(vars->ray.dir.angle - vars->ordr.dir1->angle);
-        draw_wall(pdis, vars, &x);
-        vars->ray.dir.angle= (1.0 / (WINDOW_WIDTH)) * (M_PI / 6.0);
+        cast_ray(vars, RECT_SIZE); 
+        draw_line(&vars->ray.origin, &vars->ray.dir, vars);
+        vars->ray.dir.angle= (1.0 / (WINDOW_WIDTH/2)) * (M_PI / 6.0);
         rotation(&vars->ray.dir, vars->ray.dir.angle); 
         x++;
-    }
+    } 
+}
+
+void    camera(t_vars *vars)
+{
+    int x;
+    double dis;
+    double  angle;
+
+    x = 0;
+    dis = 0.0;
+    angle = 0;
+    vars->ray.origin = *vars->ordr.origin;
+    vars->ray.dir = *vars->ordr.minplane;
+    vars->ray.dir.angle = M_PI / 6.0;
+    while (x < WINDOW_WIDTH)
+    {
+        dis = cast_ray(vars, RECT_SIZE); 
+        draw_wall(dis, vars, &x, angle);
+        vars->ray.dir.angle= (1.0 / (WINDOW_WIDTH)) * (M_PI / 6.0);
+        angle += vars->ray.dir.angle;
+        rotation(&vars->ray.dir, vars->ray.dir.angle); 
+        x++;
+    }  
+    // map(vars);
 }

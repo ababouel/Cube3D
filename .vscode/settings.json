@@ -1,34 +1,12 @@
 {
     "files.associations": {
-        "tools.h": "c",
-        "draw.h": "c",
         "raycast.h": "c",
-        "__config": "c",
-        "__hash_table": "c",
-        "__locale": "c",
-        "array": "c",
-        "functional": "c",
-        "ios": "c",
-        "iterator": "c",
-        "locale": "c",
-        "ostream": "c",
-        "sstream": "c",
-        "string": "c",
-        "string_view": "c",
-        "type_traits": "c",
-        "vector": "c"
-    },
-    "makefile.launchConfigurations": [
-        {
-            "cwd": "/Users/abdelghani/Documents/Cube3D",
-            "binaryPath": "/Users/abdelghani/Documents/Cube3D/cub3d",
-            "binaryArgs": []
-        }
-    ]
+        "draw.h": "c",
+        "data.h": "c",
+        "mlx.h": "c",
+        "stdlib.h": "c",
+        "stdio.h": "c",
         "parsing.h": "c",
-        "string.h": "c",
-        "chrono": "c",
-        "unordered_map": "c"
-    },
-    "C_Cpp.errorSquiggles": "Disabled"
+        "events.h": "c"
+    }
 }

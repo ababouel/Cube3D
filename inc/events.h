@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:37:52 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/10 05:34:28 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/17 02:54:28 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@
 # define ESC_KEY 53
 # define ARROWLEFT 123
 # define ARROWRIGHT 124
-# define ARROWDOWN 125
-# define ARROWUP 126
+# define DOWN_S 1
+# define UP_W 13
+# define LEFT_A 0
+# define RIGHT_D 2
 
 #include "draw.h" 
 

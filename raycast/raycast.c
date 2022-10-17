@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 17:18:19 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/07 05:27:08 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/16 05:54:18 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int intersect_with_x(t_inters   *inters, t_vars *vars)
 
     gridX = inters->next_pos.px - 1 + inters->sign_x;
     gridY = inters->pos_grid.py;
-    if (gridX < 0 || gridX >= 10 || gridY < 0 || gridY >= 10)
+    if (gridX < 0 || gridX > *vars->data->wth || gridY < 0 || gridY > vars->data->hgt)
         return (0);
     if(vars->data->map[gridY][gridX] == '1')
     {
@@ -36,9 +36,9 @@ static int intersect_with_y(t_inters   *inters, t_vars *vars)
 
     gridX = inters->pos_grid.px;
     gridY = inters->next_pos.py - 1 + inters->sign_y;
-    if (gridX < 0 || gridX >= 10 || gridY < 0 || gridY >= 10)
+    if (gridX < 0 || gridX > *vars->data->wth || gridY < 0 || gridY > vars->data->hgt)
         return (0);
-    if(vars->data->map[gridY][gridX] == '1')
+    if(vars->data->map && vars->data->map[gridY][gridX] == '1')
     {
         vars->ray.is_vertical = 0;
         return (1);
@@ -46,14 +46,14 @@ static int intersect_with_y(t_inters   *inters, t_vars *vars)
     return (0);
 }
 
-static void op_params(t_inters *inters, t_vars *vars)
+static void op_params(t_inters *inters, t_vars *vars, double rect_size)
 {
-    inters->pos_grid.px = inters->current_pos.x / RECT_SIZE;
-    inters->pos_grid.py = inters->current_pos.y / RECT_SIZE;
+    inters->pos_grid.px = inters->current_pos.x / rect_size;
+    inters->pos_grid.py = inters->current_pos.y / rect_size;
     inters->next_pos.px = inters->pos_grid.px + inters->sign_x;
     inters->next_pos.py = inters->pos_grid.py + inters->sign_y;
-    inters->next_pos_grid.px = inters->next_pos.px * RECT_SIZE;
-    inters->next_pos_grid.py = inters->next_pos.py * RECT_SIZE;
+    inters->next_pos_grid.px = inters->next_pos.px * rect_size;
+    inters->next_pos_grid.py = inters->next_pos.py * rect_size;
     inters->dx = (inters->next_pos_grid.px - inters->current_pos.x) / vars->ray.dir.x;
     inters->dy = (inters->next_pos_grid.py - inters->current_pos.y) / vars->ray.dir.y;
 }
@@ -76,7 +76,7 @@ static double   op_distance(t_inters *inters, t_vars *vars)
     return (inters->final_d);
 } 
 
-double  cast_ray(t_vars *vars)
+double  cast_ray(t_vars *vars, double rect_size)
 {
     int         x;
     double      dis;
@@ -91,9 +91,9 @@ double  cast_ray(t_vars *vars)
         vars->ray.inters.sign_x = 0;
     if(vars->ray.dir.y < 0)
         vars->ray.inters.sign_y = 0;
-    while(x < 200 && !vars->ray.inters.is_inters)
+    while(x < 100 && !vars->ray.inters.is_inters)
     {
-        op_params(&vars->ray.inters, vars); 
+        op_params(&vars->ray.inters, vars, rect_size); 
         dis += op_distance(&vars->ray.inters, vars); 
         x++;
     } 

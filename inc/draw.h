@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/10 05:50:24 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/16 22:14:16 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #ifndef DRAW_H
 # define DRAW_H
 
-# define WINDOW_WIDTH	1280.0
-# define WINDOW_HEIGHT	800.0
+# define WINDOW_WIDTH	640.0
+# define WINDOW_HEIGHT	480.0
 # define MLX_ERROR	1
-# define RECT_SIZE	60.0
+# define RECT_SIZE	64.0
 
 # include <mlx.h>
 # include <math.h>
@@ -28,7 +28,7 @@
 
 #include "data.h"
 
-uint32_t	*generate_pixels(t_vars *vars, char *path);
+void	generate_image(t_vars *vars, char *path, t_nswe ns);
 void	draw_pixel(t_vars *data, t_vector *v);
 int		create_trgb(t_color *color);
 void	draw_line(t_vector *v1, t_vector *v2, t_vars *data);
