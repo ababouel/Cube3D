@@ -19,7 +19,7 @@ void    draw_pixels(t_vars *data, t_vector *v, unsigned int color)
     unsigned int    *dst;
 
     img = data->iarg;
-    dst = (unsigned int *) data->iarg->addr;
+    dst = (unsigned int *) img->addr;
     dst[((int)WINDOW_WIDTH * (int)v->y) + (int)v->x] = color;
 }
 
@@ -52,7 +52,7 @@ void    draw_wall(double dis_ray, t_vars *vars, int *x, double angle)
     else
         color = (unsigned int *) vars->wall_txt.n_txt.txt_img.addr;
     y = top_y; 
-    while (y <= bottom_y && y <= WINDOW_HEIGHT)
+    while (y >= 0 && y <= bottom_y && y <= WINDOW_HEIGHT)
     {
         v.y = y;
         if (vars->ray.is_vertical)

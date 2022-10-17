@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/17 03:14:22 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/17 05:30:13 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int    ft_init(t_vars *vars)
 			WINDOW_WIDTH, WINDOW_HEIGHT);
 	vars->iarg->addr = mlx_get_data_addr(vars->iarg->img,
 			&vars->iarg->bpp, &vars->iarg->line_len, &vars->iarg->endian);
+	vars->minimap.width = 500;
+	vars->minimap.height = 250;
 	vars->minimap.iarg.img = mlx_new_image(vars->mlx, vars->minimap.width, vars->minimap.height); 
 	vars->minimap.iarg.addr = mlx_get_data_addr(vars->minimap.iarg.img,
 			&vars->minimap.iarg.bpp, &vars->minimap.iarg.line_len, &vars->minimap.iarg.endian);

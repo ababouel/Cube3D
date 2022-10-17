@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:35:59 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/15 21:56:21 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/17 05:26:07 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,27 @@ int	esc_key(int keynum, t_vars *vars)
 	if (keynum == ESC_KEY)
 		clear_data(vars);
 	if (keynum == ARROWRIGHT)
-	{ 
-		climg(vars->iarg);
+	{
+		vars->ordr.origin->angle += vars->ordr.dir1->angle;
 		rotation(vars->ordr.dir1, vars->ordr.dir1->angle);
 		rotation(vars->ordr.minplane, vars->ordr.minplane->angle);
 		rotation(vars->ordr.maxplane, vars->ordr.maxplane->angle);
 	}
 	else if (keynum == ARROWLEFT)
 	{
-		climg(vars->iarg);
+		vars->ordr.origin->angle -= vars->ordr.dir1->angle;
 		rotation(vars->ordr.dir1, -vars->ordr.dir1->angle);
 		rotation(vars->ordr.maxplane, -vars->ordr.maxplane->angle);
 		rotation(vars->ordr.minplane, -vars->ordr.minplane->angle);
 	}
-	else if (keynum == ARROWUP)
-	{
-		climg(vars->iarg);
+	else if (keynum == UP_W)
 		vect_add(vars->ordr.origin, vars->ordr.dir1, 10);
-	}
-	else if (keynum == ARROWDOWN)
-	{
-		climg(vars->iarg);
-		vect_add(vars->ordr.origin, vars->ordr.dir1, -10);	
-	}
+	else if (keynum == DOWN_S)
+		vect_add(vars->ordr.origin, vars->ordr.dir1, -10);
+	else if (keynum == LEFT_A)
+		move_dir(vars->ordr.origin, -10);
+	else if (keynum == RIGHT_D)
+		move_dir(vars->ordr.origin, 10);
 	return (0);
 }
 

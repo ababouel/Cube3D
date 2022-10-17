@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 15:37:08 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/17 03:03:31 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/17 05:47:33 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,23 @@ void    draw_circle(t_vars *data ,t_vector *v, double rad)
 	}	
 }
 
-void	draw_rect(t_vars *data, double rect,double x, double y)
+void	draw_rect(t_vars *data, double rect,t_vector v)
 {
-	t_vector v;
+	t_vector vp;
 		
-	y *= rect;
-	x *= rect;
-	v.y = y; 
-	v.color = data->rect.color;
-	while (v.y < y + rect - 1)
+	v.x *= rect;
+	v.y *= rect;
+	vp.y = v.y;
+	vp.color = v.color;	
+	while (vp.y < v.y + rect - 1)
 	{
-		v.x = x;
-		while (v.x < x + rect - 1)
+		vp.x = v.x;
+		while (vp.x < v.x + rect - 1)
 		{
-			draw_pixel(&data->minimap.iarg, &v);
-			v.x++;
+			draw_pixel(&data->minimap.iarg, &vp);
+			vp.x++;
 		}
-		v.y++;
+		vp.y++;
 	}
 }
 

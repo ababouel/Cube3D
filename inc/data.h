@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 06:01:46 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/17 03:05:06 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/17 06:12:35 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,8 @@ typedef	struct s_minimap
 	t_imgarg	iarg;
 	double		width;
 	double		height;
-	double		rect;	
+	double		rect;
+	t_vector	player;	
 }	t_minimap;
 
 typedef struct	s_vars 

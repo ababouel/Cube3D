@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 02:43:41 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/10 21:13:53 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/17 03:47:56 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ void        debug(t_vector *v, int x, double angle);
 void        norm_vect(t_vector *vect);
 void        vect_multi(t_vector *dir,double scale);
 void        vect_add(t_vector *origin, t_vector *dir, double angle);
+void    move_dir(t_vector *origin, double travel);
 
 #endif
