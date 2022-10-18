@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:41 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/10 21:16:41 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/18 00:07:44 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 #include "data.h"
 
-int     ft_is_in_wall(char **map, int x, int y, int lenx, int leny);
+int     ft_is_in_wall(char **map, int x, int y, int *lenx, int leny);
 int		ft_is_space(char c);
 int     ft_iscolor(char *c, int i);
 int     count_lines(char *path);
@@ -39,11 +39,11 @@ char	*ft_strjoin(char *str1, char *str2);
 char	**ft_split(char const *s, char c, char c2);
 int     ft_strcmp(char *s1, char *s2);
 char	*ft_strdup(const char *s);
+char	*ft_getchr(char *s, int c);
 int     ft_atoi(const char *str);
 int		ft_is_space(char c);
 int     ft_check_whitespace(char *str);
 int     ft_invalid_line(char *line);
-int     ft_is_in_wall(char **c, int x, int y, int lenx, int leny);
 int     ft_check_whitespace(char *str);
 int     ft_check_format(char *color);
 int     ft_check_map(t_vars *vars);

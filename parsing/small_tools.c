@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:37:04 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/05 21:15:31 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/18 00:23:31 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int ft_is_space(char c)
 	return (0);
 }
 
-int ft_is_in_wall(char **map, int x, int y, int lenx, int leny)
+int ft_is_in_wall(char **map, int x, int y, int *lenx, int leny)
 {
-    if ((x == 0 || y == 0 || x == lenx - 1 || y == leny - 1 
+    if ((x == 0 || y == 0 || x == lenx[y] - 1 || y == leny - 1 
         || ft_is_space(map[y + 1][x]) || ft_is_space(map[y - 1][x]) || ft_is_space(map[y][x + 1]) 
-        || ft_is_space(map[y][x  - 1])))
+        || ft_is_space(map[y][x  - 1])) || x > lenx[y - 1] - 1)
         return (1);
     return (0);
 }

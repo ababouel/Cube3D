@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/18 00:22:03 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/18 01:57:50 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int	main(int argc, char **argv)
 		ft_init(vars);
 		ft_init_vars(vars);
 		mlx_loop_hook(vars->mlx, render_next_frame, (void *)vars);	
+		mlx_hook(vars->win, 02, 0, move_keys, vars);
 		mlx_key_hook(vars->win, esc_key, vars);
 		mlx_hook(vars->win, 17, 0, close_game, vars);
 		mlx_loop(vars->mlx);

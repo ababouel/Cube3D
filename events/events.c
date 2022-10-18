@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:35:59 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/17 05:26:07 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/18 01:52:43 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ int	esc_key(int keynum, t_vars *vars)
 {	
 	if (keynum == ESC_KEY)
 		clear_data(vars);
+
+	return (0);
+}
+
+int	move_keys(int keynum, t_vars *vars)
+{
 	if (keynum == ARROWRIGHT)
 	{
 		vars->ordr.origin->angle += vars->ordr.dir1->angle;
