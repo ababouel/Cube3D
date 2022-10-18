@@ -2,3 +2,5 @@
 .DS_Store
 build
 cub3d
+*.a
+*.o
