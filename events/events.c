@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:35:59 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/18 01:52:43 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/18 02:15:30 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ int	move_keys(int keynum, t_vars *vars)
 		rotation(vars->ordr.minplane, -vars->ordr.minplane->angle);
 	}
 	else if (keynum == UP_W)
-		vect_add(vars->ordr.origin, vars->ordr.dir1, 10);
+		vect_add(vars->ordr.origin, vars->ordr.dir1, 15);
 	else if (keynum == DOWN_S)
-		vect_add(vars->ordr.origin, vars->ordr.dir1, -10);
+		vect_add(vars->ordr.origin, vars->ordr.dir1, -15);
 	else if (keynum == LEFT_A)
-		move_dir(vars->ordr.origin, -10);
+		move_dir(vars->ordr.origin, -15);
 	else if (keynum == RIGHT_D)
-		move_dir(vars->ordr.origin, 10);
+		move_dir(vars->ordr.origin, 15);
 	return (0);
 }
 

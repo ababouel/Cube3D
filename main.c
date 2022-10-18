@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/18 01:57:50 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/18 02:15:21 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,26 @@ void	ft_generate_texture(t_vars *vars, char *path, t_nswe ns)
 		text = &vars->wall_txt.w_txt;
 	else if (ns == NO)
 		text = &vars->wall_txt.n_txt;
+	else if (ns == SO)
+		text = &vars->wall_txt.s_txt;
+	else
+		text = &vars->wall_txt.e_txt;
 	text->txt_img.img = mlx_xpm_file_to_image(vars->mlx, path, &text->width, &text->height);
 	img = &text->txt_img;
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->line_len, &img->endian);
 }
 
+void	ft_set_nswe(t_vars *vars)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		ft_generate_texture(vars, vars->data->txtpath[i].path, vars->data->txtpath[i].nswe);
+		i++;
+	}	
+}
 
 int	ft_init_vars(t_vars *vars)
 {
@@ -52,8 +67,7 @@ int	ft_init_vars(t_vars *vars)
 	vars->ray.top_x = 0;
 	vars->rect.x = 5;
 	vars->rect.y = 5;
-	ft_generate_texture(vars, vars->data->txtpath[2].path, WE);
-	ft_generate_texture(vars, vars->data->txtpath[0].path, NO); 	
+	ft_set_nswe(vars);
 	return(0);
 }
 
