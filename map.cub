@@ -5,10 +5,10 @@ SO ./texture/floor.xpm
 
 WE ./texture/wall.xpm
 
+EA ./texture/test.xpm
 
 F 185,185,185
 
-EA ./texture/test.xpm
 
 
 

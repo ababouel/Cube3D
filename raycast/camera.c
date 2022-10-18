@@ -31,22 +31,20 @@ void    draw_wall(double dis_ray, t_vars *vars, int *x, double angle)
     int             top_y;
     int             bottom_y;
     double          distance;
-    double             wall_height; 
+    double          wall_height; 
     int             y;
     unsigned int    *color;
 
-    top_y = 0;
     y = 0;
+    top_y = 0;
+    v.x= *x;
     offset.px = 0;
     offset.py = 0;
     correct_dis = dis_ray * cos(M_PI/6 - angle);
     distance = (WINDOW_WIDTH / 2) / tan(M_PI / 6);
     wall_height = (60 / correct_dis) * distance; 
-    top_y = (int)WINDOW_HEIGHT / 2 - (int)wall_height / 2;
-    // if (top_y < 0)
-    //     top_y = 0;
+    top_y = (int)WINDOW_HEIGHT / 2 - (int)wall_height / 2; 
     bottom_y = top_y + (int)wall_height;
-    v.x = *x;
     if (vars->ray.is_vertical)
         color = (unsigned int *) vars->wall_txt.w_txt.txt_img.addr;
     else

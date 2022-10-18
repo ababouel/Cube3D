@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/17 05:30:13 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/18 00:22:03 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,7 @@ int    ft_init(t_vars *vars)
 	vars->iarg->img = mlx_new_image(vars->mlx,
 			WINDOW_WIDTH, WINDOW_HEIGHT);
 	vars->iarg->addr = mlx_get_data_addr(vars->iarg->img,
-			&vars->iarg->bpp, &vars->iarg->line_len, &vars->iarg->endian);
-	vars->minimap.width = 500;
-	vars->minimap.height = 250;
-	vars->minimap.iarg.img = mlx_new_image(vars->mlx, vars->minimap.width, vars->minimap.height); 
-	vars->minimap.iarg.addr = mlx_get_data_addr(vars->minimap.iarg.img,
-			&vars->minimap.iarg.bpp, &vars->minimap.iarg.line_len, &vars->minimap.iarg.endian);
+			&vars->iarg->bpp, &vars->iarg->line_len, &vars->iarg->endian);	
 	return (0);
 }
 
@@ -87,13 +82,11 @@ int render_next_frame(void *vars)
 	
 	v = (t_vars *)vars;
 	climg(v->iarg->img);
-	climg(v->minimap.iarg.img);
 	draw_ceil_floor(v);
 	draw_map(v);
 	camera(v);
 	draw_minimap(v);
 	mlx_put_image_to_window( v->mlx, v->win, v->iarg->img, 0, 0);
-	mlx_put_image_to_window(v->mlx, v->win, v->minimap.iarg.img, 0,0);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 17:18:19 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/16 05:54:18 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/18 01:27:07 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int intersect_with_y(t_inters   *inters, t_vars *vars)
     gridY = inters->next_pos.py - 1 + inters->sign_y;
     if (gridX < 0 || gridX > *vars->data->wth || gridY < 0 || gridY > vars->data->hgt)
         return (0);
-    if(vars->data->map && vars->data->map[gridY][gridX] == '1')
+    if(vars->data->map[gridY][gridX] == '1')
     {
         vars->ray.is_vertical = 0;
         return (1);
@@ -60,12 +60,12 @@ static void op_params(t_inters *inters, t_vars *vars, double rect_size)
 
 static double   op_distance(t_inters *inters, t_vars *vars)
 {
-    if (inters->dx < inters->dy)
+    if (inters->dx > 0 && inters->dx < inters->dy)
     {
         inters->is_inters = intersect_with_x(inters,vars);
         inters->final_d = inters->dx;
     }
-    else
+    else if (inters->dy > 0 && inters->dx > inters->dy)
     {
         inters->is_inters = intersect_with_y(inters,vars);
         inters->final_d = inters->dy;

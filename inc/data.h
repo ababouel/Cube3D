@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 06:01:46 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/17 06:12:35 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/18 00:22:45 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,7 @@ typedef struct s_wall_txt
 }	t_wall_txt;
 
 typedef	struct s_minimap
-{
-	t_imgarg	iarg;
+{	
 	double		width;
 	double		height;
 	double		rect;

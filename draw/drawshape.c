@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 15:37:08 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/17 05:47:33 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/18 00:18:59 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	draw_rect(t_vars *data, double rect,t_vector v)
 		vp.x = v.x;
 		while (vp.x < v.x + rect - 1)
 		{
-			draw_pixel(&data->minimap.iarg, &vp);
+			draw_pixel(data->iarg, &vp);
 			vp.x++;
 		}
 		vp.y++;
