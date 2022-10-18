@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 17:18:19 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/18 01:27:07 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/18 03:22:02 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int intersect_with_x(t_inters   *inters, t_vars *vars)
 
     gridX = inters->next_pos.px - 1 + inters->sign_x;
     gridY = inters->pos_grid.py;
-    if (gridX < 0 || gridX > *vars->data->wth || gridY < 0 || gridY > vars->data->hgt)
+    if (gridY < 0 || gridY > vars->data->hgt || gridX < 0 || gridX > vars->data->wth[gridY])
         return (0);
     if(vars->data->map[gridY][gridX] == '1')
     {
@@ -36,7 +36,7 @@ static int intersect_with_y(t_inters   *inters, t_vars *vars)
 
     gridX = inters->pos_grid.px;
     gridY = inters->next_pos.py - 1 + inters->sign_y;
-    if (gridX < 0 || gridX > *vars->data->wth || gridY < 0 || gridY > vars->data->hgt)
+    if (gridY < 0 || gridY > vars->data->hgt || gridX < 0 || gridX > vars->data->wth[gridY])
         return (0);
     if(vars->data->map[gridY][gridX] == '1')
     {
@@ -60,12 +60,12 @@ static void op_params(t_inters *inters, t_vars *vars, double rect_size)
 
 static double   op_distance(t_inters *inters, t_vars *vars)
 {
-    if (inters->dx > 0 && inters->dx < inters->dy)
+    if (inters->dx < inters->dy)
     {
         inters->is_inters = intersect_with_x(inters,vars);
         inters->final_d = inters->dx;
     }
-    else if (inters->dy > 0 && inters->dx > inters->dy)
+    else
     {
         inters->is_inters = intersect_with_y(inters,vars);
         inters->final_d = inters->dy;

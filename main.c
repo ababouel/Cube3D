@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/18 02:15:21 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/18 02:52:48 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int render_next_frame(void *vars)
 	draw_ceil_floor(v);
 	draw_map(v);
 	camera(v);
-	draw_minimap(v);
+	// draw_minimap(v);
 	mlx_put_image_to_window( v->mlx, v->win, v->iarg->img, 0, 0);
 	return (1);
 }
