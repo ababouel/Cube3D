@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:32:36 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/18 00:35:34 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/18 04:49:58 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int ft_check_format(char *color)
     return (1);
 }
 
-int ft_check_map(t_vars *vars)
+int ft_check_map(t_vars *vars, t_pars *pars)
 {
     int x;
     int y;
@@ -61,10 +61,19 @@ int ft_check_map(t_vars *vars)
             if (ft_is_in_wall(vars->data->map, x, y, vars->data->wth, vars->data->hgt) == 1
                 && vars->data->map[y][x] != '1' && ft_is_space(vars->data->map[y][x]) != 1)
                 return (-1);
+            if (vars->data->map[y][x] == 'N' || vars->data->map[y][x] == 'S'
+                || vars->data->map[y][x] == 'W' || vars->data->map[y][x] == 'E')
+                {
+                    if (pars->flag == 1)
+                        return (-1);
+                    pars->flag = 1;
+                }
             x++;
         }
         y++;
     }
+    if (pars->flag == 0)
+        return (-1);
     return (0);
 }
 

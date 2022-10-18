@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 06:01:46 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/18 00:22:45 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/18 04:26:36 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ typedef struct s_pars
     int     j;
     int     fd;
     int     col;
+	int		flag;
     int     count;
     char    *line;
     char    **tmp;

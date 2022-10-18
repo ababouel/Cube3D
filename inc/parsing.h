@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:41 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/18 00:07:44 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/18 04:29:50 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int     ft_check_whitespace(char *str);
 int     ft_invalid_line(char *line);
 int     ft_check_whitespace(char *str);
 int     ft_check_format(char *color);
-int     ft_check_map(t_vars *vars);
+int     ft_check_map(t_vars *vars, t_pars *pars);
 int     ft_proccess_file(t_vars *vars, t_pars *pars);
 int     ft_parse_setups(t_vars *vars, t_pars *pars);
 int     ft_parse_map(t_vars *vars, t_pars *pars);
