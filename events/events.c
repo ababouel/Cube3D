@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:35:59 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/18 02:21:37 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/18 04:22:06 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	move_keys(int keynum, t_vars *vars)
 	else if (keynum == DOWN_S)
 		vect_add(vars->ordr.origin, vars->ordr.dir1, -15);
 	else if (keynum == LEFT_A)
-		move_dir(vars->ordr.origin, -15);
-	else if (keynum == RIGHT_D)
 		move_dir(vars->ordr.origin, 15);
+	else if (keynum == RIGHT_D)
+		move_dir(vars->ordr.origin, -15);
 	return (0);
 }
 

@@ -92,24 +92,24 @@ void    map(t_vars *vars)
 
 void    camera(t_vars *vars)
 {
-    int x;
-    double dis;
-    double  angle;
+    // int x;
+    // double dis;
+    // double  angle;
 
-    x = 0;
-    dis = 0.0;
-    angle = 0;
-    vars->ray.origin = *vars->ordr.origin;
-    vars->ray.dir = *vars->ordr.minplane;
-    vars->ray.dir.angle = M_PI / 6.0;
-    while (x < WINDOW_WIDTH)
-    {
-        dis = cast_ray(vars, RECT_SIZE); 
-        draw_wall(dis, vars, &x, angle);
-        vars->ray.dir.angle= (1.0 / (WINDOW_WIDTH)) * (M_PI / 6.0);
-        angle += vars->ray.dir.angle;
-        rotation(&vars->ray.dir, vars->ray.dir.angle); 
-        x++;
-    }  
-    // map(vars);
+    // x = 0;
+    // dis = 0.0;
+    // angle = 0;
+    // vars->ray.origin = *vars->ordr.origin;
+    // vars->ray.dir = *vars->ordr.minplane;
+    // vars->ray.dir.angle = M_PI / 6.0;
+    // while (x < WINDOW_WIDTH)
+    // {
+    //     dis = cast_ray(vars, RECT_SIZE); 
+    //     draw_wall(dis, vars, &x, angle);
+    //     vars->ray.dir.angle= (1.0 / (WINDOW_WIDTH)) * (M_PI / 6.0);
+    //     angle += vars->ray.dir.angle;
+    //     rotation(&vars->ray.dir, vars->ray.dir.angle); 
+    //     x++;
+    // }  
+    map(vars);
 }

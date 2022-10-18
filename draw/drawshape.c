@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 15:37:08 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/18 00:18:59 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/18 04:25:46 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ void	draw_rect(t_vars *data, double rect,t_vector v)
 	v.x *= rect;
 	v.y *= rect;
 	vp.y = v.y;
-	vp.color = v.color;	
+	vp.color.gr = 255;
+	vp.color.bl = 0; 	
+	vp.color.rd = 0; 	
 	while (vp.y < v.y + rect - 1)
 	{
 		vp.x = v.x;
