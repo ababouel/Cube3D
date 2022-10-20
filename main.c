@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/20 03:00:12 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/21 00:22:15 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	ft_set_nswe(t_vars *vars)
 
 int	ft_init_vars(t_vars *vars)
 {
-	vars->ordr.dir1 = addvect(1, 1, add_color(255,0,0), 10);
-	vars->ordr.minplane = addvect(cos(M_PI/6.0), sin(M_PI/6.0), add_color(255,0,0), 20);
-	vars->ordr.maxplane = addvect(cos((M_PI/3.0)), sin((M_PI/3.0)), add_color(255,0,0), 20);	
+	vars->ordr.dir1 = addvect(cos(0), sin(0), add_color(255,0,0), 10);
+	vars->ordr.minplane = addvect(cos(-M_PI/6.0), sin(-M_PI/6.0), add_color(255,0,0), 20);
+	vars->ordr.maxplane = addvect(cos((M_PI/6.0)), sin((M_PI/6.0)), add_color(255,0,0), 20);	
 	vars->ordr.dir1->angle = M_PI/50;
 	vars->ordr.maxplane->angle = M_PI/50;
 	vars->ordr.minplane->angle = M_PI/50;	

@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/20 02:55:01 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/21 00:02:44 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	draw_map(t_vars *vars)
 				add_camera_data(vars, &v, M_PI / 6 );
 			else if (vars->ordr.origin == NULL
 				&& vars->data->map[(int)v.y][(int)v.x] == 'N')
-				add_camera_data(vars, &v, - 5 * M_PI / 6);
+				add_camera_data(vars, &v, -0);
 			else if (vars->ordr.origin == NULL
 				&& vars->data->map[(int)v.y][(int)v.x] == 'E')
 				add_camera_data(vars, &v, - 2 * M_PI / 6);

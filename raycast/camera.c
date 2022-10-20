@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:55:30 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/20 06:19:57 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/21 00:02:31 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ void    draw_wall(double dis_ray, t_vars *vars, int *x, double angle)
 
     if (vars->ray.is_vertical)
     {
-        if (cos(angle) > 0)   
+        // if (cos(angle) > 0)   
             wall.color = (unsigned int *) vars->wall_txt.e_txt.txt_img.addr;
-        else
-            wall.color = (unsigned int *) vars->wall_txt.w_txt.txt_img.addr;
+        // else
+        // wall.color = (unsigned int *) vars->wall_txt.n_txt.txt_img.addr;
     }
     else
-        wall.color = (unsigned int *) vars->wall_txt.n_txt.txt_img.addr;
+            wall.color = (unsigned int *) vars->wall_txt.w_txt.txt_img.addr;
     wall.y = wall.top_y;
     if (wall.top_y < 0)
         wall.y = 0;
@@ -57,13 +57,13 @@ void    draw_wall(double dis_ray, t_vars *vars, int *x, double angle)
         {
             wall.offset.px = (int) vars->ray.inters.current_pos.y % vars->wall_txt.w_txt.width;
             wall.offset.py = (double)(((wall.y - wall.top_y) / wall.wall_height) * vars->wall_txt.w_txt.height); 
-            draw_pixels(vars, &wall.v, wall.color[(int)(vars->wall_txt.w_txt.width * wall.offset.py) + wall.offset.px]); 
+            draw_pixels(vars, &wall.v, wall.color[(int)(vars->wall_txt.e_txt.width * wall.offset.py) + wall.offset.px]); 
         }
         else
         {
             wall.offset.px = (int) vars->ray.inters.current_pos.x % vars->wall_txt.s_txt.width;
-            wall.offset.py = (double)(((wall.y - wall.top_y) / wall.wall_height) * vars->wall_txt.s_txt.height);
-            draw_pixels(vars, &wall.v, wall.color[(int)(vars->wall_txt.s_txt.width * wall.offset.py) + wall.offset.px]); 
+            wall.offset.py = (double)(((wall.y - wall.top_y) / wall.wall_height) * vars->wall_txt.w_txt.height);
+            draw_pixels(vars, &wall.v, wall.color[(int)(vars->wall_txt.w_txt.width * wall.offset.py) + wall.offset.px]); 
         }
         wall.y++;
     } 
@@ -75,14 +75,14 @@ void    map(t_vars *vars)
 
     v.py = 0;	
     int x = 0;
-    draw_circle(vars, vars->ordr.origin, 10);
+    draw_circle(vars, vars->ordr.origin, 2);
+    // draw_line(vars->ordr.origin, vars->ordr.dir1, vars);
     vars->ray.origin = *vars->ordr.origin;
     vars->ray.dir = *vars->ordr.minplane;
     vars->ray.dir.angle = M_PI / 6.0;
     while (x < WINDOW_WIDTH)
     {
         cast_ray(vars, RECT_SIZE);
-        printf("dis => %f\n",vars->ray.dir.mag); 
         draw_line(&vars->ray.origin, &vars->ray.dir, vars);
         vars->ray.dir.angle = M_PI / (3.0 * WINDOW_WIDTH);
         rotation(&vars->ray.dir, vars->ray.dir.angle); 
