@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/16 21:58:04 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/20 02:55:01 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ int	create_trgb(t_color *color)
 	return (color->rd << 16 | color->gr << 8 | color->bl);
 }
 
-void	draw_pixel(t_vars *data, t_vector *v)
+void	draw_pixel(t_imgarg *data, t_vector *v)
 {
 	char		*dst;
-	t_imgarg	img;
+	t_imgarg	*img;
 
-	img = *data->iarg;
+	img = data;
 	if (v->x < WINDOW_WIDTH && v->x >= 0 && v->y < WINDOW_HEIGHT && v->y >= 0)
 	{
-		dst = img.addr + ((int) v->y * img.line_len
-				+ (int)v->x * (img.bpp / 8));
+		dst = img->addr + ((int) v->y * img->line_len
+				+ (int)v->x * (img->bpp / 8));
 		*(unsigned int *) dst = create_trgb(&v->color);
 	}	
 }
@@ -37,8 +37,8 @@ void	draw_pixel(t_vars *data, t_vector *v)
 void	add_camera_data(t_vars *vars, t_vector *v, double angle)
 {
 	v->angle = angle;
-	vars->ordr.origin = addvect(v->x * RECT_SIZE,
-			v->y * RECT_SIZE, v->color, 0);
+	vars->ordr.origin = addvect(v->x * RECT_SIZE + 32,
+			v->y * RECT_SIZE + 32, v->color, 0);
 	rotation(vars->ordr.dir1, v->angle);
 	rotation(vars->ordr.minplane, v->angle);
 	rotation(vars->ordr.maxplane, v->angle);
@@ -53,21 +53,21 @@ void	draw_map(t_vars *vars)
 	{
 		v.x = 0;
 		while (v.x < vars->data->wth[(int)v.y])
-		{
+		{	
 			// if (vars->data->map[(int)v.y][(int)v.x] == '1')
-			// 	draw_rect(vars, v.x, v.y);
+			// 	draw_rect(vars, RECT_SIZE, v);	
 			if (vars->ordr.origin == NULL
 				&& vars->data->map[(int)v.y][(int)v.x] == 'S')
-				add_camera_data(vars, &v, 3 * M_PI / 4 );
+				add_camera_data(vars, &v, M_PI / 6 );
 			else if (vars->ordr.origin == NULL
 				&& vars->data->map[(int)v.y][(int)v.x] == 'N')
-				add_camera_data(vars, &v, -3 * M_PI/4);
+				add_camera_data(vars, &v, - 5 * M_PI / 6);
 			else if (vars->ordr.origin == NULL
 				&& vars->data->map[(int)v.y][(int)v.x] == 'E')
-				add_camera_data(vars, &v, -M_PI / 4);
+				add_camera_data(vars, &v, - 2 * M_PI / 6);
 			else if (vars->ordr.origin == NULL
 				&& vars->data->map[(int)v.y][(int)v.x] == 'W')
-				add_camera_data(vars, &v, M_PI/4);
+				add_camera_data(vars, &v, 4 * M_PI / 6);
 			v.x++;
 		}
 		v.y++;

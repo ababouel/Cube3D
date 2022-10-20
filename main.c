@@ -3,25 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/17 03:42:04 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/20 03:00:12 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include <math.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include "parsing.h"
 #include "draw.h" 
 #include "events.h"
 #include "tools.h"
 #include "raycast.h"
-#include<unistd.h>
-#include <fcntl.h>
-#include <sys/errno.h>
 
 void	ft_generate_texture(t_vars *vars, char *path, t_nswe ns)
 {
@@ -33,11 +26,26 @@ void	ft_generate_texture(t_vars *vars, char *path, t_nswe ns)
 		text = &vars->wall_txt.w_txt;
 	else if (ns == NO)
 		text = &vars->wall_txt.n_txt;
+	else if (ns == SO)
+		text = &vars->wall_txt.s_txt;
+	else
+		text = &vars->wall_txt.e_txt;
 	text->txt_img.img = mlx_xpm_file_to_image(vars->mlx, path, &text->width, &text->height);
 	img = &text->txt_img;
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->line_len, &img->endian);
 }
 
+void	ft_set_nswe(t_vars *vars)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		ft_generate_texture(vars, vars->data->txtpath[i].path, vars->data->txtpath[i].nswe);
+		i++;
+	}	
+}
 
 int	ft_init_vars(t_vars *vars)
 {
@@ -47,12 +55,13 @@ int	ft_init_vars(t_vars *vars)
 	vars->ordr.dir1->angle = M_PI/50;
 	vars->ordr.maxplane->angle = M_PI/50;
 	vars->ordr.minplane->angle = M_PI/50;	
-	vars->rect.color = add_color(0,0,255);
+	vars->rect.cwall = add_color(0,0,255);
+	vars->rect.cfloo = add_color(255, 255, 255);
 	vars->ray.top_x = 0;
+	vars->old_x = WINDOW_WIDTH/2;
 	vars->rect.x = 5;
 	vars->rect.y = 5;
-	ft_generate_texture(vars, vars->data->txtpath[2].path, WE);
-	ft_generate_texture(vars, vars->data->txtpath[0].path, NO); 	
+	ft_set_nswe(vars);
 	return(0);
 }
 
@@ -68,10 +77,10 @@ int    ft_init(t_vars *vars)
 		free(vars);
 		return (MLX_ERROR);
 	}
-	vars->iarg->img= mlx_new_image(vars->mlx,
+	vars->iarg->img = mlx_new_image(vars->mlx,
 			WINDOW_WIDTH, WINDOW_HEIGHT);
 	vars->iarg->addr = mlx_get_data_addr(vars->iarg->img,
-			&vars->iarg->bpp, &vars->iarg->line_len, &vars->iarg->endian);
+			&vars->iarg->bpp, &vars->iarg->line_len, &vars->iarg->endian);	
 	return (0);
 }
 
@@ -81,9 +90,10 @@ int render_next_frame(void *vars)
 	
 	v = (t_vars *)vars;
 	climg(v->iarg->img);
-	draw_ceil_floor(vars);
+	draw_ceil_floor(v);
 	draw_map(v);
 	camera(v);
+	// draw_minimap(v);
 	mlx_put_image_to_window( v->mlx, v->win, v->iarg->img, 0, 0);
 	return (1);
 }
@@ -107,6 +117,8 @@ int	main(int argc, char **argv)
 		ft_init_vars(vars);
 		mlx_loop_hook(vars->mlx, render_next_frame, (void *)vars);	
 		mlx_key_hook(vars->win, esc_key, vars);
+		mlx_hook(vars->win, 02, 0, move_keys, vars);
+		mlx_hook(vars->win, 06, 0, move_mouse, vars);
 		mlx_hook(vars->win, 17, 0, close_game, vars);
 		mlx_loop(vars->mlx);
 	}
