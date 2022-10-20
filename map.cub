@@ -1,7 +1,7 @@
 
-NO ./texture/tnt.xpm
+NO ./texture/floor.xpm
 
-SO ./texture/floor.xpm
+SO ./texture/tnt.xpm
 
 WE ./texture/wall.xpm
 

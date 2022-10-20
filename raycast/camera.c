@@ -78,9 +78,6 @@ void    map(t_vars *vars)
 
     v.py = 0;	
     int x = 0;
-    // draw_line(vars->ordr.origin,vars->ordr.dir1, vars);
-    // draw_line(vars->ordr.origin,vars->ordr.minplane, vars);
-    // draw_line(vars->ordr.origin,vars->ordr.maxplane, vars);
     draw_circle(vars, vars->ordr.origin, 10);
     vars->ray.origin = *vars->ordr.origin;
     vars->ray.dir = *vars->ordr.minplane;
@@ -112,7 +109,7 @@ void    camera(t_vars *vars)
     {
         dis = cast_ray(vars, RECT_SIZE); 
         draw_wall(dis, vars, &x, angle);
-        vars->ray.dir.angle= (1.0 / (WINDOW_WIDTH)) * (M_PI / 6.0);
+        vars->ray.dir.angle = (1.0 / (WINDOW_WIDTH)) * (M_PI / 6.0);
         angle += vars->ray.dir.angle;
         rotation(&vars->ray.dir, vars->ray.dir.angle); 
         x++;

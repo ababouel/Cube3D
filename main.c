@@ -3,25 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/20 01:40:40 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/20 03:00:12 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include <math.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include "parsing.h"
 #include "draw.h" 
 #include "events.h"
 #include "tools.h"
 #include "raycast.h"
-#include<unistd.h>
-#include <fcntl.h>
-#include <sys/errno.h>
 
 void	ft_generate_texture(t_vars *vars, char *path, t_nswe ns)
 {

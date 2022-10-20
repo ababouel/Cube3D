@@ -6,17 +6,17 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 06:01:46 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/20 02:56:00 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/20 03:18:27 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DATA_H
 # define DATA_H
 
-# define WINDOW_WIDTH	1280.0
-# define WINDOW_HEIGHT	720.0
+# define WINDOW_WIDTH	1980.0
+# define WINDOW_HEIGHT	1080.0
 # define MLX_ERROR	1
-# define RECT_SIZE	60.0
+# define RECT_SIZE	128.0
 # define SCALE_HEIGHT 1
 
 #include <mlx.h>
