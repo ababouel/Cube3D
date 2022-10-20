@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 06:01:46 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/20 03:18:27 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/20 05:08:06 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define WINDOW_WIDTH	1980.0
 # define WINDOW_HEIGHT	1080.0
 # define MLX_ERROR	1
-# define RECT_SIZE	128.0
+# define RECT_SIZE	256.0
 # define SCALE_HEIGHT 1
 
 #include <mlx.h>
@@ -160,7 +160,18 @@ typedef struct	s_vars
 	t_wall_txt	wall_txt;
 }	t_vars;
 
-
+typedef struct s_wall
+{
+	t_point         offset;
+    t_vector        v;
+    double          correct_dis;
+    int             top_y;
+    int             bottom_y;
+    double          scale;
+    double          wall_height; 
+    int             y;
+    unsigned int    *color;
+}	t_wall;
 typedef struct s_pars 
 {
     int     i;

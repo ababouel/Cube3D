@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 04:00:33 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/18 04:33:31 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/20 04:11:20 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void    ft_init_pars(t_vars *vars, t_pars *pars, char *path)
     pars->tmp = NULL;
     vars->data = (t_data *)malloc(sizeof(t_data));
     vars->data->txtpath = (t_txtpath *)malloc(sizeof(t_txtpath) * 4);
-    // vars->data->txtpath->path = (char **)malloc(sizeof(char *) * 5);
     vars->data->hgt = count_lines(path);
     vars->data->wth = (int *)malloc(sizeof(int) * vars->data->hgt);
     vars->data->map = (char **)malloc(sizeof(int *) * (vars->data->hgt + 1));
