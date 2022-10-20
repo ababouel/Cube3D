@@ -6,12 +6,18 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 06:01:46 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/16 04:44:49 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/20 03:18:27 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DATA_H
 # define DATA_H
+
+# define WINDOW_WIDTH	1980.0
+# define WINDOW_HEIGHT	1080.0
+# define MLX_ERROR	1
+# define RECT_SIZE	128.0
+# define SCALE_HEIGHT 1
 
 #include <mlx.h>
 #include <math.h>
@@ -81,7 +87,8 @@ typedef struct  s_rect
 {
 	double	x;
 	double	y;
-	t_color color;
+	t_color cwall;
+	t_color cfloo;
 }	t_rect;
 
 typedef	struct s_point
@@ -129,12 +136,21 @@ typedef struct s_wall_txt
 	t_texture	e_txt;	
 }	t_wall_txt;
 
+typedef	struct s_minimap
+{	
+	double		width;
+	double		height;
+	double		rect;
+	t_vector	player;	
+}	t_minimap;
 
 typedef struct	s_vars 
 {
+	int			old_x;
 	void		*mlx;
 	void		*win;
 	t_imgarg	*iarg;
+	t_minimap	minimap;
 	t_data		*data;
 	t_org_dir	ordr;
 	t_rect		rect;
@@ -144,12 +160,14 @@ typedef struct	s_vars
 	t_wall_txt	wall_txt;
 }	t_vars;
 
+
 typedef struct s_pars 
 {
     int     i;
     int     j;
     int     fd;
     int     col;
+	int		flag;
     int     count;
     char    *line;
     char    **tmp;

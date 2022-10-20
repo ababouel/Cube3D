@@ -6,11 +6,12 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 15:37:08 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/11 06:26:08 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/19 05:30:34 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
+#include "tools.h"
 
 void draw_line(t_vector *v1, t_vector *v2, t_vars *data)
 {
@@ -23,10 +24,11 @@ void draw_line(t_vector *v1, t_vector *v2, t_vars *data)
 	step = v2->mag;
 	vd.y /= step;
 	vd.x /= step;
-	vf = *v1;	
+	vf = *v1;
+	vf.color = v1->color;
 	while (step)
 	{
-		draw_pixel(data, &vf);
+		draw_pixel(data->iarg, &vf);
 		vf.x += v2->x;
 		vf.y += v2->y; 
 		step--;
@@ -41,32 +43,33 @@ void    draw_circle(t_vars *data ,t_vector *v, double rad)
 	angle = 0;
 	while(angle < 360)
 	{
-		v1.x = rad * cos(angle * M_PI / 180);
-		v1.y = rad * sin(angle * M_PI / 180);
-		v->x += v1.x;
-		v->y += v1.y; 
-		draw_pixel(data, v);
+		v1.x = cos(angle * M_PI / 180);
+		v1.y = sin(angle * M_PI / 180); 
+		v1.mag = rad;
+		draw_line(v, &v1, data);
 		angle += 0.1;
 	}	
 }
 
-void	draw_rect(t_vars *data, double x, double y)
+void	draw_rect(t_vars *data, double rect,t_vector v)
 {
-	t_vector v;
+	t_vector vp;
 		
-	y *= RECT_SIZE;
-	x *= RECT_SIZE;
-	v.y = y; 
-	v.color = data->rect.color;
-	while (v.y < y + RECT_SIZE - 1)
+	v.x *= rect;
+	v.y *= rect;
+	vp.y = v.y;
+	vp.color.gr = 255;
+	vp.color.bl = 0; 	
+	vp.color.rd = 0; 	
+	while (vp.y < v.y + rect - 1)
 	{
-		v.x = x;
-		while (v.x < x + RECT_SIZE - 1)
+		vp.x = v.x;
+		while (vp.x < v.x + rect - 1)
 		{
-			draw_pixel(data, &v);
-			v.x++;
+			draw_pixel(data->iarg, &vp);
+			vp.x++;
 		}
-		v.y++;
+		vp.y++;
 	}
 }
 
@@ -81,7 +84,7 @@ static void    draw_loop(int y, t_color *color, t_vars *vars)
     {
         v.x = x;
         v.color = *color;
-        draw_pixel(vars,&v);
+        draw_pixel(vars->iarg,&v);
         x++;
 	}
 }

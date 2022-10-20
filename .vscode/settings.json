@@ -7,6 +7,11 @@
         "stdlib.h": "c",
         "stdio.h": "c",
         "parsing.h": "c",
-        "events.h": "c"
+        "events.h": "c",
+        "math.h": "c",
+        "tools.h": "c",
+        "unistd.h": "c",
+        "fcntl.h": "c",
+        "errno.h": "c"
     }
 }
