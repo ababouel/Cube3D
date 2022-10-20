@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 06:01:46 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/20 02:18:59 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/20 02:56:00 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ typedef	struct s_minimap
 
 typedef struct	s_vars 
 {
+	int			old_x;
 	void		*mlx;
 	void		*win;
 	t_imgarg	*iarg;

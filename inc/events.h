@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:37:52 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/18 01:52:58 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/20 01:47:56 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,6 @@ int     esc_key(int keynum, t_vars *vars);
 void    clear_data(t_vars *vars);
 void	climg(t_imgarg *img);
 int	    move_keys(int keynum, t_vars *vars);
+int	    move_mouse(int x, int y, t_vars *data);
+
 #endif
