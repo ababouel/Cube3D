@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/18 04:23:03 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/20 01:41:11 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	draw_map(t_vars *vars)
 		v.x = 0;
 		while (v.x < vars->data->wth[(int)v.y])
 		{	
-			if (vars->data->map[(int)v.y][(int)v.x] == '1')
-				draw_rect(vars, 64, v);	
+			// if (vars->data->map[(int)v.y][(int)v.x] == '1')
+			// 	draw_rect(vars, 64, v);	
 			if (vars->ordr.origin == NULL
 				&& vars->data->map[(int)v.y][(int)v.x] == 'S')
 				add_camera_data(vars, &v, 3 * M_PI / 4 );

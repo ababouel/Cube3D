@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/18 02:52:48 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/20 01:40:40 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	ft_init_vars(t_vars *vars)
 	vars->rect.cwall = add_color(0,0,255);
 	vars->rect.cfloo = add_color(255, 255, 255);
 	vars->ray.top_x = 0;
+	vars->old_x = WINDOW_WIDTH/2;
 	vars->rect.x = 5;
 	vars->rect.y = 5;
 	ft_set_nswe(vars);
@@ -122,8 +123,9 @@ int	main(int argc, char **argv)
 		ft_init(vars);
 		ft_init_vars(vars);
 		mlx_loop_hook(vars->mlx, render_next_frame, (void *)vars);	
-		mlx_hook(vars->win, 02, 0, move_keys, vars);
 		mlx_key_hook(vars->win, esc_key, vars);
+		mlx_hook(vars->win, 02, 0, move_keys, vars);
+		mlx_hook(vars->win, 06, 0, move_mouse, vars);
 		mlx_hook(vars->win, 17, 0, close_game, vars);
 		mlx_loop(vars->mlx);
 	}
