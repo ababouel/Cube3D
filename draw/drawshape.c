@@ -6,11 +6,12 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 15:37:08 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/18 04:25:46 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/19 05:30:34 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
+#include "tools.h"
 
 void draw_line(t_vector *v1, t_vector *v2, t_vars *data)
 {
@@ -23,7 +24,8 @@ void draw_line(t_vector *v1, t_vector *v2, t_vars *data)
 	step = v2->mag;
 	vd.y /= step;
 	vd.x /= step;
-	vf = *v1;	
+	vf = *v1;
+	vf.color = v1->color;
 	while (step)
 	{
 		draw_pixel(data->iarg, &vf);
@@ -41,11 +43,10 @@ void    draw_circle(t_vars *data ,t_vector *v, double rad)
 	angle = 0;
 	while(angle < 360)
 	{
-		v1.x = rad * cos(angle * M_PI / 180);
-		v1.y = rad * sin(angle * M_PI / 180);
-		v->x += v1.x;
-		v->y += v1.y; 
-		draw_pixel(data->iarg, v);
+		v1.x = cos(angle * M_PI / 180);
+		v1.y = sin(angle * M_PI / 180); 
+		v1.mag = rad;
+		draw_line(v, &v1, data);
 		angle += 0.1;
 	}	
 }

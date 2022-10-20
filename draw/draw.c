@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/18 04:23:03 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/20 02:38:11 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	draw_pixel(t_imgarg *data, t_vector *v)
 void	add_camera_data(t_vars *vars, t_vector *v, double angle)
 {
 	v->angle = angle;
-	vars->ordr.origin = addvect(v->x * RECT_SIZE,
-			v->y * RECT_SIZE, v->color, 0);
+	vars->ordr.origin = addvect(v->x * RECT_SIZE + 32,
+			v->y * RECT_SIZE + 32, v->color, 0);
 	rotation(vars->ordr.dir1, v->angle);
 	rotation(vars->ordr.minplane, v->angle);
 	rotation(vars->ordr.maxplane, v->angle);
@@ -54,20 +54,20 @@ void	draw_map(t_vars *vars)
 		v.x = 0;
 		while (v.x < vars->data->wth[(int)v.y])
 		{	
-			if (vars->data->map[(int)v.y][(int)v.x] == '1')
-				draw_rect(vars, 64, v);	
+			// if (vars->data->map[(int)v.y][(int)v.x] == '1')
+			// 	draw_rect(vars, RECT_SIZE, v);	
 			if (vars->ordr.origin == NULL
 				&& vars->data->map[(int)v.y][(int)v.x] == 'S')
-				add_camera_data(vars, &v, 3 * M_PI / 4 );
+				add_camera_data(vars, &v, M_PI / 6 );
 			else if (vars->ordr.origin == NULL
 				&& vars->data->map[(int)v.y][(int)v.x] == 'N')
-				add_camera_data(vars, &v, -3 * M_PI/4);
+				add_camera_data(vars, &v, - 5 * M_PI / 6);
 			else if (vars->ordr.origin == NULL
 				&& vars->data->map[(int)v.y][(int)v.x] == 'E')
-				add_camera_data(vars, &v, -M_PI / 4);
+				add_camera_data(vars, &v, - 2 * M_PI / 6);
 			else if (vars->ordr.origin == NULL
 				&& vars->data->map[(int)v.y][(int)v.x] == 'W')
-				add_camera_data(vars, &v, M_PI / 4);
+				add_camera_data(vars, &v, 4 * M_PI / 6);
 			v.x++;
 		}
 		v.y++;

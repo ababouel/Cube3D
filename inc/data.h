@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 06:01:46 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/18 04:26:36 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/20 02:18:59 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DATA_H
 # define DATA_H
+
+# define WINDOW_WIDTH	1280.0
+# define WINDOW_HEIGHT	720.0
+# define MLX_ERROR	1
+# define RECT_SIZE	60.0
+# define SCALE_HEIGHT 1
 
 #include <mlx.h>
 #include <math.h>
