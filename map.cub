@@ -1,9 +1,9 @@
 
-NO ./texture/new_gold.xpm
+NO ./texture/north.xpm
 
-SO ./texture/test.xpm
+SO ./texture/south.xpm
 
-WE ./texture/south.xpm
+WE ./texture/west.xpm
 
 EA ./texture/east.xpm
 
@@ -15,7 +15,7 @@ F 185,185,185
 C 0,0,0
 
 
-           1111111111111111111111111
+            1111111111111111111111111
            1000000000110000000000001
            1011000001110000001000001
            1001000000000000000000111

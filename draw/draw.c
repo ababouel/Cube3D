@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:35 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/21 00:02:44 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/21 02:11:26 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,16 @@ void	draw_map(t_vars *vars)
 			// 	draw_rect(vars, RECT_SIZE, v);	
 			if (vars->ordr.origin == NULL
 				&& vars->data->map[(int)v.y][(int)v.x] == 'S')
-				add_camera_data(vars, &v, M_PI / 6 );
+				add_camera_data(vars, &v, -3 * M_PI / 2);
 			else if (vars->ordr.origin == NULL
 				&& vars->data->map[(int)v.y][(int)v.x] == 'N')
-				add_camera_data(vars, &v, -0);
+				add_camera_data(vars, &v, -M_PI / 2);
 			else if (vars->ordr.origin == NULL
 				&& vars->data->map[(int)v.y][(int)v.x] == 'E')
-				add_camera_data(vars, &v, - 2 * M_PI / 6);
+				add_camera_data(vars, &v, 0);
 			else if (vars->ordr.origin == NULL
 				&& vars->data->map[(int)v.y][(int)v.x] == 'W')
-				add_camera_data(vars, &v, 4 * M_PI / 6);
+				add_camera_data(vars, &v, -M_PI);
 			v.x++;
 		}
 		v.y++;

@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:35:59 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/20 01:46:12 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/21 00:52:25 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,18 @@ int	esc_key(int keynum, t_vars *vars)
 	return (0);
 }
 
-void	ft_rotate(t_vars *vars, int choice, int key_mouse)
+void	ft_rotate(t_vars *vars, int choice)
 {
 	if (choice == 1)
 	{
-		vars->ordr.origin->angle += vars->ordr.dir1->angle - key_mouse;
+		vars->ordr.origin->angle += vars->ordr.dir1->angle;
 		rotation(vars->ordr.dir1, vars->ordr.dir1->angle);
 		rotation(vars->ordr.minplane, vars->ordr.minplane->angle);
 		rotation(vars->ordr.maxplane, vars->ordr.maxplane->angle);
 	}
 	else if (choice == -1)
 	{
-		vars->ordr.origin->angle -= vars->ordr.dir1->angle - key_mouse;
+		vars->ordr.origin->angle -= vars->ordr.dir1->angle;
 		rotation(vars->ordr.dir1, -vars->ordr.dir1->angle);
 		rotation(vars->ordr.maxplane, -vars->ordr.maxplane->angle);
 		rotation(vars->ordr.minplane, -vars->ordr.minplane->angle);
@@ -51,9 +51,9 @@ int	move_mouse(int x, int y, t_vars *vars)
 {	
 	(void)y;
 	if (x > vars->old_x)
-		ft_rotate(vars, 1, 1000);
+		ft_rotate(vars, 1);
 	if (x < vars->old_x)
-		ft_rotate(vars, -1, 1000);
+		ft_rotate(vars, -1);
 	vars->old_x = x;
 	return (0);
 }
@@ -61,9 +61,9 @@ int	move_mouse(int x, int y, t_vars *vars)
 int	move_keys(int keynum, t_vars *vars)
 {
 	if (keynum == ARROWRIGHT)
-		ft_rotate(vars, 1, 0);
+		ft_rotate(vars, 1);
 	else if (keynum == ARROWLEFT)
-		ft_rotate(vars, -1, 0);
+		ft_rotate(vars, -1);
 	else if (keynum == UP_W)
 		vect_add(vars->ordr.origin, vars->ordr.dir1, 15);
 	else if (keynum == DOWN_S)
