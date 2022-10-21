@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:55:30 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/21 05:55:26 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/21 06:26:39 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,31 @@ void    draw_pixels(t_vars *data, t_vector *v, unsigned int color)
     dst[((int)WINDOW_WIDTH * (int)v->y) + (int)v->x] = color;
 }
 
+void    ft_set_color(t_vars *vars, t_wall *wall)
+{
+     if (!vars->ray.is_vertical)
+    {
+        if ( vars->ray.dir.y < 0)
+            wall->color = (unsigned int *) vars->wall_txt.n_txt.txt_img.addr;
+        else if ( vars->ray.dir.y > 0)
+            wall->color = (unsigned int *) vars->wall_txt.s_txt.txt_img.addr;
+    }
+    else
+    {
+        if (vars->ray.dir.x  > 0)   
+            wall->color = (unsigned int *) vars->wall_txt.e_txt.txt_img.addr;
+        else if (vars->ray.dir.x < 0)
+            wall->color = (unsigned int *) vars->wall_txt.w_txt.txt_img.addr;
+    }
+}
+
+void    ft_draw_text(t_vars *vars, t_wall *wall, t_texture *text, double pos)
+{
+    wall->offset.px = (int) pos % text->width;
+    wall->offset.py = (double)(((wall->y - wall->top_y) / wall->wall_height) * text->height);
+    draw_pixels(vars, &wall->v, wall->color[(int)(text->width * wall->offset.py) + wall->offset.px]);
+}
+
 void    draw_wall(double dis_ray, t_vars *vars, int *x, double angle)
 {
     t_wall  wall;
@@ -37,20 +62,7 @@ void    draw_wall(double dis_ray, t_vars *vars, int *x, double angle)
     wall.wall_height = (WINDOW_HEIGHT / wall.correct_dis) * wall.scale; 
     wall.top_y = (int)WINDOW_HEIGHT / 2 - (int)wall.wall_height / 2; 
     wall.bottom_y = wall.top_y + (int)wall.wall_height;
-    if (!vars->ray.is_vertical)
-    {
-        if ( vars->ray.dir.y < 0)
-            wall.color = (unsigned int *) vars->wall_txt.n_txt.txt_img.addr;
-        else if ( vars->ray.dir.y > 0)
-            wall.color = (unsigned int *) vars->wall_txt.s_txt.txt_img.addr;
-    }
-    else
-    {
-        if (vars->ray.dir.x  > 0)   
-            wall.color = (unsigned int *) vars->wall_txt.e_txt.txt_img.addr;
-        else if (vars->ray.dir.x < 0)
-            wall.color = (unsigned int *) vars->wall_txt.w_txt.txt_img.addr;
-    }
+    ft_set_color(vars, &wall);
     wall.y = wall.top_y;
     if (wall.top_y < 0)
         wall.y = 0;
@@ -60,32 +72,16 @@ void    draw_wall(double dis_ray, t_vars *vars, int *x, double angle)
         if (!vars->ray.is_vertical)
         {
             if (vars->ray.dir.y < 0)
-            {
-                wall.offset.px = (int) vars->ray.inters.current_pos.x % vars->wall_txt.n_txt.width;
-                wall.offset.py = (double)(((wall.y - wall.top_y) / wall.wall_height) * vars->wall_txt.n_txt.height);
-                draw_pixels(vars, &wall.v, wall.color[(int)(vars->wall_txt.n_txt.width * wall.offset.py) + wall.offset.px]);
-            } 
+                ft_draw_text(vars, &wall, &vars->wall_txt.n_txt, vars->ray.inters.current_pos.x);
             else if (vars->ray.dir.y > 0)
-            {
-                wall.offset.px = (int) vars->ray.inters.current_pos.x % vars->wall_txt.s_txt.width;
-                wall.offset.py = (double)(((wall.y - wall.top_y) / wall.wall_height) * vars->wall_txt.s_txt.height);
-                draw_pixels(vars, &wall.v, wall.color[(int)(vars->wall_txt.s_txt.width * wall.offset.py) + wall.offset.px]);
-            }
+                ft_draw_text(vars, &wall, &vars->wall_txt.s_txt, vars->ray.inters.current_pos.x);
         }
         else
         {
             if (vars->ray.dir.x > 0)
-            {
-                wall.offset.px = (int) vars->ray.inters.current_pos.y % vars->wall_txt.e_txt.width;
-                wall.offset.py = (double)(((wall.y - wall.top_y) / wall.wall_height) * vars->wall_txt.e_txt.height);
-                draw_pixels(vars, &wall.v, wall.color[(int)(vars->wall_txt.e_txt.width * wall.offset.py) + wall.offset.px]);
-            }
+                ft_draw_text(vars, &wall, &vars->wall_txt.e_txt, vars->ray.inters.current_pos.y);
             else if(vars->ray.dir.x < 0)
-            {
-                wall.offset.px = (int) vars->ray.inters.current_pos.y % vars->wall_txt.w_txt.width;
-                wall.offset.py = (double)(((wall.y - wall.top_y) / wall.wall_height) * vars->wall_txt.w_txt.height);
-                draw_pixels(vars, &wall.v, wall.color[(int)(vars->wall_txt.w_txt.width * wall.offset.py) + wall.offset.px]);
-            }   
+                ft_draw_text(vars, &wall, &vars->wall_txt.w_txt, vars->ray.inters.current_pos.y); 
         }
         wall.y++;
     } 
