@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:35:59 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/22 02:07:38 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/22 23:24:36 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void	ft_rotate(t_vars *vars, int choice)
 int	move_mouse(int x, int y, t_vars *vars)
 {	
 	(void)y;
-	if (x > vars->old_x)
+	if (x > WINDOW_WIDTH / 2)
 		ft_rotate(vars, 1);
-	if (x < vars->old_x)
+	if (x < WINDOW_WIDTH / 2)
 		ft_rotate(vars, -1);
-	vars->old_x = x;
+	mlx_mouse_move(vars->win, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	return (0);
 }
 
