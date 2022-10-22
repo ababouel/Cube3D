@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/23 00:21:36 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/23 00:22:45 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int render_next_frame(void *vars)
 	v = (t_vars *)vars;
 	climg(v->iarg->img);
 	draw_ceil_floor(v);
-	draw_map(v);
+	init_pos_player(v);
 	camera(v);
 	draw_minimap(v);
 	mlx_put_image_to_window( v->mlx, v->win, v->iarg->img, 0, 0);	
