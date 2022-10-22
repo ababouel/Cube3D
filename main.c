@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/21 00:22:15 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/22 00:46:07 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ int	ft_init_vars(t_vars *vars)
 	vars->rect.cfloo = add_color(255, 255, 255);
 	vars->ray.top_x = 0;
 	vars->old_x = WINDOW_WIDTH/2;
-	vars->rect.x = 5;
-	vars->rect.y = 5;
+	vars->rect.x = 10;
+	vars->rect.y = 10;
 	ft_set_nswe(vars);
 	return(0);
 }
@@ -93,8 +93,8 @@ int render_next_frame(void *vars)
 	draw_ceil_floor(v);
 	draw_map(v);
 	camera(v);
-	// draw_minimap(v);
-	mlx_put_image_to_window( v->mlx, v->win, v->iarg->img, 0, 0);
+	draw_minimap(v);
+	mlx_put_image_to_window( v->mlx, v->win, v->iarg->img, 0, 0);	
 	return (1);
 }
 
@@ -120,6 +120,7 @@ int	main(int argc, char **argv)
 		mlx_hook(vars->win, 02, 0, move_keys, vars);
 		mlx_hook(vars->win, 06, 0, move_mouse, vars);
 		mlx_hook(vars->win, 17, 0, close_game, vars);
+		mlx_do_sync(vars->mlx);
 		mlx_loop(vars->mlx);
 	}
 	else

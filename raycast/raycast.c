@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 17:18:19 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/20 03:42:05 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/22 01:44:21 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ static int intersect_with_x(t_inters   *inters, t_vars *vars)
 
     gridX = inters->next_pos.px - 1 + inters->sign_x;
     gridY = inters->pos_grid.py;
-    if (gridY < 0 || gridY > vars->data->hgt || gridX < 0 || gridX > vars->data->wth[gridY])
+    if (gridY < 0 || gridY >= vars->data->hgt || gridX < 0 || gridX >= vars->data->wth[gridY])
         return (0);
+    // printf("data gridY %d: width %d\n", gridY,vars->data->wth[gridY]);
     if(vars->data->map[gridY][gridX] == '1')
     {
         vars->ray.is_vertical = 1;
@@ -36,7 +37,7 @@ static int intersect_with_y(t_inters   *inters, t_vars *vars)
 
     gridX = inters->pos_grid.px;
     gridY = inters->next_pos.py - 1 + inters->sign_y;
-    if (gridY < 0 || gridY > vars->data->hgt || gridX < 0 || gridX > vars->data->wth[gridY])
+    if (gridY < 0 || gridY >= vars->data->hgt || gridX < 0 || gridX >= vars->data->wth[gridY])
         return (0);
     if(vars->data->map[gridY][gridX] == '1')
     {

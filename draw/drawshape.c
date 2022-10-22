@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 15:37:08 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/19 05:30:34 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/22 02:08:10 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void    draw_circle(t_vars *data ,t_vector *v, double rad)
 	t_vector v1;
 	double angle;
     
-	angle = 0;
+	angle = 0;	
 	while(angle < 360)
 	{
 		v1.x = cos(angle * M_PI / 180);
@@ -58,9 +58,7 @@ void	draw_rect(t_vars *data, double rect,t_vector v)
 	v.x *= rect;
 	v.y *= rect;
 	vp.y = v.y;
-	vp.color.gr = 255;
-	vp.color.bl = 0; 	
-	vp.color.rd = 0; 	
+	vp.color = v.color;	
 	while (vp.y < v.y + rect - 1)
 	{
 		vp.x = v.x;

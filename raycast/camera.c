@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:55:30 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/21 06:26:39 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/22 01:24:56 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@ void    draw_pixels(t_vars *data, t_vector *v, unsigned int color)
     t_imgarg        *img;
     unsigned int    *dst;
 
+    img = NULL;
+    dst = NULL;
     img = data->iarg;
     dst = (unsigned int *) img->addr;
-    dst[((int)WINDOW_WIDTH * (int)v->y) + (int)v->x] = color;
+    if (v->y < WINDOW_HEIGHT && v->x < WINDOW_WIDTH && v->x >= 0 && v->y >= 0)
+        dst[((int)WINDOW_WIDTH * (int)v->y) + (int)v->x] = color;
 }
 
 void    ft_set_color(t_vars *vars, t_wall *wall)
