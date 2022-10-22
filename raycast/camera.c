@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:55:30 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/22 01:24:56 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/22 23:12:04 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void    ft_set_color(t_vars *vars, t_wall *wall)
 
 void    ft_draw_text(t_vars *vars, t_wall *wall, t_texture *text, double pos)
 {
-    wall->offset.px = (int) pos % text->width;
-    wall->offset.py = (double)(((wall->y - wall->top_y) / wall->wall_height) * text->height);
-    draw_pixels(vars, &wall->v, wall->color[(int)(text->width * wall->offset.py) + wall->offset.px]);
+	wall->offset.px = (int) pos % text->width;
+	wall->offset.py = (double)(((wall->y - wall->top_y) / wall->wall_height) * text->height);
+	draw_pixels(vars, &wall->v, wall->color[(int)(text->width * wall->offset.py) + wall->offset.px]);
 }
 
 void    draw_wall(double dis_ray, t_vars *vars, int *x, double angle)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 02:43:28 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/10 21:13:42 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/22 23:17:38 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_color	add_color(int rd, int gr, int bl)
 	color.rd = rd;
 	color.bl = bl;
 	color.gr = gr;
-	return color;
+	return (color);
 }
 
 t_vars	*allocate(void)
