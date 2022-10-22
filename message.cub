@@ -1,15 +1,19 @@
 
-NO ./texture/tnt.xpm
+NO ./texture/north.xpm
 
-SO ./texture/floor.xpm
+SO ./texture/south.xpm
 
-WE ./texture/wall.xpm
+WE ./texture/west.xpm
 
-EA ./texture/test.xpm
+EA ./texture/east.xpm
 
-F 185,185,185
+F 80,80,80
+
+
+
 
 C 0,0,0
+
 
 1
         1111111111111111                        
