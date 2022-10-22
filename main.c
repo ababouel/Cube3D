@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/22 00:46:07 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/22 03:46:39 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int    ft_init(t_vars *vars)
 	if (!vars->mlx)
 		return (MLX_ERROR);
 	vars->win = mlx_new_window(vars->mlx,
-			WINDOW_WIDTH, WINDOW_HEIGHT, "vars");
+			WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3D");
 	if (!vars->win)
 	{
 		free(vars);
