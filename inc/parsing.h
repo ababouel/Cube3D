@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:41 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/23 04:05:48 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/23 22:32:00 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # include "data.h"
 
-int		ft_is_in_wall(char **map, int x, int y, int *lenx, int leny);
+int		ft_is_in_wall(t_vars *vars, int x, int y);
 int		ft_is_space(char c);
 int		ft_iscolor(char *c, int i);
 int		count_lines(char *path);
@@ -53,4 +53,5 @@ int		ft_parse_map(t_vars *vars, t_pars *pars);
 int		arr_len(char **arr);
 int		ft_assign_nswe(char *nswe, t_vars *vars, int i);
 int		ft_copy_colors(t_vars *vars, char **tmp);
+void	ft_next_line(t_pars *pars);
 #endif

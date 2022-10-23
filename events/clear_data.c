@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   clear_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 03:41:17 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/23 03:46:06 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/23 21:11:41 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
-#include "tools.h"
 #include "raycast.h"
 #include "parsing.h"
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:38:54 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/23 05:44:02 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/23 22:32:51 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,19 @@ char	*ft_getchr(char *s, int c)
 		++s;
 	}
 	return (NULL);
+}
+
+int	arr_len(char **arr)
+{
+	int	index;
+	int	count;
+
+	index = 0;
+	count = 0;
+	while (arr[index])
+	{
+		count++;
+		index++;
+	}
+	return (count);
 }

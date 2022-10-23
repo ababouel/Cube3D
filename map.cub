@@ -1,11 +1,11 @@
 
-NO ./texture/north.xpm
+NO /Users/fech-cha/Desktop/Cube3D/texture/north.xpm
 
-SO ./texture/south.xpm
+SO /Users/fech-cha/Desktop/Cube3D/texture/south.xpm
 
-WE ./texture/west.xpm
+WE /Users/fech-cha/Desktop/Cube3D/texture/west.xpm
 
-EA ./texture/east.xpm
+EA /Users/fech-cha/Desktop/Cube3D/texture/east.xpm
 
 F 80,80,80
 

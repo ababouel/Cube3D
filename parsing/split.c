@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 04:38:25 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/23 05:55:44 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/23 23:12:01 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "data.h"
 
 int	word_count(char *s, char c1, char c2)
 {
@@ -70,30 +71,28 @@ char	*ft_start(int *i, int *j, int *k, const char *s)
 char	**ft_split(char const *s, char c, char c2)
 {
 	char	**new;
-	int		i;
-	int		j;
-	int		k;
+	t_split	sp;
 
-	if (!ft_start(&i, &j, &k, s))
+	if (!ft_start(&sp.i, &sp.j, &sp.k, s))
 		return (NULL);
 	new = (char **)malloc((word_count((char *)s, c, c2) + 1) * sizeof(char *));
 	if (!new)
 		return (NULL);
-	while (s[i] && j < word_count((char *)s, c, c2) && s[i] != '\n')
+	while (s[sp.i] && sp.j < word_count((char *)s, c, c2) && s[sp.i] != '\n')
 	{
-		if (s[i] == c || s[i] == c2)
+		if (s[sp.i] == c || s[sp.i] == c2)
 		{
-			i++;
-			continue;
+			sp.i++;
+			continue ;
 		}
-		new[j] = (char *)malloc(count_length((char *)s, c, c2, i) + 1);
-		if (!new[j])
-			return (free_arr(new, j));
-		while ((s[i] != c && s[i] != c2) && s[i])
-			new[j][k++] = s[i++];
-		new[j++][k] = '\0';
-		k = 0;
+		new[sp.j] = (char *)malloc(count_length((char *)s, c, c2, sp.i) + 1);
+		if (!new[sp.j])
+			return (free_arr(new, sp.j));
+		while ((s[sp.i] != c && s[sp.i] != c2) && s[sp.i])
+			new[sp.j][sp.k++] = s[sp.i++];
+		new[sp.j++][sp.k] = '\0';
+		sp.k = 0;
 	}
-	new[j] = NULL;
+	new[sp.j] = NULL;
 	return (new);
 }

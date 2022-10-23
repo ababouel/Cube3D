@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+         #
+#    By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/03 16:04:53 by ababouel          #+#    #+#              #
-#    Updated: 2022/10/23 04:57:06 by ababouel         ###   ########.fr        #
+#    Updated: 2022/10/23 22:34:48 by fech-cha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -g 
 BDIR = build
 FILES = main draw/draw draw/generate_text draw/minimap events/events events/clear_data tools/tools\
-	raycast/camera tools/vect_tools tools/debug\
+	raycast/camera tools/vect_tools \
 	draw/drawshape raycast/raycast raycast/draw_wall\
 	parsing/parsing_tools \
 	parsing/parsing \
@@ -26,6 +26,7 @@ FILES = main draw/draw draw/generate_text draw/minimap events/events events/clea
 	parsing/ft_atoi \
 	parsing/libft_func \
 	parsing/parser_check \
+	parsing/parse_file \
 	parsing/small_tools
 	
 NAME = cub3d

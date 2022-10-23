@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:32:36 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/23 06:03:29 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/23 22:33:53 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,27 @@ int	ft_check_format(char *color)
 	return (1);
 }
 
+int	ft_check_members(t_vars *vars, t_pars *pars, int *x, int *y)
+{
+	if (ft_is_in_wall(vars, *x, *y) == 1 && vars->data->map[*y][*x] != '1'
+		&& ft_is_space(vars->data->map[*y][*x]) != 1)
+	{
+		pars = my_free(pars);
+		return (-1);
+	}
+	if (vars->data->map[*y][*x] == 'N' || vars->data->map[*y][*x] == 'S'
+		|| vars->data->map[*y][*x] == 'W' || vars->data->map[*y][*x] == 'E')
+	{
+		if (pars->flag == 1)
+		{
+			pars = my_free(pars);
+			return (-1);
+		}
+		pars->flag = 1;
+	}
+	return (1);
+}
+
 int	ft_check_map(t_vars *vars, t_pars *pars)
 {
 	int	x;
@@ -58,67 +79,16 @@ int	ft_check_map(t_vars *vars, t_pars *pars)
 		x = 0;
 		while (x < vars->data->wth[y])
 		{
-			if (ft_is_in_wall(vars->data->map, x, y,
-					vars->data->wth, vars->data->hgt) == 1
-				&& vars->data->map[y][x] != '1'
-				&& ft_is_space(vars->data->map[y][x]) != 1)
+			if (ft_check_members(vars, pars, &x, &y) == -1)
 				return (-1);
-			if (vars->data->map[y][x] == 'N' || vars->data->map[y][x] == 'S'
-				|| vars->data->map[y][x] == 'W' || vars->data->map[y][x] == 'E')
-			{
-				if (pars->flag == 1)
-					return (-1);
-				pars->flag = 1;
-			}
 			x++;
 		}
 		y++;
 	}
 	if (pars->flag == 0)
+	{
+		pars = my_free(pars);
 		return (-1);
+	}
 	return (0);
-}
-
-int	ft_proccess_file(t_vars *vars, t_pars *pars)
-{
-	if (pars->count > 0 && ft_check_whitespace(pars->line) == 0)
-	{
-		if (ft_parse_setups(vars, pars) == -1)
-			return (-1);
-	}
-	else
-	{
-		if (ft_parse_map(vars, pars) == -1)
-			return (-1);
-	}
-	return (1);
-}
-
-int	ft_parse_setups(t_vars *vars, t_pars *pars)
-{
-	int	len;
-
-	pars->tmp = ft_split(pars->line, ' ', '\t');
-	if (arr_len(pars->tmp) > 2)
-		return (-1);
-	if (ft_strlen(pars->tmp[0]) > 1)
-	{
-		if (ft_assign_nswe(pars->tmp[0], vars, pars->i) == 0)
-			return (-1);
-		vars->data->txtpath[pars->i].path = ft_strdup(pars->tmp[1]);
-		len = ft_strlen(vars->data->txtpath[pars->i].path);
-		if (ft_strchr(vars->data->txtpath[pars->i].path, '\n') == 0)
-			vars->data->txtpath[pars->i].path[len - 1] = '\0';
-		pars->i++;
-	}
-	else
-	{
-		if (ft_copy_colors(vars, pars->tmp) == -1)
-			return (-1);
-	}
-	pars->count--;
-	pars->tmp[0] = my_free(pars->tmp[0]);
-	pars->tmp[1] = my_free(pars->tmp[1]);
-	pars->tmp = my_free(pars->tmp);
-	return (1);
 }
