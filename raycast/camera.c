@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:55:30 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/22 23:12:04 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/23 00:18:12 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,26 +90,6 @@ void    draw_wall(double dis_ray, t_vars *vars, int *x, double angle)
     } 
 }
 
-void    map(t_vars *vars)
-{   
-    t_point v;
-
-    v.py = 0;	
-    int x = 0;
-    draw_circle(vars, vars->ordr.origin, 2);
-    vars->ray.origin = *vars->ordr.origin;
-    vars->ray.dir = *vars->ordr.minplane;
-    vars->ray.dir.angle = M_PI / 6.0;
-    while (x < WINDOW_WIDTH)
-    {
-        cast_ray(vars, RECT_SIZE);
-        draw_line(&vars->ray.origin, &vars->ray.dir, vars);
-        vars->ray.dir.angle = M_PI / (3.0 * WINDOW_WIDTH);
-        rotation(&vars->ray.dir, vars->ray.dir.angle); 
-        x++;
-    } 
-}
-
 void    camera(t_vars *vars)
 {
     int x;
@@ -129,6 +109,5 @@ void    camera(t_vars *vars)
         angle += vars->ray.dir.angle;
         rotation(&vars->ray.dir, vars->ray.dir.angle); 
         x++;
-    }  
-    // map(vars);
+    }
 }

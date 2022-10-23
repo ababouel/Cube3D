@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:35:59 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/23 02:32:43 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/23 03:44:42 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 #include "raycast.h"
 #include "parsing.h"
 
-
 int	close_game(t_vars *vars)
 {
-	clear_data(vars); 
+	clear_data(vars);
 	return (0);
 }
 
@@ -26,7 +25,6 @@ int	esc_key(int keynum, t_vars *vars)
 {	
 	if (keynum == ESC_KEY)
 		clear_data(vars);
-
 	return (0);
 }
 
@@ -74,44 +72,4 @@ int	move_keys(int keynum, t_vars *vars)
 	else if (keynum == RIGHT_D)
 		move_dir(vars, 15);
 	return (0);
-}
-
-
-void	climg(t_imgarg *img)
-{
-	t_vector	v;
-	char		*pixel;
-
-	v.y = 0;
-	while (v.y < WINDOW_HEIGHT)
-	{
-		v.x = 0;
-		while (v.x < WINDOW_WIDTH)
-		{
-			pixel = img->addr +((int)v.y * img->line_len + (int)v.x * (img->bpp / 8));
-			*(unsigned int *)pixel = 0x000000;
-			v.x++;
-		}
-		v.y++;
-	}
-}
-
-void	clear_data(t_vars *vars)
-{
-	int	i;
-
-	i = 0;
-	mlx_destroy_image(vars->mlx, vars->iarg->img);
-	mlx_destroy_window(vars->mlx, vars->win);
-	while (i < vars->data->hgt)
-	{
-		vars->data->map[i] = my_free(vars->data->map[i]);
-		i++;
-	}
-	vars->data->map = my_free(vars->data->map);
-	vars->data->wth = my_free(vars->data->wth);
-	vars->data->txtpath = my_free(vars->data->txtpath);
-	vars->iarg = my_free(vars->iarg);
-	vars = my_free(vars);
-	exit(0);
 }

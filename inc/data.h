@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 06:01:46 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/23 02:37:12 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/23 03:55:38 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,46 +16,46 @@
 # define WINDOW_WIDTH	1280.0
 # define WINDOW_HEIGHT	1080.0
 # define MLX_ERROR	1
-# define RECT_SIZE  256.0	
-# define SCALE_HEIGHT 1
+# define RECT_SIZE	256.0
+# define SCALE_HEIGHT	1
 
-#include <mlx.h>
-#include <math.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <assert.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/errno.h>
+# include <mlx.h>
+# include <math.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <assert.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <sys/errno.h>
 
 typedef enum e_NSWE
 {
-    NO,
-    SO,
-    WE,
-    EA
-}   t_nswe;
+	NO,
+	SO,
+	WE,
+	EA
+}	t_nswe;
 
 typedef struct s_txtpath
 {
-    char    *path;	
-    t_nswe  nswe; 
-}   t_txtpath;
+	char	*path;
+	t_nswe	nswe;
+}	t_txtpath;
 
-typedef  struct	s_color
+typedef struct s_color
 {
-	unsigned int    rd;
-    unsigned int    gr;
-    unsigned int    bl;
+	unsigned int	rd;
+	unsigned int	gr;
+	unsigned int	bl;
 }	t_color;
 
 typedef struct s_data
 {
-    int         *wth;
-    int         hgt;
-    t_txtpath   *txtpath; 
-    char        **map;
-}   t_data;
+	int			*wth;
+	int			hgt;
+	t_txtpath	*txtpath;
+	char		**map;
+}	t_data;
 
 typedef struct s_imgarg
 {
@@ -83,20 +83,19 @@ typedef struct s_org_dir
 	t_vector	*maxplane;	
 }	t_org_dir;
 
-typedef struct  s_rect
+typedef struct s_rect
 {
 	double	x;
 	double	y;
-	t_color cwall;
-	t_color cfloo;
+	t_color	cwall;
+	t_color	cfloo;
 }	t_rect;
 
-typedef	struct s_point
+typedef struct s_point
 {
 	int	px;
 	int	py;
 }	t_point;
-
 
 typedef struct s_inter
 {
@@ -121,10 +120,10 @@ typedef struct s_ray
 	int			is_vertical;
 }	t_ray;
 
-typedef struct	s_texture
+typedef struct s_texture
 {
-	int 		width;
-	int 		height;
+	int			width;
+	int			height;
 	t_imgarg	txt_img;
 }	t_texture;
 
@@ -136,7 +135,7 @@ typedef struct s_wall_txt
 	t_texture	e_txt;	
 }	t_wall_txt;
 
-typedef	struct s_minimap
+typedef struct s_minimap
 {	
 	double		width;
 	double		height;
@@ -144,7 +143,7 @@ typedef	struct s_minimap
 	t_vector	player;	
 }	t_minimap;
 
-typedef struct	s_vars 
+typedef struct s_vars
 {
 	void		*mlx;
 	void		*win;
@@ -161,26 +160,27 @@ typedef struct	s_vars
 
 typedef struct s_wall
 {
-	t_point         offset;
-    t_vector        v;
-    double          correct_dis;
-    int             top_y;
-    int             bottom_y;
-    double          scale;
-    double          wall_height; 
-    int             y;
-    unsigned int    *color;
+	t_point			offset;
+	t_vector		v;
+	double			correct_dis;
+	int				top_y;
+	int				bottom_y;
+	double			scale;
+	double			wall_height;
+	int				y;
+	unsigned int	*color;
 }	t_wall;
-typedef struct s_pars 
+
+typedef struct s_pars
 {
-    int     i;
-    int     j;
-    int     fd;
-    int     col;
+	int		i;
+	int		j;
+	int		fd;
+	int		col;
 	int		flag;
-    int     count;
-    char    *line;
-    char    **tmp;
-}   t_pars;
+	int		count;
+	char	*line;
+	char	**tmp;
+}	t_pars;
 
 #endif

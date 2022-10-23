@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/23 01:57:30 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/23 03:56:08 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef DRAW_H
 # define DRAW_H
 
-#include "data.h"
+# include "data.h"
 
 void	generate_image(t_vars *vars, char *path, t_nswe ns);
 void	draw_pixel(t_imgarg *data, t_vector *v);
