@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/23 02:35:52 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/23 05:18:00 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,5 @@ int	main(int argc, char **argv)
 	}
 	else
 		printf("Usage ./cub3d map_name \n");
-	while(1);
 	return (0);
 }	
