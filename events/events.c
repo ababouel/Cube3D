@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:35:59 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/09/25 02:56:15 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/23 03:44:42 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
+#include "tools.h"
+#include "raycast.h"
+#include "parsing.h"
 
 int	close_game(t_vars *vars)
 {
@@ -19,29 +22,54 @@ int	close_game(t_vars *vars)
 }
 
 int	esc_key(int keynum, t_vars *vars)
-{
+{	
 	if (keynum == ESC_KEY)
 		clear_data(vars);
 	return (0);
 }
 
-void	clear_data(t_vars *vars)
+void	ft_rotate(t_vars *vars, int choice)
 {
-	int	i;
+	if (choice == 1)
+	{
+		vars->ordr.origin->angle += vars->ordr.dir1->angle;
+		rotation(vars->ordr.dir1, vars->ordr.dir1->angle);
+		rotation(vars->ordr.minplane, vars->ordr.minplane->angle);
+		rotation(vars->ordr.maxplane, vars->ordr.maxplane->angle);
+	}
+	else if (choice == -1)
+	{
+		vars->ordr.origin->angle -= vars->ordr.dir1->angle;
+		rotation(vars->ordr.dir1, -vars->ordr.dir1->angle);
+		rotation(vars->ordr.maxplane, -vars->ordr.maxplane->angle);
+		rotation(vars->ordr.minplane, -vars->ordr.minplane->angle);
+	}
+}
 
-	i = 0;
-	mlx_destroy_image(vars->mlx, vars->iarg->img);
-	mlx_destroy_window(vars->mlx, vars->win);
-	//free array of map
-	// while (i < vars->line_count)
-	// {
-	// 	free(vars->map_colors[i]);
-	// 	free(vars->map_values[i]);
-	// 	i++;
-	// }
-	// free(vars->map_colors);
-	// free(vars->map_values);
-	free(vars->iarg);
-	free(vars);
-	exit(0);
+int	move_mouse(int x, int y, t_vars *vars)
+{	
+	(void)y;
+	if (x > WINDOW_WIDTH / 2)
+		ft_rotate(vars, 1);
+	if (x < WINDOW_WIDTH / 2)
+		ft_rotate(vars, -1);
+	mlx_mouse_move(vars->win, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	return (0);
+}
+
+int	move_keys(int keynum, t_vars *vars)
+{
+	if (keynum == ARROWRIGHT)
+		ft_rotate(vars, 1);
+	else if (keynum == ARROWLEFT)
+		ft_rotate(vars, -1);
+	else if (keynum == UP_W)
+		vect_add(vars, 15);
+	else if (keynum == DOWN_S)
+		vect_add(vars, -15);
+	else if (keynum == LEFT_A)
+		move_dir(vars, -15);
+	else if (keynum == RIGHT_D)
+		move_dir(vars, 15);
+	return (0);
 }

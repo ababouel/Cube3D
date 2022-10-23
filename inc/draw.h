@@ -3,49 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/09/25 03:20:33 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/23 03:56:08 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef DRAW_H
 # define DRAW_H
 
-# define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1080
-# define MLX_ERROR	1
+# include "data.h"
 
-#include "parsing.h"
-typedef struct s_imgarg
-{
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}	t_imgarg;
-
-typedef struct	s_vars {
-	void		*mlx;
-	void		*win;
-	t_imgarg	*iarg;
-	t_data		*data;
-}	t_vars;
-
-typedef struct s_vector
-{
-	double	x;
-	double	y;
-	t_color	*color;
-}	t_vector;
-
-void	draw_pixel(t_vars *data, t_vector *v);
-int		create_trgb(t_color *color);
+void	generate_image(t_vars *vars, char *path, t_nswe ns);
+void	draw_pixel(t_imgarg *data, t_vector *v);
 void	draw_line(t_vector *v1, t_vector *v2, t_vars *data);
-void	draw_circle(t_vars *data,t_vector *v, t_vector *vfix, double rad);
-void	draw_rectangle(t_imgarg *data, t_vector *v, t_vector *v1);
+void	draw_circle(t_vars *data, t_vector *v, double rad);
+void	draw_rect(t_vars *data, double rect, t_vector v);
+void	init_pos_player(t_vars *vars);
+void	draw_ceil_floor(t_vars *vars);
+void	draw_minimap(t_vars *vars);
+void	ft_set_nswe(t_vars *vars);
+void	ft_generate_texture(t_vars *vars, char *path, t_nswe ns);
 
 #endif

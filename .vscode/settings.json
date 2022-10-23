@@ -1,0 +1,17 @@
+{
+    "files.associations": {
+        "raycast.h": "c",
+        "draw.h": "c",
+        "data.h": "c",
+        "mlx.h": "c",
+        "stdlib.h": "c",
+        "stdio.h": "c",
+        "parsing.h": "c",
+        "events.h": "c",
+        "math.h": "c",
+        "tools.h": "c",
+        "unistd.h": "c",
+        "fcntl.h": "c",
+        "errno.h": "c"
+    }
+}
