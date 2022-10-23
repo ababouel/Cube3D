@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 04:38:25 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/09/27 19:38:19 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/23 05:55:44 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int	word_count(char *s, char c1 , char c2)
+int	word_count(char *s, char c1, char c2)
 {
 	int	state;
 	int	count;

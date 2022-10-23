@@ -6,16 +6,16 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 02:43:28 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/22 23:17:38 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/23 05:23:32 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 #include "raycast.h"
 
-t_vector *addvect(double x, double y, t_color color, double mag)
+t_vector	*addvect(double x, double y, t_color color, double mag)
 {
-	t_vector *v;
+	t_vector	*v;
 
 	v = malloc(sizeof(t_vector));
 	if (v == NULL)
@@ -23,14 +23,13 @@ t_vector *addvect(double x, double y, t_color color, double mag)
 	v->x = x;
 	v->y = y;
 	v->color = color;
-	v->mag = mag;	
+	v->mag = mag;
 	return (v);
 }
 
-
 t_color	add_color(int rd, int gr, int bl)
 {
-	t_color color;
+	t_color	color;
 
 	color.rd = rd;
 	color.bl = bl;
@@ -47,15 +46,15 @@ t_vars	*allocate(void)
 		return (NULL);
 	vars->iarg = (t_imgarg *)malloc(sizeof(t_imgarg));
 	if (vars->iarg == NULL)
-		return (NULL);	
+		return (NULL);
 	return (vars);
 }
 
-void    rotation(t_vector *vf, double angle)
+void	rotation(t_vector *vf, double angle)
 {
-    double  v;
+	double	v;
 
-    v = vf->x;
-    vf->x = vf->x * cos(angle) - vf->y * sin(angle);
-    vf->y = vf->y * cos(angle) + v * sin(angle);
+	v = vf->x;
+	vf->x = vf->x * cos(angle) - vf->y * sin(angle);
+	vf->y = vf->y * cos(angle) + v * sin(angle);
 }

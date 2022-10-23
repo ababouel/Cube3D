@@ -6,7 +6,7 @@
 /*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/23 05:18:00 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/23 05:40:08 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,28 @@
 #include "tools.h"
 #include "raycast.h"
 
-int	ft_init_vars(t_vars *vars)
+static int	ft_init_vars(t_vars *vars)
 {
-	vars->ordr.dir1 = addvect(cos(0), sin(0), add_color(255,0,0), 10);
-	vars->ordr.minplane = addvect(cos(-M_PI/6.0), sin(-M_PI/6.0), add_color(255,0,0), 20);
-	vars->ordr.maxplane = addvect(cos((M_PI/6.0)), sin((M_PI/6.0)), add_color(255,0,0), 20);	
-	vars->ordr.dir1->angle = M_PI/50;
-	vars->ordr.maxplane->angle = M_PI/50;
-	vars->ordr.minplane->angle = M_PI/50;	
-	vars->rect.cwall = add_color(0,0,255);
+	vars->ordr.dir1 = addvect(cos(0), sin(0), add_color(255, 0, 0), 10);
+	vars->ordr.minplane = addvect(cos(-M_PI / 6.0), sin(-M_PI / 6.0),
+			add_color(255, 0, 0), 20);
+	vars->ordr.maxplane = addvect(cos((M_PI / 6.0)), sin((M_PI / 6.0)),
+			add_color(255, 0, 0), 20);
+	vars->ordr.dir1->angle = M_PI / 50;
+	vars->ordr.maxplane->angle = M_PI / 50;
+	vars->ordr.minplane->angle = M_PI / 50;
+	vars->rect.cwall = add_color(0, 0, 255);
 	vars->rect.cfloo = add_color(255, 255, 255);
 	vars->ray.top_x = 0;
 	vars->rect.x = 10;
 	vars->rect.y = 10;
 	ft_set_nswe(vars);
-	return(0);
+	return (0);
 }
 
-int    ft_init(t_vars *vars)
+static int	ft_init(t_vars *vars)
 {
-    vars->mlx = mlx_init();
+	vars->mlx = mlx_init();
 	if (!vars->mlx)
 		return (MLX_ERROR);
 	vars->win = mlx_new_window(vars->mlx,
@@ -48,29 +50,43 @@ int    ft_init(t_vars *vars)
 	vars->iarg->img = mlx_new_image(vars->mlx,
 			WINDOW_WIDTH, WINDOW_HEIGHT);
 	vars->iarg->addr = mlx_get_data_addr(vars->iarg->img,
-			&vars->iarg->bpp, &vars->iarg->line_len, &vars->iarg->endian);	
+			&vars->iarg->bpp, &vars->iarg->line_len, &vars->iarg->endian);
 	return (0);
 }
 
-int render_next_frame(void *vars)
+static int	render_next_frame(void *vars)
 {
 	t_vars	*v;
-	
+
 	v = (t_vars *)vars;
 	climg(v->iarg->img);
 	draw_ceil_floor(v);
 	init_pos_player(v);
 	camera(v);
 	draw_minimap(v);
-	mlx_put_image_to_window( v->mlx, v->win, v->iarg->img, 0, 0);	
+	mlx_put_image_to_window(v->mlx, v->win, v->iarg->img, 0, 0);
 	return (1);
+}
+
+static void	start_drawing(t_vars *vars)
+{
+	ft_init(vars);
+	ft_init_vars(vars);
+	mlx_loop_hook(vars->mlx, render_next_frame, (void *)vars);
+	mlx_key_hook(vars->win, esc_key, vars);
+	mlx_hook(vars->win, 02, 0, move_keys, vars);
+	mlx_hook(vars->win, 06, 0, move_mouse, vars);
+	mlx_mouse_hide();
+	mlx_hook(vars->win, 17, 0, close_game, vars);
+	mlx_do_sync(vars->mlx);
+	mlx_loop(vars->mlx);
 }
 
 int	main(int argc, char **argv)
 {
 	t_vars	*vars;
 	int		check;
-	
+
 	if (argc == 2)
 	{
 		vars = allocate();
@@ -80,18 +96,9 @@ int	main(int argc, char **argv)
 			printf("Error.\n");
 			return (1);
 		}
-		ft_init(vars);
-		ft_init_vars(vars);
-		mlx_loop_hook(vars->mlx, render_next_frame, (void *)vars);	
-		mlx_key_hook(vars->win, esc_key, vars);
-		mlx_hook(vars->win, 02, 0, move_keys, vars);
-		mlx_hook(vars->win, 06, 0, move_mouse, vars);
-		mlx_mouse_hide();
-		mlx_hook(vars->win, 17, 0, close_game, vars);
-		mlx_do_sync(vars->mlx);
-		mlx_loop(vars->mlx);
+		start_drawing(vars);
 	}
 	else
 		printf("Usage ./cub3d map_name \n");
 	return (0);
-}	
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:38:54 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/17 23:54:52 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/23 05:44:02 by ababouel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_strdup(const char *s)
 
 int	ft_strcmp(char *s1, char *s2)
 {
-	int i;
+	int	i;
 	int	j;
 
 	i = 0;
