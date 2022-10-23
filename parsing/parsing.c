@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 04:00:33 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/20 04:11:20 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/23 02:37:03 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,18 @@ void    ft_init_pars(t_vars *vars, t_pars *pars, char *path)
     pars->line = NULL;
     pars->tmp = NULL;
     vars->data = (t_data *)malloc(sizeof(t_data));
+    if (vars->data == NULL)
+        return ;
     vars->data->txtpath = (t_txtpath *)malloc(sizeof(t_txtpath) * 4);
+    if (vars->data->txtpath == NULL)
+        return ;
     vars->data->hgt = count_lines(path);
     vars->data->wth = (int *)malloc(sizeof(int) * vars->data->hgt);
+    if (vars->data->wth == NULL)
+        return ;
     vars->data->map = (char **)malloc(sizeof(int *) * (vars->data->hgt + 1));
+    if (vars->data->map == NULL)
+        return ;
 }
 
 int ft_parse_map(t_vars *vars, t_pars *pars)
@@ -62,6 +70,8 @@ int ft_parse_map(t_vars *vars, t_pars *pars)
     if (vars->data->wth[pars->j] < 0)
         return (-1);
     vars->data->map[pars->j] = (char *)malloc(sizeof(char) * (vars->data->wth[pars->j] + 1));
+    if (vars->data->map[pars->j] == NULL)
+        return (-1);
     ft_push_data(pars->line, vars->data->map[pars->j]);
     pars->j++;
     return (1);
@@ -71,7 +81,6 @@ int ft_parse(char *path, t_vars *vars)
 {  
     t_pars  *pars;
     
-
     pars = (t_pars *)malloc(sizeof(t_pars));
     if (pars == NULL || ft_strcmp(ft_getchr(path, '.'), ".cub") != 0)
         return (-1);

@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/23 00:22:45 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/23 02:35:52 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,6 @@
 #include "events.h"
 #include "tools.h"
 #include "raycast.h"
-
-void	ft_generate_texture(t_vars *vars, char *path, t_nswe ns)
-{
-	t_texture	*text;
-	t_imgarg	*img;
-	
-	text = NULL;
-	if (ns == WE)
-		text = &vars->wall_txt.w_txt;
-	else if (ns == NO)
-		text = &vars->wall_txt.n_txt;
-	else if (ns == SO)
-		text = &vars->wall_txt.s_txt;
-	else
-		text = &vars->wall_txt.e_txt;
-	text->txt_img.img = mlx_xpm_file_to_image(vars->mlx, path, &text->width, &text->height);
-	img = &text->txt_img;
-	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->line_len, &img->endian);
-}
-
-void	ft_set_nswe(t_vars *vars)
-{
-	int	i;
-
-	i = 0;
-	while (i < 4)
-	{
-		ft_generate_texture(vars, vars->data->txtpath[i].path, vars->data->txtpath[i].nswe);
-		i++;
-	}	
-}
 
 int	ft_init_vars(t_vars *vars)
 {
@@ -101,6 +70,7 @@ int	main(int argc, char **argv)
 {
 	t_vars	*vars;
 	int		check;
+	
 	if (argc == 2)
 	{
 		vars = allocate();
@@ -110,8 +80,6 @@ int	main(int argc, char **argv)
 			printf("Error.\n");
 			return (1);
 		}
-		else
-			printf("Valid map.\n");
 		ft_init(vars);
 		ft_init_vars(vars);
 		mlx_loop_hook(vars->mlx, render_next_frame, (void *)vars);	
@@ -125,5 +93,6 @@ int	main(int argc, char **argv)
 	}
 	else
 		printf("Usage ./cub3d map_name \n");
+	while(1);
 	return (0);
 }	

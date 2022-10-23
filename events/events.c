@@ -6,13 +6,14 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:35:59 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/22 23:24:36 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/23 02:32:43 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
 #include "tools.h"
 #include "raycast.h"
+#include "parsing.h"
 
 
 int	close_game(t_vars *vars)
@@ -75,26 +76,6 @@ int	move_keys(int keynum, t_vars *vars)
 	return (0);
 }
 
-void	clear_data(t_vars *vars)
-{
-	// int	i;
-
-	// i = 0;
-	mlx_destroy_image(vars->mlx, vars->iarg->img);
-	mlx_destroy_window(vars->mlx, vars->win);
-	//free array of map
-	// while (i < vars->line_count)
-	// {
-	// 	free(vars->map_colors[i]);
-	// 	free(vars->map_values[i]);
-	// 	i++;
-	// }
-	// free(vars->map_colors);
-	// free(vars->map_values);
-	free(vars->iarg);
-	free(vars);
-	exit(0);
-}
 
 void	climg(t_imgarg *img)
 {
@@ -113,4 +94,24 @@ void	climg(t_imgarg *img)
 		}
 		v.y++;
 	}
+}
+
+void	clear_data(t_vars *vars)
+{
+	int	i;
+
+	i = 0;
+	mlx_destroy_image(vars->mlx, vars->iarg->img);
+	mlx_destroy_window(vars->mlx, vars->win);
+	while (i < vars->data->hgt)
+	{
+		vars->data->map[i] = my_free(vars->data->map[i]);
+		i++;
+	}
+	vars->data->map = my_free(vars->data->map);
+	vars->data->wth = my_free(vars->data->wth);
+	vars->data->txtpath = my_free(vars->data->txtpath);
+	vars->iarg = my_free(vars->iarg);
+	vars = my_free(vars);
+	exit(0);
 }
