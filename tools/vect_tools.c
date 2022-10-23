@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   vect_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 10:44:01 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/23 05:28:36 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/24 00:06:03 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycast.h"
 #include "tools.h"
+#include "parsing.h"
 
 int	ft_cord_in_wall(t_vars *vars, double x, double y)
 {
@@ -20,7 +21,8 @@ int	ft_cord_in_wall(t_vars *vars, double x, double y)
 
 	map_grid_x = (int)(x / RECT_SIZE);
 	map_grid_y = (int)(y / RECT_SIZE);
-	if (vars->data->map[map_grid_y][map_grid_x] == '1')
+	if (vars->data->map[map_grid_y][map_grid_x] == '1' || 
+	ft_is_space(vars->data->map[map_grid_y][map_grid_x]))
 		return (-1);
 	return (1);
 }
