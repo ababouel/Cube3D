@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:28:41 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/23 22:32:00 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/24 19:51:31 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 
 # include "data.h"
 
+void	free_line(char **tmp, int i);
+int		valid_path(char *path);
 int		ft_is_in_wall(t_vars *vars, int x, int y);
 int		ft_is_space(char c);
 int		ft_iscolor(char *c, int i);

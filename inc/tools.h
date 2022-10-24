@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 02:43:41 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/23 04:14:39 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/24 19:36:39 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "draw.h"
 # include "events.h"
 
+void		ft_putstr_fd(char *s, int fd);
 t_vector	*addvect(double x, double y, t_color color, double mag);
 t_color		add_color(int rd, int gr, int bl);
 t_vars		*allocate(void);

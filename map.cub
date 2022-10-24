@@ -1,13 +1,15 @@
 
-NO /Users/fech-cha/Desktop/Cube3D/texture/north.xpm
-
-SO /Users/fech-cha/Desktop/Cube3D/texture/south.xpm
-
-WE /Users/fech-cha/Desktop/Cube3D/texture/west.xpm
-
-EA /Users/fech-cha/Desktop/Cube3D/texture/east.xpm
+NO  ./texture/north.xpm
 
 F 80,80,80
+
+SO ./texture/south.xpm
+
+WE ./texture/west.xpm
+
+EA ./texture/east.xpm
+
+
 
 
 

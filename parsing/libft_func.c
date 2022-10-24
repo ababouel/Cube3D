@@ -6,11 +6,19 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:38:54 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/23 22:32:51 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/24 19:42:03 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+int	valid_path(char *path)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	return (fd);
+}
 
 char	*ft_strdup(const char *s)
 {

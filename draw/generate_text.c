@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   generate_text.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 01:56:21 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/23 03:31:41 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/24 19:33:34 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "tools.h"
 #include "raycast.h"
 
-void	ft_generate_texture(t_vars *vars, char *path, t_nswe ns)
+int	ft_generate_texture(t_vars *vars, char *path, t_nswe ns)
 {
 	t_texture	*text;
 	t_imgarg	*img;
@@ -32,20 +32,25 @@ void	ft_generate_texture(t_vars *vars, char *path, t_nswe ns)
 		text = &vars->wall_txt.e_txt;
 	text->txt_img.img = mlx_xpm_file_to_image(vars->mlx, path,
 			&text->width, &text->height);
+	if (text->txt_img.img == NULL)
+		return (-1);
 	img = &text->txt_img;
 	img->addr = mlx_get_data_addr(img->img, &img->bpp,
 			&img->line_len, &img->endian);
+	return (0);
 }
 
-void	ft_set_nswe(t_vars *vars)
+int	ft_set_nswe(t_vars *vars)
 {
 	int	i;
 
 	i = 0;
 	while (i < 4)
 	{
-		ft_generate_texture(vars, vars->data->txtpath[i].path,
-			vars->data->txtpath[i].nswe);
+		if (ft_generate_texture(vars, vars->data->txtpath[i].path,
+				vars->data->txtpath[i].nswe) == -1)
+			return (-1);
 		i++;
-	}	
+	}
+	return (0);
 }

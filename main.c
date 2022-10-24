@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/23 05:40:08 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/24 19:37:37 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static int	ft_init_vars(t_vars *vars)
 	vars->ray.top_x = 0;
 	vars->rect.x = 10;
 	vars->rect.y = 10;
-	ft_set_nswe(vars);
+	if (ft_set_nswe(vars) == -1)
+		return (-1);
 	return (0);
 }
 
@@ -68,10 +69,15 @@ static int	render_next_frame(void *vars)
 	return (1);
 }
 
-static void	start_drawing(t_vars *vars)
+static int	start_drawing(t_vars *vars)
 {
 	ft_init(vars);
-	ft_init_vars(vars);
+	if (ft_init_vars(vars) == -1)
+	{
+		ft_putstr_fd("Error.\n", 2);
+		clear_data(vars);
+		return (-1);
+	}
 	mlx_loop_hook(vars->mlx, render_next_frame, (void *)vars);
 	mlx_key_hook(vars->win, esc_key, vars);
 	mlx_hook(vars->win, 02, 0, move_keys, vars);
@@ -80,6 +86,7 @@ static void	start_drawing(t_vars *vars)
 	mlx_hook(vars->win, 17, 0, close_game, vars);
 	mlx_do_sync(vars->mlx);
 	mlx_loop(vars->mlx);
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -93,12 +100,12 @@ int	main(int argc, char **argv)
 		check = ft_parse(argv[1], vars);
 		if (check < 0)
 		{
-			printf("Error.\n");
+			ft_putstr_fd("Error.\n", 2);
 			return (1);
 		}
 		start_drawing(vars);
 	}
 	else
-		printf("Usage ./cub3d map_name \n");
+		ft_putstr_fd("Usage ./cub3d map_name \n", 2);
 	return (0);
 }

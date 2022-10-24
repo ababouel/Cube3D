@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_tools.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 04:17:08 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/23 05:49:27 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/24 19:49:47 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,15 @@ int	ft_copy_colors(t_vars *vars, char **tmp)
 		if (ft_check_format(tmp[1]) == 1)
 		{
 			color = ft_split(tmp[1], ',', ',');
+			if (arr_len(color) != 3)
+				return (-1);
 			if (tmp[0][0] == 'C')
 				vars->ceil = add_color(ft_atoi(color[0]),
 						ft_atoi(color[1]), ft_atoi(color[2]));
 			else
 				vars->floor = add_color(ft_atoi(color[0]),
 						ft_atoi(color[1]), ft_atoi(color[2]));
-			color[0] = my_free(color[0]);
-			color[1] = my_free(color[1]);
-			color[2] = my_free(color[2]);
-			color = my_free(color);
+			free_line(color, 0);
 			return (1);
 		}
 		else

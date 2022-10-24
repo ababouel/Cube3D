@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:47:26 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/23 03:56:08 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/24 19:34:20 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	draw_rect(t_vars *data, double rect, t_vector v);
 void	init_pos_player(t_vars *vars);
 void	draw_ceil_floor(t_vars *vars);
 void	draw_minimap(t_vars *vars);
-void	ft_set_nswe(t_vars *vars);
-void	ft_generate_texture(t_vars *vars, char *path, t_nswe ns);
+int		ft_set_nswe(t_vars *vars);
+int		ft_generate_texture(t_vars *vars, char *path, t_nswe ns);
 
 #endif
