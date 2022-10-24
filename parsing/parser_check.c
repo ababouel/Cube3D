@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:32:36 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/24 19:17:32 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/24 23:06:30 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,11 @@ int	ft_check_format(char *color)
 	count = 0;
 	while (color[i])
 	{
-		if (ft_iscolor(color, i) == 1 && count <= 2)
-		{
-			if (color[i] == ',')
+		if (ft_iscolor(color, i) == -1)
+			return (-1);
+		if (color[i] == ',')
 				count++;
-			i++;
-		}
+		i++;
 	}
 	if (count != 2)
 		return (-1);
