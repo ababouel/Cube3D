@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababouel <ababouel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 02:37:52 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/23 03:57:00 by ababouel         ###   ########.fr       */
+/*   Updated: 2022/10/28 00:24:45 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int		close_game(t_vars *vars);
 int		esc_key(int keynum, t_vars *vars);
 void	clear_data(t_vars *vars);
 void	climg(t_imgarg *img);
+void	ft_check_keys(t_vars *vars);
+void	ft_rotate(t_vars *vars, int choice);
 int		move_keys(int keynum, t_vars *vars);
 int		move_mouse(int x, int y, t_vars *data);
+int		move_keys_release(int keynum, t_vars *vars);
 
 #endif

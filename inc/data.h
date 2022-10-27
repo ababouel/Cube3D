@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 06:01:46 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/27 16:29:02 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/28 00:23:55 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,16 @@ typedef struct s_minimap
 	t_vector	player;	
 }	t_minimap;
 
+typedef struct s_keys
+{
+	int	arr_up;
+	int	arr_down;
+	int	arr_left;
+	int	arr_right;
+	int	rot_left;
+	int	rot_right;
+}	t_keys;
+
 typedef struct s_vars
 {
 	void		*mlx;
@@ -156,6 +166,7 @@ typedef struct s_vars
 	t_color		ceil;
 	t_color		floor;
 	t_wall_txt	wall_txt;
+	t_keys		keys;
 }	t_vars;
 
 typedef struct s_wall

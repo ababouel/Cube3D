@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 10:44:01 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/24 19:50:57 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/28 00:25:53 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	ft_cord_in_wall(t_vars *vars, double x, double y)
 	map_grid_x = (int)(x / RECT_SIZE);
 	map_grid_y = (int)(y / RECT_SIZE);
 	if (vars->data->map[map_grid_y][map_grid_x] == '1' ||
-	ft_is_space(vars->data->map[map_grid_y][map_grid_x]))
+	ft_is_space(vars->data->map[map_grid_y][map_grid_x]) ||
+		vars->data->map[map_grid_y][map_grid_x] == '\0')
 		return (-1);
 	return (1);
 }

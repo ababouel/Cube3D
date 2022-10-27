@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/24 19:37:37 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/28 00:17:43 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static int	render_next_frame(void *vars)
 	t_vars	*v;
 
 	v = (t_vars *)vars;
+	ft_check_keys(vars);
 	climg(v->iarg->img);
 	draw_ceil_floor(v);
 	init_pos_player(v);
@@ -79,11 +80,11 @@ static int	start_drawing(t_vars *vars)
 		return (-1);
 	}
 	mlx_loop_hook(vars->mlx, render_next_frame, (void *)vars);
-	mlx_key_hook(vars->win, esc_key, vars);
+	mlx_hook(vars->win, 17, 0, close_game, vars);
 	mlx_hook(vars->win, 02, 0, move_keys, vars);
+	mlx_hook(vars->win, 03, 0, move_keys_release, vars);
 	mlx_hook(vars->win, 06, 0, move_mouse, vars);
 	mlx_mouse_hide();
-	mlx_hook(vars->win, 17, 0, close_game, vars);
 	mlx_do_sync(vars->mlx);
 	mlx_loop(vars->mlx);
 	return (0);
