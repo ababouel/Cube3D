@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 04:00:33 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/23 23:00:46 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:55:59 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	ft_init_pars(t_vars *vars, t_pars *pars, char *path)
 	pars->flag = 0;
 	pars->line = NULL;
 	pars->tmp = NULL;
+	pars->in_map = 0;
 	vars->data = (t_data *)malloc(sizeof(t_data));
 	if (vars->data == NULL)
 		return ;
@@ -91,7 +92,7 @@ int	ft_parse(char *path, t_vars *vars)
 	pars->line = get_next_line(pars->fd);
 	while (pars->line)
 	{
-		if (ft_check_whitespace(pars->line))
+		if (ft_check_whitespace(pars->line) && pars->in_map == 0)
 		{
 			ft_next_line(pars);
 			continue ;

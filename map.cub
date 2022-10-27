@@ -1,8 +1,6 @@
 
 NO  ./texture/north.xpm
 
-F 80,80,80
-
 SO ./texture/south.xpm
 
 WE ./texture/west.xpm
@@ -12,7 +10,7 @@ EA ./texture/east.xpm
 
 
 
-
+F 80,80,80
 
 C 0,0,0
 

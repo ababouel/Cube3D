@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 06:01:46 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/23 23:13:55 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:29:02 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ typedef struct s_pars
 	int		j;
 	int		fd;
 	int		col;
+	int		in_map;
 	int		flag;
 	int		count;
 	char	*line;

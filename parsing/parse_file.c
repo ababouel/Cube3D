@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 22:34:08 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/10/24 19:49:26 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:39:13 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	ft_proccess_file(t_vars *vars, t_pars *pars)
 {
+	if (pars->in_map == 1 && ft_check_whitespace(pars->line) == 1)
+		return (-1);
 	if (pars->count > 0 && ft_check_whitespace(pars->line) == 0)
 	{
 		if (ft_parse_setups(vars, pars) == -1)
@@ -23,6 +25,7 @@ int	ft_proccess_file(t_vars *vars, t_pars *pars)
 	{
 		if (ft_parse_map(vars, pars) == -1)
 			return (-1);
+		pars->in_map = 1;
 	}
 	return (1);
 }
