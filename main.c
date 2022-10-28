@@ -6,7 +6,7 @@
 /*   By: fech-cha <fech-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 20:34:40 by ababouel          #+#    #+#             */
-/*   Updated: 2022/10/28 00:17:43 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/10/28 17:45:14 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int	start_drawing(t_vars *vars)
 	ft_init(vars);
 	if (ft_init_vars(vars) == -1)
 	{
-		ft_putstr_fd("Error.\n", 2);
+		ft_putstr_fd("Error\n", 2);
 		clear_data(vars);
 		return (-1);
 	}
