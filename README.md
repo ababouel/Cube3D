@@ -8,3 +8,7 @@ rendering the environment using raycasting techniques
 
 # Preview
 
+
+
+https://github.com/Farouk-Echaref/Cube3D/assets/66710845/2ea97531-8a82-4bbb-ac92-b913bcec21e8
+
